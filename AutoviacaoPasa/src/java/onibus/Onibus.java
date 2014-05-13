@@ -28,6 +28,14 @@ public class Onibus implements Serializable{
     private String placa;
     private long id_onibus;
     private int qnt_assentos;
+    
+    public Onibus(){
+    }
+    
+    public Onibus(String placa, int qnt_assentos){
+        this.placa = placa;
+        this.qnt_assentos = qnt_assentos;
+    }
 
     @Column (unique = true)
     public String getPlaca() {
