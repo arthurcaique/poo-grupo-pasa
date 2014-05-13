@@ -9,5 +9,5 @@ package pessoas;
  * @author Arthur
  */
 public class Pessoa {
-    
+    private String nome;
 }
