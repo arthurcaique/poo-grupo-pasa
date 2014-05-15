@@ -7,6 +7,7 @@
 package clientes;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,14 +32,14 @@ public class Cliente extends Pessoa implements Serializable {
     }
     
     //Construtor
-    public Cliente( String nome, String cpf, String telefone, long id_cliente, String senha){
-        super(nome, cpf, telefone);
-        this.id_cliente = id_cliente;
-        this.senha = senha;   
+    public Cliente( String nome, String cpf, String telefone, String senha){
+        super(nome, cpf, telefone);  
+        this.senha = senha;
     }
     
     //Gets e Sets
     @Id
+    @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId_cliente() {
         return id_cliente;
@@ -47,7 +48,8 @@ public class Cliente extends Pessoa implements Serializable {
     public void setId_cliente(long id_cliente) {
         this.id_cliente = id_cliente;
     }
-
+    
+    @Column
     public String getSenha() {
         return senha;
     }
