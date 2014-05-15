@@ -4,14 +4,20 @@
  */
 package pessoas;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
 /**
  *
  * @author Arthur
  */
+@Entity
 public abstract class Pessoa {
     
     //Atributos
     private String nome, cpf, telefone;
+    private long codigo;
     
     //Construtor Vazio
     public Pessoa(){
@@ -19,13 +25,15 @@ public abstract class Pessoa {
     }
     
     //Construtor
-    public Pessoa(String nome, String cpf, String telefone){
+    public Pessoa(String nome, String cpf, String telefone, long codigo){
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.codigo = codigo;
     }
     
     //Gets e Sets
+    @Transient
     public String getNome() {
         return nome;
     }
@@ -33,7 +41,8 @@ public abstract class Pessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    
+    @Transient
     public String getCpf() {
         return cpf;
     }
@@ -41,7 +50,8 @@ public abstract class Pessoa {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
+    
+    @Transient
     public String getTelefone() {
         return telefone;
     }
@@ -49,9 +59,16 @@ public abstract class Pessoa {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
-    
-    
+   
+   
+   @Id
+    public long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(long codigo) {
+        this.codigo = codigo;
+    }
     
     
 }
