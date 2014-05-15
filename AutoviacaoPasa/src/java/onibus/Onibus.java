@@ -28,6 +28,7 @@ public class Onibus implements Serializable{
     private String placa;
     private long id_onibus;
     private int qnt_assentos;
+  
     
     public Onibus(){
     }
