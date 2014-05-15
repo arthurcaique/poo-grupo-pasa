@@ -19,4 +19,6 @@ public interface RepositorioOnibus {
     public void excluir(long id) throws ErroInternoException, OnibusInexistenteException;
     
     public void editar(Onibus onibus) throws ErroInternoException, OnibusInexistenteException;
+    
+    public Onibus buscar(long id) throws ErroInternoException, OnibusInexistenteException;
 }
