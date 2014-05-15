@@ -6,10 +6,14 @@
 
 package clientes;
 
+import javax.persistence.Entity;
+import pessoas.Pessoa;
+
 /**
  *
  * @author Arthur
  */
-public class Cliente {
+@Entity
+public class Cliente extends Pessoa {
     
 }
