@@ -19,7 +19,6 @@ import javax.persistence.Table;
  * @author Arthur
  */
 @Entity
-@Table (name = "clientes")
 public class Cliente implements Serializable {
     //Atributos
     private long id_cliente;
@@ -40,7 +39,6 @@ public class Cliente implements Serializable {
     
     //Gets e Sets
     @Id
-    @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId_cliente() {
         return id_cliente;
@@ -50,7 +48,6 @@ public class Cliente implements Serializable {
         this.id_cliente = id_cliente;
     }
     
-    @Column
     public String getSenha() {
         return senha;
     }
@@ -59,7 +56,6 @@ public class Cliente implements Serializable {
         this.senha = senha;
     }
     
-    @Column
     public String getNome() {
         return nome;
     }
@@ -77,7 +73,6 @@ public class Cliente implements Serializable {
         this.cpf = cpf;
     }
 
-    @Column
     public String getTelefone() {
         return telefone;
     }
