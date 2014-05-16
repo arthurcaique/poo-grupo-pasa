@@ -18,7 +18,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import motorista.Motorista;
 import onibus.Onibus;
 
 /**
@@ -32,20 +31,17 @@ public class Viagem implements Serializable   {
     private Date hora;
     private Date data;
     private Onibus onibus;
-    private Motorista motorista;
     private long id_viagem;
     
     public Viagem(){
     
 }
-    public Viagem(Cidades origem, Cidades destino, Date hora, Date data,Onibus onibus, Motorista motorista){
+    public Viagem(Cidades origem, Cidades destino, Date hora, Date data,Onibus onibus){
        this.origem = origem;
        this.destino = destino;
        this.hora = hora;
        this.data = data;
        this.onibus= onibus;
-       this.motorista = motorista;
-        
     }
     
     public void set(Viagem v){
@@ -54,7 +50,6 @@ public class Viagem implements Serializable   {
         this.hora = v.hora;
         this.origem = v.origem;
         this.id_viagem = v.id_viagem;
-        this.motorista = v.motorista;
         this.onibus = v.onibus;
         
 }
@@ -101,13 +96,6 @@ public class Viagem implements Serializable   {
         this.onibus = onibus;
     }
 
-    public Motorista getMotorista() {
-        return motorista;
-    }
-
-    public void setMotorista(Motorista motorista) {
-        this.motorista = motorista;
-    }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId_viagem() {
@@ -119,7 +107,7 @@ public class Viagem implements Serializable   {
     }
   
     public String toString(){
-        return super.toString()+"\n"+ this.data+"\n"+this.destino+"/n"+this.hora+"\n"+this.motorista+"\n"+this.onibus+"/n"+this.id_viagem+"\n"+this.origem;
+        return super.toString()+"\n"+ this.data+"\n"+this.destino+"/n"+this.hora+"\n"+this.onibus+"/n"+this.id_viagem+"\n"+this.origem;
     }
     public boolean equals(Object o){
         if(o==null){
@@ -128,7 +116,7 @@ public class Viagem implements Serializable   {
         if(Viagem.class != o.getClass())
             return  false;
             Viagem v = (Viagem)o;
-             return(super.equals(v)&& this.data.equals(v.data)&& this.destino.equals(v.destino)&&this.hora.equals(v.hora)&&this.origem.equals(v.origem)&&this.motorista.equals(v.motorista)&&this.onibus.equals(v.onibus)&&super.equals(o));
+             return(super.equals(v)&& this.data.equals(v.data)&& this.destino.equals(v.destino)&&this.hora.equals(v.hora)&&this.origem.equals(v.origem)&&this.onibus.equals(v.onibus)&&super.equals(o));
     }    
     
 }

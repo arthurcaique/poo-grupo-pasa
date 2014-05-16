@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import pessoas.Pessoa;
 
 /**
  *
@@ -21,10 +20,10 @@ import pessoas.Pessoa;
  */
 @Entity
 @Table (name = "clientes")
-public class Cliente extends Pessoa implements Serializable {
+public class Cliente implements Serializable {
     //Atributos
     private long id_cliente;
-    private String senha;
+    private String senha, nome, cpf, telefone;
     
     //Construtor Vazio
     public Cliente(){
@@ -32,9 +31,11 @@ public class Cliente extends Pessoa implements Serializable {
     }
     
     //Construtor
-    public Cliente( String nome, String cpf, String telefone, String senha){
-        super(nome, cpf, telefone);  
+    public Cliente(String nome, String cpf, String telefone, String senha){ 
         this.senha = senha;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.cpf = cpf;
     }
     
     //Gets e Sets
@@ -58,4 +59,30 @@ public class Cliente extends Pessoa implements Serializable {
         this.senha = senha;
     }
     
+    @Column
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Column (unique = true)
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    @Column
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 }
