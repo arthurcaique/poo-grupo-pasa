@@ -24,8 +24,7 @@ public class Poltrona implements Serializable{
         
     }
     
-    public Poltrona(long id_poltrona, int numero_poltrona){
-        this.id_poltrona = id_poltrona;
+    public Poltrona(int numero_poltrona){
         this.numero_poltrona = numero_poltrona;
     }
     
@@ -46,5 +45,5 @@ public class Poltrona implements Serializable{
     public void setNumero_poltrona(int numero_poltrona) {
         this.numero_poltrona = numero_poltrona;
     }
-    
+
 }
