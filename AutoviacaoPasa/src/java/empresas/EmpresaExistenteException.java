@@ -4,16 +4,15 @@
  * and open the template in the editor.
  */
 
-package onibus;
+package empresas;
 
 /**
  *
  * @author Arthur
  */
-public class OnibusInexistenteException extends Exception {
+public class EmpresaExistenteException extends Exception{
     
-    public OnibusInexistenteException(){
-        super("Esse ônibus não está cadastrado no sistema.");
+    public EmpresaExistenteException(){
+        super("Essa empresa já está cadastrada no sistema.");
     }
-    
 }
