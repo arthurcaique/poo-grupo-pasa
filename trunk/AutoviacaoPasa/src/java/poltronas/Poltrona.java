@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import viagens.Viagem;
 
 /**
  *
@@ -19,7 +20,7 @@ import javax.persistence.Id;
 public class Poltrona implements Serializable{
     private long id_poltrona;
     private int numero_poltrona;
-    
+    private Viagem viagem;
     public Poltrona(){
         
     }
