@@ -11,5 +11,5 @@ import index.ErroInternoException;
  * @author Arthur
  */
 public interface RepositorioPoltronas {
-    public void escolher (Poltrona p) throws ErroInternoException, PoltronaInexistenteException, PoltronaIndisponivelException;
+    public void adicionar (Poltrona p) throws ErroInternoException, PoltronaInexistenteException, PoltronaIndisponivelException;
 }
