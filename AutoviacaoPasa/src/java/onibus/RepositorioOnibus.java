@@ -16,7 +16,7 @@ public interface RepositorioOnibus {
     
     public void cadastrar(Onibus onibus) throws ErroInternoException, OnibusExistenteException;
     
-    public void excluir(long id) throws ErroInternoException, OnibusInexistenteException;
+    public void excluir(long id_onibus) throws ErroInternoException, OnibusInexistenteException;
     
     public void editar(Onibus onibus) throws ErroInternoException, OnibusInexistenteException;
     

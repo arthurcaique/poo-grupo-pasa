@@ -29,15 +29,15 @@ public class CadastroOnibus {
         }
     }
     
-    public Onibus buscar(long id) throws ErroInternoException, OnibusInexistenteException{
-        return onibus.buscar(id);
+    public Onibus buscar(long id_onibus) throws ErroInternoException, OnibusInexistenteException{
+        return onibus.buscar(id_onibus);
     }
     
     public void editar(Onibus onibus) throws ErroInternoException, OnibusInexistenteException{
         this.onibus.editar(onibus);
     }
     
-    public void excluir(long id) throws ErroInternoException, OnibusInexistenteException{
-        this.onibus.excluir(id);
+    public void excluir(long id_onibus) throws ErroInternoException, OnibusInexistenteException{
+        this.onibus.excluir(id_onibus);
     }
 }
