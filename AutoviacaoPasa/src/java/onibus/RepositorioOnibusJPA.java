@@ -59,7 +59,7 @@ public class RepositorioOnibusJPA implements RepositorioOnibus {
             if (onibus2 == null) {
                 throw new OnibusInexistenteException();
             }
-            this.em.refresh(onibus2);
+            this.em.merge(onibus);
         } catch (Exception e) {
             throw new ErroInternoException(e);
         }
