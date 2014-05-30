@@ -7,13 +7,16 @@
 package viagens;
 
 import index.ErroInternoException;
+import java.io.Serializable;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author Sabrina Moreira
  */
-public interface RepositorioViagem {
+@Local
+public interface RepositorioViagem extends Serializable{
     
     public void adicionar(Viagem v) throws ErroInternoException;
     
@@ -21,11 +24,9 @@ public interface RepositorioViagem {
     
     public void atualizar(Viagem v) throws ErroInternoException,ViagemInexistenteException;
     
-    public void buscar (long id_viagem) throws ErroInternoException, ViagemInexistenteException;
+    public Viagem buscar (long id_viagem) throws ErroInternoException, ViagemInexistenteException;
     
-    public List<Viagem> buscarPorOnibus (String Placa) throws ErroInternoException;
-    
-    public List<Viagem> buscarPorMotorista (String nome) throws ErroInternoException;
+
 }
     
            

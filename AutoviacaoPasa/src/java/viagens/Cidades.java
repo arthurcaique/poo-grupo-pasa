@@ -11,6 +11,23 @@ package viagens;
  * @author Sabrina Moreira
  */
 public enum Cidades {
-    Recife,VitóriaSantoAntao,Gravata,Bezerros,Caruaru,SãoCaetano,BeloJardim,Sanharó,Pesqueira,Arcoverde,
-           Agrestina,Toritama, SantaCruz,Cupira, Panelas, Palmares,Riberão,Garanhuns, Limoeiro;
+    RECIFE,
+    VITORIA_SANTO_ANTAO,
+    GRAVATA,
+    BEZERROS,
+    CARUARU,
+    SAO_CAETANO,
+    BELO_JARDIM,
+    SANHARO,
+    PESQUEIRA,
+    ARCOVERDE,
+    AGRESTINA,
+    TORITAMA, 
+    SANTA_CRUZ,
+    CUPIRA, 
+    PANELAS, 
+    PALMARES,
+    RIBEIRAO,
+    GARANHUNS, 
+    LIMOEIRO;
 }
