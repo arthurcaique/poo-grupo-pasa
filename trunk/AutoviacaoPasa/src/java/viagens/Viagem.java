@@ -6,6 +6,7 @@
 
 package viagens;
 
+import empresas.Empresa;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -31,17 +32,19 @@ public class Viagem implements Serializable   {
     private Date hora;
     private Date data;
     private Onibus onibus;
+    private Empresa empresa;
     private long id_viagem;
     
     public Viagem(){
     
 }
-    public Viagem(Cidades origem, Cidades destino, Date hora, Date data,Onibus onibus){
+    public Viagem(Cidades origem, Cidades destino, Date hora, Date data,Onibus onibus, Empresa empresa){
        this.origem = origem;
        this.destino = destino;
        this.hora = hora;
        this.data = data;
        this.onibus= onibus;
+       this.empresa = empresa;
     }
     
     public void set(Viagem v){
@@ -51,6 +54,7 @@ public class Viagem implements Serializable   {
         this.origem = v.origem;
         this.id_viagem = v.id_viagem;
         this.onibus = v.onibus;
+        this.empresa = v.empresa;
         
 }
 
@@ -105,9 +109,17 @@ public class Viagem implements Serializable   {
     public void setId_viagem(long id_viagem) {
         this.id_viagem = id_viagem;
     }
+    @OneToMany
+    public Empresa getEmpresas(){
+        return empresa;
+    }
+    
+    public void setEmpresa(Empresa empresa){
+        this.empresa = empresa;
+    }
   
     public String toString(){
-        return super.toString()+"\n"+ this.data+"\n"+this.destino+"/n"+this.hora+"\n"+this.onibus+"/n"+this.id_viagem+"\n"+this.origem;
+        return super.toString()+"\n"+ this.data+"\n"+this.destino+"/n"+this.hora+"\n"+this.onibus+"/n"+this.id_viagem+"\n"+this.origem+"\n"+this.empresa;
     }
     public boolean equals(Object o){
         if(o==null){
@@ -116,7 +128,7 @@ public class Viagem implements Serializable   {
         if(Viagem.class != o.getClass())
             return  false;
             Viagem v = (Viagem)o;
-             return(super.equals(v)&& this.data.equals(v.data)&& this.destino.equals(v.destino)&&this.hora.equals(v.hora)&&this.origem.equals(v.origem)&&this.onibus.equals(v.onibus)&&super.equals(o));
+             return(this.data.equals(v.data)&& this.destino.equals(v.destino)&&this.hora.equals(v.hora)&&this.origem.equals(v.origem)&&this.onibus.equals(v.onibus)&&this.empresa.equals(v.empresa)&&super.equals(o));
     }    
     
 }
