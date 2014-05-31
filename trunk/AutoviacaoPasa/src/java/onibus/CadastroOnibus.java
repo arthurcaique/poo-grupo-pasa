@@ -7,17 +7,20 @@
 package onibus;
 
 import index.ErroInternoException;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author Arthur
  */
+@Stateless
 public class CadastroOnibus {
     
+    @EJB
     private RepositorioOnibus onibus;
     
-    public CadastroOnibus(RepositorioOnibus onibus){
-        this.onibus = onibus;
+    public CadastroOnibus(){
     }
     
     public void cadastrar(Onibus onibus) throws ErroInternoException, OnibusExistenteException{
