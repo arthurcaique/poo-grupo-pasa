@@ -7,12 +7,15 @@
 package onibus;
 
 import index.ErroInternoException;
+import java.io.Serializable;
+import javax.ejb.Local;
 
 /**
  *
  * @author Arthur
  */
-public interface RepositorioOnibus {
+@Local
+public interface RepositorioOnibus extends Serializable{
     
     public void cadastrar(Onibus onibus) throws ErroInternoException, OnibusExistenteException;
     
