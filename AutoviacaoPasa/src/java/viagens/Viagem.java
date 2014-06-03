@@ -127,8 +127,9 @@ public class Viagem implements Serializable   {
         }
         if(Viagem.class != o.getClass())
             return  false;
-            Viagem v = (Viagem)o;
+           Viagem v = (Viagem)o;
              return(this.data.equals(v.data)&& this.destino.equals(v.destino)&&this.hora.equals(v.hora)&&this.origem.equals(v.origem)&&this.onibus.equals(v.onibus)&&this.empresa.equals(v.empresa)&&super.equals(o));
+    
     }    
     
 }

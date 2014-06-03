@@ -22,7 +22,7 @@ public class RepositorioViagemJPA implements RepositorioViagem{
     private EntityManager em;
     
     public RepositorioViagemJPA(){
-        EntityManagerFactory f = Persistence.createEntityManagerFactory("autoviacao_pasa");
+        EntityManagerFactory f = Persistence.createEntityManagerFactory("AutoviacaoPasaPU");
         this.em = f.createEntityManager();
     }
     
@@ -41,7 +41,7 @@ public class RepositorioViagemJPA implements RepositorioViagem{
     @Override
     public void remover(long id_viagem) throws ErroInternoException, ViagemInexistenteException {
         
-          Viagem v = buscar(id_viagem);//buscar esta fora do try  para naõ prender a exceçao
+          Viagem v = buscar(id_viagem);//buscar esta fora do try  para não prender a exceçao
         try{
              
               this.em.remove(v);
