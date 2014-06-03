@@ -9,7 +9,7 @@ package viagens;
 import index.ErroInternoException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import onibus.RepositorioOnibus;
+
 
 /**
  *
@@ -30,8 +30,9 @@ public class CadastroViagem {
             throw new ViagemExistenteException();
      
         }
-        catch(Exception e){
-            throw new ErroInternoException(e);
+        catch(ViagemInexistenteException e){
+            this.viagem.adicionar(v);
+            
         }
         
     }
