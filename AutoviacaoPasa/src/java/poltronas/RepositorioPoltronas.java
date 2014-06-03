@@ -6,13 +6,15 @@ package poltronas;
 
 import index.ErroInternoException;
 import java.util.List;
-import viagens.Viagem;
 
 /**
  *
  * @author Arthur
  */
 public interface RepositorioPoltronas {
+    
     public void adicionar (Poltrona p) throws ErroInternoException, PoltronaInexistenteException, PoltronaIndisponivelException;
-    public List<Poltrona> listar (Viagem viagem) throws ErroInternoException;
+    public Poltrona buscar (long id_poltrona) throws ErroInternoException, PoltronaInexistenteException;
+    public List<Poltrona> listar (long id_viagem) throws ErroInternoException;
+    
 }
