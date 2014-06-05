@@ -1,0 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package empresas;
+
+import index.ErroInternoException;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+
+/**
+ *
+ * @author Polyana
+ */
+@Stateless
+public class CadastroEmpresa {
+    @EJB
+    private RepositorioEmpresa empresa;
+    
+    public CadastroEmpresa(){
+        
+    }
+    public void adicionar(Empresa ep) throws ErroInternoException, EmpresaExistenteException{
+        try{
+            Empresa ep2 =  this.empresa.buscar(ep.getId_empresa());
+            throw new EmpresaExistenteException();
+     
+        }
+        catch(EmpresaInexistenteException e){
+            this.empresa.adicionar(ep);
+            
+        }
+        
+    }
+    public void remove(long Id_empresa) throws EmpresaInexistenteException, ErroInternoException{
+        this.empresa.remover(Id_empresa);
+    }
+
+    public Empresa buscar(long Id_empresa) throws EmpresaInexistenteException, ErroInternoException{
+       return this.empresa.buscar(Id_empresa);
+    } 
+    public void atualizar(Empresa ep) throws EmpresaInexistenteException, ErroInternoException{
+        this.empresa.atualizar(ep);
+    }
+}
