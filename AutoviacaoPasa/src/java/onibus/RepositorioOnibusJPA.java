@@ -20,7 +20,7 @@ public class RepositorioOnibusJPA implements RepositorioOnibus {
     private EntityManager em;
 
     public RepositorioOnibusJPA() {
-        this.em = Persistence.createEntityManagerFactory("autoviacao_pasa").createEntityManager();
+        this.em = Persistence.createEntityManagerFactory("AutoviacaoPasaPU").createEntityManager();
     }
 
     public void cadastrar(Onibus onibus) throws ErroInternoException {
