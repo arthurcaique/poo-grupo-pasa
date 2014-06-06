@@ -23,5 +23,5 @@ public interface RepositorioOnibus extends Serializable{
     
     public void editar(Onibus onibus) throws ErroInternoException, OnibusInexistenteException;
     
-    public Onibus buscar(long id) throws ErroInternoException, OnibusInexistenteException;
+    public Onibus buscarOnibus(long id) throws ErroInternoException, OnibusInexistenteException;
 }

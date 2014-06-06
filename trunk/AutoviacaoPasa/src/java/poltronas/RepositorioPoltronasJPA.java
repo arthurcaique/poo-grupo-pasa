@@ -35,7 +35,7 @@ public class RepositorioPoltronasJPA implements RepositorioPoltronas{
     }
 
     @Override
-    public Poltrona buscar(long id_poltrona) throws ErroInternoException, PoltronaInexistenteException {
+    public Poltrona buscarPoltrona(long id_poltrona) throws ErroInternoException, PoltronaInexistenteException {
         try{
             Poltrona p = this.em.find(Poltrona.class, id_poltrona);
             if(p == null){

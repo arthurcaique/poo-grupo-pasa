@@ -39,9 +39,9 @@ public class RepositorioViagemJPA implements RepositorioViagem{
     }
     
     @Override
-    public void remover(long id_viagem) throws ErroInternoException, ViagemInexistenteException {
+    public void removerViagem(long id_viagem) throws ErroInternoException, ViagemInexistenteException {
         
-          Viagem v = buscar(id_viagem);//buscar esta fora do try  para não prender a exceçao
+          Viagem v = buscarViagem(id_viagem);//buscar esta fora do try  para não prender a exceçao
         try{
              
               this.em.remove(v);
@@ -58,7 +58,7 @@ public class RepositorioViagemJPA implements RepositorioViagem{
     public void atualizar(Viagem v) throws ErroInternoException, ViagemInexistenteException {
         
       
-        buscar(v.getId_viagem());// não precisa do lançar o erro inexistente pois o buscar esta fora do try e ele ja faz isso
+        buscarViagem(v.getId_viagem());// não precisa do lançar o erro inexistente pois o buscar esta fora do try e ele ja faz isso
         try{
         this.em.merge(v);
         }
@@ -69,7 +69,7 @@ public class RepositorioViagemJPA implements RepositorioViagem{
         
        
     @Override
-    public Viagem buscar(long id_viagem) throws ErroInternoException, ViagemInexistenteException {
+    public Viagem buscarViagem(long id_viagem) throws ErroInternoException, ViagemInexistenteException {
         try{
             Viagem v = this.em.find(Viagem.class, id_viagem);
             if(v == null){

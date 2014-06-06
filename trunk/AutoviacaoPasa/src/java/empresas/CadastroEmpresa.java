@@ -24,7 +24,7 @@ public class CadastroEmpresa {
     }
     public void adicionar(Empresa ep) throws ErroInternoException, EmpresaExistenteException{
         try{
-            Empresa ep2 =  this.empresa.buscar(ep.getId_empresa());
+            Empresa ep2 =  this.empresa.buscarEmpresa(ep.getId_empresa());
             throw new EmpresaExistenteException();
      
         }
@@ -38,8 +38,8 @@ public class CadastroEmpresa {
         this.empresa.remover(Id_empresa);
     }
 
-    public Empresa buscar(long Id_empresa) throws EmpresaInexistenteException, ErroInternoException{
-       return this.empresa.buscar(Id_empresa);
+    public Empresa buscarEmpresa(long Id_empresa) throws EmpresaInexistenteException, ErroInternoException{
+       return this.empresa.buscarEmpresa(Id_empresa);
     } 
     public void atualizar(Empresa ep) throws EmpresaInexistenteException, ErroInternoException{
         this.empresa.atualizar(ep);

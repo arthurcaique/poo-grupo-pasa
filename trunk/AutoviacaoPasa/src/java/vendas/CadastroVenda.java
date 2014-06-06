@@ -31,15 +31,15 @@ public class CadastroVenda {
         this.venda.adicionar(venda);
     }
     
-    public Venda buscar(long id) throws ErroInternoException, VendaInexistenteException{
-        return this.venda.buscar(id);
+    public Venda buscarVenda(long id) throws ErroInternoException, VendaInexistenteException{
+        return this.venda.buscarVenda(id);
     }
     
     public List<Venda> vendasPorViagem(long id_viagem) throws ErroInternoException, VendaInexistenteException{
             List<Venda> venda = new ArrayList<Venda>();
             for (int i = 0; i < this.viagem.size(); i++){
                 if (this.viagem.get(i).getId_viagem() == id_viagem){
-                    venda.add(buscar(id_viagem));
+                    venda.add(buscarVenda(id_viagem));
                 }
             }
             return venda;

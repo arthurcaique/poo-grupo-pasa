@@ -14,7 +14,7 @@ import java.util.List;
 public interface RepositorioPoltronas {
     
     public void adicionar (Poltrona p) throws ErroInternoException, PoltronaInexistenteException, PoltronaIndisponivelException;
-    public Poltrona buscar (long id_poltrona) throws ErroInternoException, PoltronaInexistenteException;
+    public Poltrona buscarPoltrona (long id_poltrona) throws ErroInternoException, PoltronaInexistenteException;
     public List<Poltrona> listar (long id_viagem) throws ErroInternoException;
     
 }

@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 public interface RepositorioEmpresa extends Serializable {
     public void adicionar (Empresa ep) throws ErroInternoException;
-    public Empresa buscar (long id_empresa) throws ErroInternoException,EmpresaInexistenteException;
+    public Empresa buscarEmpresa (long id_empresa) throws ErroInternoException,EmpresaInexistenteException;
     public void atualizar (Empresa ep) throws ErroInternoException, EmpresaInexistenteException;
     public void remover   (long id_empresa) throws ErroInternoException, EmpresaInexistenteException;
     

@@ -20,11 +20,11 @@ public interface RepositorioViagem extends Serializable{
     
     public void adicionar(Viagem v) throws ErroInternoException;
     
-    public void remover(long id_viagem) throws ErroInternoException, ViagemInexistenteException;
+    public void removerViagem(long id_viagem) throws ErroInternoException, ViagemInexistenteException;
     
     public void atualizar(Viagem v) throws ErroInternoException,ViagemInexistenteException;
     
-    public Viagem buscar (long id_viagem) throws ErroInternoException, ViagemInexistenteException;
+    public Viagem buscarViagem (long id_viagem) throws ErroInternoException, ViagemInexistenteException;
     
 
 }
