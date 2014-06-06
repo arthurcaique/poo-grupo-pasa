@@ -5,12 +5,15 @@
 package clientes;
 
 import index.ErroInternoException;
+import java.io.Serializable;
+import javax.ejb.Local;
 
 /**
  *
  * @author Arthur
  */
-public interface RepositorioClientes {
+//@Local
+public interface RepositorioClientes extends Serializable{
     
     public void adicionar (Cliente c) throws ErroInternoException, ClienteExistenteException;
     public void remover (long id_cliente) throws ErroInternoException, ClienteInexistenteException;
