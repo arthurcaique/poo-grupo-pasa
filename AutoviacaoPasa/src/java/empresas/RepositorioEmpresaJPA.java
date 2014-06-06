@@ -35,7 +35,7 @@ public class RepositorioEmpresaJPA implements RepositorioEmpresa{
     }
     @Override
     public void  remover (long id_empresa) throws ErroInternoException,EmpresaInexistenteException{
-        Empresa ep = buscar(id_empresa);
+        Empresa ep = buscarEmpresa(id_empresa);
         try {
             this.em.remove(ep);
         }
@@ -48,7 +48,7 @@ public class RepositorioEmpresaJPA implements RepositorioEmpresa{
     public void atualizar(Empresa ep) throws ErroInternoException, EmpresaInexistenteException {
         
       
-        buscar(ep.getId_empresa());
+        buscarEmpresa(ep.getId_empresa());
         try{
         this.em.merge(ep);
         }
@@ -59,7 +59,7 @@ public class RepositorioEmpresaJPA implements RepositorioEmpresa{
         
        
     @Override
-    public Empresa buscar(long id_empresa) throws ErroInternoException, EmpresaInexistenteException {
+    public Empresa buscarEmpresa(long id_empresa) throws ErroInternoException, EmpresaInexistenteException {
         try{
             Empresa ep = this.em.find(Empresa.class, id_empresa);
             if(ep == null){

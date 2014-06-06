@@ -32,7 +32,7 @@ public class RepositorioOnibusJPA implements RepositorioOnibus {
     }
 
     public void excluir(long id_onibus) throws ErroInternoException, OnibusInexistenteException {
-        Onibus onibus = buscar(id_onibus);
+        Onibus onibus = buscarOnibus(id_onibus);
         try {
             this.em.remove(onibus);
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class RepositorioOnibusJPA implements RepositorioOnibus {
         }
     }
 
-    public Onibus buscar(long id_onibus) throws ErroInternoException, OnibusInexistenteException {
+    public Onibus buscarOnibus(long id_onibus) throws ErroInternoException, OnibusInexistenteException {
         try {
             Onibus onibus = this.em.find(Onibus.class, id_onibus);
             if (onibus == null) {
@@ -53,7 +53,7 @@ public class RepositorioOnibusJPA implements RepositorioOnibus {
     }
 
     public void editar(Onibus onibus) throws ErroInternoException, OnibusInexistenteException {
-        buscar(onibus.getId_onibus());
+        buscarOnibus(onibus.getId_onibus());
         try {
             this.em.merge(onibus);
         } catch (Exception e) {

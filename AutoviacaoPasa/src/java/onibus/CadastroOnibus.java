@@ -25,15 +25,15 @@ public class CadastroOnibus {
     
     public void cadastrar(Onibus onibus) throws ErroInternoException, OnibusExistenteException{
         try {
-            Onibus onibus2 = this.onibus.buscar(onibus.getId_onibus());
+            Onibus onibus2 = this.onibus.buscarOnibus(onibus.getId_onibus());
             throw new OnibusExistenteException();
         } catch (OnibusInexistenteException e){
             this.onibus.cadastrar(onibus);
         }
     }
     
-    public Onibus buscar(long id_onibus) throws ErroInternoException, OnibusInexistenteException{
-        return onibus.buscar(id_onibus);
+    public Onibus buscarOnibus(long id_onibus) throws ErroInternoException, OnibusInexistenteException{
+        return onibus.buscarOnibus(id_onibus);
     }
     
     public void editar(Onibus onibus) throws ErroInternoException, OnibusInexistenteException{

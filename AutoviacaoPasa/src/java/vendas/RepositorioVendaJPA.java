@@ -61,7 +61,7 @@ public class RepositorioVendaJPA implements RepositorioVenda {
         }
     }*/
 
-    public Venda buscar(long codigo) throws ErroInternoException, VendaInexistenteException {
+    public Venda buscarVenda(long codigo) throws ErroInternoException, VendaInexistenteException {
         try {
             Venda v = this.em.find(Venda.class, codigo);
             if (v == null) {

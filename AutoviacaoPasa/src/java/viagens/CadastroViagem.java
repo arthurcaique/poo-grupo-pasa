@@ -26,7 +26,7 @@ public class CadastroViagem {
     
     public void adicionar(Viagem v) throws ErroInternoException, ViagemExistenteException{
         try{
-            Viagem viagem2 =  this.viagem.buscar(v.getId_viagem());
+            Viagem viagem2 =  this.viagem.buscarViagem(v.getId_viagem());
             throw new ViagemExistenteException();
      
         }
@@ -37,12 +37,12 @@ public class CadastroViagem {
         
     }
     
-    public void remove(long Id_viagem) throws ViagemInexistenteException, ErroInternoException{
-        this.viagem.remover(Id_viagem);
+    public void removeViagem(long Id_viagem) throws ViagemInexistenteException, ErroInternoException{
+        this.viagem.removerViagem(Id_viagem);
     }
 
-    public Viagem buscar(long Id_viagem) throws ViagemInexistenteException, ErroInternoException{
-       return this.viagem.buscar(Id_viagem);
+    public Viagem buscarViagem(long Id_viagem) throws ViagemInexistenteException, ErroInternoException{
+       return this.viagem.buscarViagem(Id_viagem);
     } 
     public void atualizar(Viagem v) throws ViagemInexistenteException, ErroInternoException{
         this.viagem.atualizar(v);

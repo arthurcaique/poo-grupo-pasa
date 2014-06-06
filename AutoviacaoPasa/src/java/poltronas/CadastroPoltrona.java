@@ -24,7 +24,7 @@ public class CadastroPoltrona {
     
     public void adicionar(Poltrona p) throws ErroInternoException, PoltronaInexistenteException, PoltronaIndisponivelException{
         try{
-        Poltrona p2 = this.poltronas.buscar(p.getId_poltrona());
+        Poltrona p2 = this.poltronas.buscarPoltrona(p.getId_poltrona());
         throw new PoltronaIndisponivelException();
         }
         catch(PoltronaInexistenteException e){
@@ -36,8 +36,8 @@ public class CadastroPoltrona {
         return this.poltronas.listar(id_viagem);
     }
     
-    public Poltrona buscar (long id_poltrona) throws ErroInternoException, PoltronaInexistenteException{
-        return this.poltronas.buscar(id_poltrona);
+    public Poltrona buscarPoltrona (long id_poltrona) throws ErroInternoException, PoltronaInexistenteException{
+        return this.poltronas.buscarPoltrona(id_poltrona);
     }
     
 }

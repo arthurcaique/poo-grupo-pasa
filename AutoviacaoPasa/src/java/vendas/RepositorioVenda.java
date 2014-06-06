@@ -20,7 +20,7 @@ public interface RepositorioVenda extends Serializable{
     
     public void adicionar(Venda venda) throws ErroInternoException;
     
-    public Venda buscar(long codigo) throws VendaInexistenteException, ErroInternoException;
+    public Venda buscarVenda(long codigo) throws VendaInexistenteException, ErroInternoException;
     
     public List<Venda> vendasPorViagem(long id_viagem) throws ErroInternoException;
     
