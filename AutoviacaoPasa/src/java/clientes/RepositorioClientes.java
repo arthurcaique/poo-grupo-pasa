@@ -12,7 +12,7 @@ import javax.ejb.Local;
  *
  * @author Arthur
  */
-//@Local
+@Local
 public interface RepositorioClientes extends Serializable{
     
     public void adicionar (Cliente c) throws ErroInternoException, ClienteExistenteException;
