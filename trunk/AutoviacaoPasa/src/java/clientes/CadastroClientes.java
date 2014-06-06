@@ -5,16 +5,20 @@
 package clientes;
 
 import index.ErroInternoException;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author Arthur
  */
+//@Stateless
 public class CadastroClientes {
+    
+  //  @EJB
     private RepositorioClientes clientes;
     
-    public CadastroClientes(RepositorioClientes clientes){
-        this.clientes = clientes;
+    public CadastroClientes(){
     }
     
     public void adicionar(Cliente c) throws ErroInternoException, ClienteExistenteException{
