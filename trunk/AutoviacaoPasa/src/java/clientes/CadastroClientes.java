@@ -12,10 +12,10 @@ import javax.ejb.Stateless;
  *
  * @author Arthur
  */
-//@Stateless
+@Stateless
 public class CadastroClientes {
     
-  //  @EJB
+    @EJB
     private RepositorioClientes clientes;
     
     public CadastroClientes(){
