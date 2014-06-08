@@ -6,11 +6,14 @@ package poltronas;
 
 import index.ErroInternoException;
 import java.util.List;
+import javax.ejb.Local;
+
 
 /**
  *
  * @author Arthur
  */
+@Local
 public interface RepositorioPoltronas {
     
     public void adicionar (Poltrona p) throws ErroInternoException, PoltronaInexistenteException, PoltronaIndisponivelException;

@@ -15,6 +15,7 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class CadastroPoltrona {
+    
     @EJB
     private RepositorioPoltronas poltronas;
     
