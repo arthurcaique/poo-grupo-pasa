@@ -5,31 +5,53 @@
 package clientes;
 
 import index.ErroInternoException;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author Arthur
  */
+@Stateless
 public class RepositorioClientesJPA implements RepositorioClientes {
-
+    
+    EntityManager em;
+    
     @Override
     public void adicionar(Cliente c) throws ErroInternoException, ClienteExistenteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            this.em.persist(c);
+        }
+        catch(Exception e){
+            throw new ErroInternoException(e);
+        }
     }
 
     @Override
     public void remover(long id_cliente) throws ErroInternoException, ClienteInexistenteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Cliente c = this.buscarCliente(id_cliente);
+        try{
+            this.em.remove(c);
+        }
+        catch(Exception e){
+            throw new ErroInternoException(e);
+        }
     }
 
     @Override
     public Cliente buscarCliente(long id_cliente) throws ErroInternoException, ClienteInexistenteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.em.find(Cliente.class, id_cliente);
     }
 
     @Override
     public void atualizar(Cliente c) throws ErroInternoException, ClienteInexistenteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.buscarCliente(c.getId_cliente());
+        try{
+            this.em.merge(c);
+        }
+        catch(Exception e){
+            throw new ErroInternoException(e);
+        }
     }
     
 }
