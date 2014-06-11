@@ -23,7 +23,7 @@ public class CadastroPoltrona {
         
     }
     
-    public void adicionar(Poltrona p) throws ErroInternoException, PoltronaInexistenteException, PoltronaIndisponivelException{
+    public void adicionar(Poltrona p) throws ErroInternoException, PoltronaIndisponivelException{
         try{
         Poltrona p2 = this.poltronas.buscarPoltrona(p.getId_poltrona());
         throw new PoltronaIndisponivelException();

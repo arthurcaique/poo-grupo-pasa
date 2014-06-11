@@ -19,15 +19,14 @@ import javax.persistence.Persistence;
 public class RepositorioPoltronasJPA implements RepositorioPoltronas{
     
     private EntityManager em;
-    
-    RepositorioPoltronasJPA(){
+
+    public RepositorioPoltronasJPA() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AutoviacaoPasaPU");
         this.em = emf.createEntityManager();
     }
     
-    
     @Override
-    public void adicionar(Poltrona p) throws ErroInternoException, PoltronaInexistenteException, PoltronaIndisponivelException {
+    public void adicionar(Poltrona p) throws ErroInternoException, PoltronaIndisponivelException {
         try{
         this.em.persist(p);
         }
