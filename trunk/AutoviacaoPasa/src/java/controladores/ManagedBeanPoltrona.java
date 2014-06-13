@@ -50,6 +50,9 @@ public class ManagedBeanPoltrona implements Serializable {
         catch(PoltronaIndisponivelException pei){
             return "PoltronaIndisponivel.xhtml";
         }
+        catch(PoltronaInexistenteException pie){
+            return "Poltrona Inexistente.xhtml";
+        }
     }
     
     public String buscarPoltrona(){
