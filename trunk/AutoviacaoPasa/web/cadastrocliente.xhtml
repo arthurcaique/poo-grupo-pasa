@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        Hello from Facelets
+        <h:form>
+            <h1>Cadastro de clientes</h1>
+             <h:outputText value = "Nome: "/> 
+             <h:inputText value = "#{managedBeanClientes.cliente.nome}"/><br/>
+             <h:outputText value = "CPF: "/> 
+             <h:inputText value = "#{managedBeanClientes.cliente.cpf}"/><br/>
+             <h:outputText value = "Telefone: "/> 
+             <h:inputText value = "#{managedBeanClientes.cliente.telefone}"/><br/>
+             <h:outputText value= "Digite uma senha: "/>
+             <h:inputText value= "#{managedBeanClientes.cliente.senha}"/>
+             
+             
+             <h:commandButton value = "Cadastrar" action = "#{managedBeanClientes.adicionarCliente()}"/>
+        </h:form>
+    </h:body>
+</html>
+
