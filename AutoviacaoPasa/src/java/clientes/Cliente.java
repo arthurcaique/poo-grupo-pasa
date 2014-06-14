@@ -55,6 +55,7 @@ public class Cliente implements Serializable {
         this.senha = senha;
     }
     
+    @Column (name = "nome", nullable = false)
     public String getNome() {
         return nome;
     }

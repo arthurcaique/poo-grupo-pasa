@@ -21,13 +21,13 @@ public class CadastroClientes {
     public CadastroClientes(){
     }
     
-    public void adicionar(Cliente c) throws ErroInternoException, ClienteExistenteException{
+    public void adicionar(Cliente cliente) throws ErroInternoException, ClienteExistenteException{
         try{
-        Cliente c2 = this.clientes.buscarCliente(c.getId_cliente());
+        Cliente c2 = this.clientes.buscarCliente(cliente.getId_cliente());
         throw new ClienteExistenteException();
         }
         catch(ClienteInexistenteException e){
-            this.clientes.adicionar(c);
+            this.clientes.adicionar(cliente);
         }
     }
     
@@ -35,8 +35,8 @@ public class CadastroClientes {
         return this.clientes.buscarCliente(id_cliente);
     }
     
-    public void atualizar(Cliente c) throws ClienteInexistenteException, ErroInternoException{
-        this.clientes.atualizar(c);
+    public void atualizar(Cliente cliente) throws ClienteInexistenteException, ErroInternoException{
+        this.clientes.atualizar(cliente);
     }
     
     public void remover (long id_cliente) throws ErroInternoException, ClienteInexistenteException{
