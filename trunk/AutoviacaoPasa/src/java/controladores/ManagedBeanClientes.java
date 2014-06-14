@@ -10,8 +10,10 @@ import clientes.ClienteInexistenteException;
 import index.ErroInternoException;
 import index.Fachada;
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 
 /**
@@ -24,7 +26,10 @@ public class ManagedBeanClientes implements Serializable {
     private Fachada fachada;
     private Cliente cliente;
     
-    ManagedBeanClientes(Cliente cliente){
+    public ManagedBeanClientes(){
+        
+    }
+    public ManagedBeanClientes(Cliente cliente){
         this.cliente = cliente;
     }
 
@@ -37,17 +42,24 @@ public class ManagedBeanClientes implements Serializable {
     }
     
     public String adicionarCliente(){
-        try{
+         try{
             this.fachada.adicionar(this.cliente);
-            this.cliente = new Cliente();
-            return "index.xhtml";                  
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Cliente Cadastrado com sucesso");
+            contexto.addMessage(null, msg);
+                              
         }
         catch(ErroInternoException eie){
-            return "ErroInterno.xhtml";
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado!");
+            contexto.addMessage(null, msg);
         }
         catch(ClienteExistenteException cee){
-            return "ClienteExistente.xhtml";
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente Existente", "Cliente já existe");
+            contexto.addMessage(null, msg);
         }
+        return null;
     }
     
     public String removerCliente(){
