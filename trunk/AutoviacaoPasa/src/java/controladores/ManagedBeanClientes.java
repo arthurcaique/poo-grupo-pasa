@@ -27,11 +27,9 @@ public class ManagedBeanClientes implements Serializable {
     private Cliente cliente;
     
     public ManagedBeanClientes(){
-        
+        this.cliente = new Cliente();
     }
-    public ManagedBeanClientes(Cliente cliente){
-        this.cliente = cliente;
-    }
+  
 
     public Cliente getCliente() {
         return cliente;
@@ -46,8 +44,7 @@ public class ManagedBeanClientes implements Serializable {
             this.fachada.adicionar(this.cliente);
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Cliente Cadastrado com sucesso");
-            contexto.addMessage(null, msg);
-                              
+            contexto.addMessage(null, msg);                          
         }
         catch(ErroInternoException eie){
             FacesContext contexto = FacesContext.getCurrentInstance();
