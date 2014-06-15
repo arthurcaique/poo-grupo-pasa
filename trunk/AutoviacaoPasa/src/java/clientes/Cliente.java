@@ -6,6 +6,7 @@
 
 package clientes;
 
+import com.google.common.base.Objects;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -79,5 +80,29 @@ public class Cliente implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+    
+    @Override
+    public boolean equals(Object obj){
+        if(obj == null || getClass() != obj.getClass() ){
+           return false; 
+        }
+        final Cliente cliente = (Cliente) obj;
+        if(!Objects.equal(this.id_cliente, cliente.id_cliente)){
+            return false;
+        }
+        if(!Objects.equal(this.cpf, cliente.cpf)){
+            return false;
+        }
+        if(!Objects.equal(this.nome, cliente.nome)){
+            return false;
+        }
+        if(!Objects.equal(this.senha, cliente.senha)){
+            return false;
+        }
+        if(!Objects.equal(this.telefone, cliente.telefone)){
+            return false;
+        }
+        return true;
     }
 }
