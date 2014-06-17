@@ -38,10 +38,20 @@
                     </p:menu>
                 </p:layoutUnit>
                 <p:layoutUnit position="center">
-                    Nome: <p:inputText/>
-                    <p>Email: <p:inputText/></p>
-                    <p>CPF: <p:inputText/></p>
-                    <p>Senha: <p:inputText/></p>
+                    <h:form>
+                        <h1>Cadastro de clientes</h1>
+                        <h:outputText value = "Nome: "/> 
+                        <h:inputText value = "#{managedBeanClientes.cliente.nome}"/><br/>
+                        <h:outputText value = "CPF: "/> 
+                        <h:inputText value = "#{managedBeanClientes.cliente.cpf}"/><br/>
+                        <h:outputText value = "Telefone: "/> 
+                        <h:inputText value = "#{managedBeanClientes.cliente.telefone}"/><br/>
+                        <h:outputText value= "Digite uma senha: "/>
+                        <h:inputText value= "#{managedBeanClientes.cliente.senha}"/>
+
+
+                        <p><h:commandButton value = "Cadastrar" action = "#{managedBeanClientes.adicionarCliente()}"/></p>
+                    </h:form>
                 </p:layoutUnit>
             </p:layout>
         </h:body>
