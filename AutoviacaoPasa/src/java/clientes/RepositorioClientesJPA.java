@@ -7,6 +7,8 @@ package clientes;
 import index.ErroInternoException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -16,6 +18,11 @@ import javax.persistence.EntityManager;
 public class RepositorioClientesJPA implements RepositorioClientes {
     
     EntityManager em;
+    
+    public RepositorioClientesJPA(){
+        EntityManagerFactory f = Persistence.createEntityManagerFactory("ClientePU");
+        this.em = f.createEntityManager();
+    }
     
     @Override
     public void adicionar(Cliente cliente) throws ErroInternoException, ClienteExistenteException {
