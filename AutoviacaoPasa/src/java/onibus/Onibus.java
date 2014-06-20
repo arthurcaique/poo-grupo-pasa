@@ -7,11 +7,14 @@
 package onibus;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import viagens.Viagem;
 
 /**
  *
@@ -26,6 +29,7 @@ public class Onibus implements Serializable{
     private String placa;
     private long id_onibus;
     private int qnt_assentos;
+    private List<Viagem> listaViagem;
   
     
     public Onibus(){
@@ -61,6 +65,15 @@ public class Onibus implements Serializable{
 
     public void setQnt_assentos(int qnt_assentos) {
         this.qnt_assentos = qnt_assentos;
+    }
+
+    @OneToMany(mappedBy = "onibus")
+    public List<Viagem> getListaViagem() {
+        return listaViagem;
+    }
+
+    public void setListaViagem(List<Viagem> listaViagem) {
+        this.listaViagem = listaViagem;
     }
       
 }

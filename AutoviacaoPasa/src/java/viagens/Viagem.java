@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -47,7 +48,7 @@ public class Viagem implements Serializable   {
        this.empresa = empresa;
     }
     
-    public void set(Viagem v){
+    /*public void set(Viagem v){
         this.destino= v.destino;
         this.data = v.data;
         this.hora = v.hora;
@@ -56,7 +57,7 @@ public class Viagem implements Serializable   {
         this.onibus = v.onibus;
         this.empresa = v.empresa;
         
-}
+}*/
 
     public Cidades getOrigem() {
         return origem;
@@ -91,7 +92,7 @@ public class Viagem implements Serializable   {
         this.data = data;
     }
 
-    @OneToMany
+    @ManyToOne
     public Onibus getOnibus() {
         return onibus;
     }
@@ -109,8 +110,9 @@ public class Viagem implements Serializable   {
     public void setId_viagem(long id_viagem) {
         this.id_viagem = id_viagem;
     }
-    @OneToMany
-    public Empresa getEmpresas(){
+    
+    @ManyToOne
+    public Empresa getEmpresa(){
         return empresa;
     }
     

@@ -7,7 +7,6 @@ package clientes;
 import index.ErroInternoException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
@@ -16,20 +15,18 @@ import javax.persistence.Persistence;
  */
 @Stateless
 public class RepositorioClientesJPA implements RepositorioClientes {
-    
+
     EntityManager em;
-    
-    public RepositorioClientesJPA(){
-        EntityManagerFactory f = Persistence.createEntityManagerFactory("ClientePU");
-        this.em = f.createEntityManager();
+
+    public RepositorioClientesJPA() {
+        this.em = Persistence.createEntityManagerFactory("AutoviacaoPasaPU").createEntityManager();
     }
     
     @Override
     public void adicionar(Cliente cliente) throws ErroInternoException, ClienteExistenteException {
-        try{
+        try {
             this.em.persist(cliente);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             throw new ErroInternoException(e);
         }
     }
@@ -37,10 +34,9 @@ public class RepositorioClientesJPA implements RepositorioClientes {
     @Override
     public void remover(long id_cliente) throws ErroInternoException, ClienteInexistenteException {
         Cliente cliente = this.buscarCliente(id_cliente);
-        try{
+        try {
             this.em.remove(cliente);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             throw new ErroInternoException(e);
         }
     }
@@ -53,12 +49,11 @@ public class RepositorioClientesJPA implements RepositorioClientes {
     @Override
     public void atualizar(Cliente cliente) throws ErroInternoException, ClienteInexistenteException {
         this.buscarCliente(cliente.getId_cliente());
-        try{
+        try {
             this.em.merge(cliente);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             throw new ErroInternoException(e);
         }
     }
-    
+
 }
