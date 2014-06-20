@@ -14,6 +14,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -21,7 +22,7 @@ import javax.faces.context.FacesContext;
  * @author Arthur
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class ManagedBeanClientes implements Serializable {
 
     @EJB
@@ -29,6 +30,7 @@ public class ManagedBeanClientes implements Serializable {
     private Cliente cliente;
 
     public ManagedBeanClientes() {
+        this.cliente = new Cliente();
     }
 
     public ManagedBeanClientes(Cliente cliente) {

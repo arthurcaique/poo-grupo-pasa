@@ -28,6 +28,7 @@
                 <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
                     <p:menu>
                         <p:submenu label="Menu">
+                            <p:menuitem value="Inicio" outcome="index"/>
                             <p:menuitem value="Quem Somos" outcome="quemsomos" />
                             <p:menuitem value="Empresas Filiadas" url="http://www.primefaces.org/documentation.html" />
                             <p:menuitem value="Cadastre-se" outcome="cadastro" />
@@ -39,18 +40,28 @@
                 </p:layoutUnit>
                 <p:layoutUnit position="center">
                     <h:form>
-                        <h1>Cadastro de clientes</h1>
-                        <h:outputText value = "Nome: "/> 
-                        <h:inputText value = "#{managedBeanClientes.cliente.nome}"/><br/>
-                        <h:outputText value = "CPF: "/> 
-                        <h:inputText value = "#{managedBeanClientes.cliente.cpf}"/><br/>
-                        <h:outputText value = "Telefone: "/> 
-                        <h:inputText value = "#{managedBeanClientes.cliente.telefone}"/><br/>
-                        <h:outputText value= "Digite uma senha: "/>
-                        <h:inputText value= "#{managedBeanClientes.cliente.senha}"/>
-
-
+                        <p:panel header="Cadstro de clientes">
+                            <p:panelGrid columns="2">
+                                <h:outputText value = "Nome: "/> 
+                                <p:inputText value = "#{managedBeanClientes.cliente.nome}" required="true" requiredMessage="O nome é obrigatório"/>
+                                <h:outputText value = "CPF: "/> 
+                                <p:inputMask mask="999.999.999-99" value = "#{managedBeanClientes.cliente.cpf}" requiredMessage="O CPF é obrigatório"/>
+                                <h:outputText value = "Telefone: "/> 
+                                <p:inputText value = "#{managedBeanClientes.cliente.telefone}" requiredMessage="O telefone é obrigatório"/>
+                                <h:outputText value= "Digite uma senha: "/>
+                                <p:password value= "#{managedBeanClientes.cliente.senha}" required="true" requiredMessage="A senha é obrigatória" validatorMessage="A senha deve ter pelo menos 4 dígitos" 
+                                            feedback="true" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte" promptLabel="Digite a senha" id="senha1" match="senha2">
+                                    <f:validateLength minimum="4"/>
+                                </p:password>
+                                <h:outputText value= "Digite novamente a senha: "/>
+                                <p:password value= "#{managedBeanClientes.cliente.senha}" required="true" requiredMessage="A senha é obrigatória" validatorMessage="As senhas não conferem" 
+                                            id="senha2">
+                                    <f:validateLength minimum="4"/>
+                                </p:password>
+                            </p:panelGrid>
+                        </p:panel>
                         <p><h:commandButton value = "Cadastrar" action = "#{managedBeanClientes.adicionarCliente()}"/></p>
+                        <p:messages showDetail="true"/>
                     </h:form>
                 </p:layoutUnit>
             </p:layout>

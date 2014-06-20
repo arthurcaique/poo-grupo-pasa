@@ -28,9 +28,10 @@ public class ManagedBeanOnibus {
     private Onibus onibus;
 
     public ManagedBeanOnibus() {
+        this.onibus = new Onibus();
     }
-    
-    public ManagedBeanOnibus(Onibus onibus){
+
+    public ManagedBeanOnibus(Onibus onibus) {
         this.onibus = onibus;
     }
 
@@ -41,17 +42,33 @@ public class ManagedBeanOnibus {
             contexto.addMessage(null, msg);
             fachada.cadastrar(onibus);
             return "index.xhtml";
-        }catch(ErroInternoException eie){
+        } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado!");
             contexto.addMessage(null, msg);
             return null;
-        }
-        catch(OnibusExistenteException cee){
+        } catch (OnibusExistenteException cee) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Onibus Existente", "Onibus já existe");
             contexto.addMessage(null, msg);
             return null;
         }
     }
+
+    public Fachada getFachada() {
+        return fachada;
+    }
+
+    public void setFachada(Fachada fachada) {
+        this.fachada = fachada;
+    }
+
+    public Onibus getOnibus() {
+        return onibus;
+    }
+
+    public void setOnibus(Onibus onibus) {
+        this.onibus = onibus;
+    }
+
 }

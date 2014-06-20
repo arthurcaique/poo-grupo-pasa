@@ -14,10 +14,12 @@ import empresas.CadastroEmpresa;
 import empresas.Empresa;
 import empresas.EmpresaExistenteException;
 import empresas.EmpresaInexistenteException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 import onibus.CadastroOnibus;
 import onibus.Onibus;
 import onibus.OnibusExistenteException;
@@ -39,7 +41,7 @@ import viagens.ViagemInexistenteException;
  * @author Sabrina Moreira
  */
 @Stateless
-public class Fachada  {
+public class Fachada implements Serializable{
     @EJB
     private CadastroClientes cliente;
     @EJB
@@ -52,8 +54,6 @@ public class Fachada  {
     private CadastroVenda venda;
     @EJB
     private CadastroViagem viagem; 
-    @EJB
-    private static Fachada fachada;
     
     public Fachada(){
         
@@ -141,14 +141,7 @@ public class Fachada  {
     public void atualizar(Viagem v) throws ViagemInexistenteException, ErroInternoException{
         this.viagem.atualizar(v);
     }
-    
-    public static Fachada getFachada(){//para fachada ser testada se já existe caso já exista não
-        if(fachada == null){
-            fachada = new Fachada();
-        }    
-            return fachada;   
-    }
-        
+       
     
 }
 

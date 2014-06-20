@@ -7,11 +7,14 @@
 package empresas;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import viagens.Viagem;
 
 /**
  *
@@ -23,6 +26,7 @@ public class Empresa implements Serializable{
     
     private String cnpj, nome, telefone, senha;
     private long id_empresa;
+    private List<Viagem> listaViagem;
     
     public Empresa(){     
     }
@@ -77,4 +81,14 @@ public class Empresa implements Serializable{
     public void setId_empresa(long id_empresa) {
         this.id_empresa = id_empresa;
     }  
+
+    @OneToMany(mappedBy = "empresa")
+    public List<Viagem> getListaViagem() {
+        return listaViagem;
+    }
+
+    public void setListaViagem(List<Viagem> listaViagem) {
+        this.listaViagem = listaViagem;
+    }
+    
 }
