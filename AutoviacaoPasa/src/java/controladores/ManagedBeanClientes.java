@@ -66,6 +66,11 @@ public class ManagedBeanClientes implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente Existente", "Cliente já existe");
             contexto.addMessage(null, msg);
         }
+        catch (ClienteInexistenteException cee) {
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente Existente", "Cliente já existe");
+            contexto.addMessage(null, msg);
+        }
         return null;
     }
 
