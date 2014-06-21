@@ -14,32 +14,31 @@
         </h:head>
 
         <h:body>
-            <h:form>
-                <p:layout fullPage="true">
+                    <h:form>
+            <p:layout fullPage="true">
 
-                    <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
-                        <h:graphicImage url="/banner.jpg"  width="700" height="200"/>
-                        <h:outputText value = "Login: "/> 
-                        <p:inputText value = "#{managedBeanClientes.cliente.cpf}" required="true" requiredMessage="O nome é obrigatório"/>
-                        <h:outputText value = " Senha: "/> 
-                        <p:password value = "#{managedBeanClientes.cliente.senha}" required="true" requiredMessage="O nome é obrigatório"/>
-                        <h:commandButton value = "Entrar" action = "#{managedBeanClientes.loginCliente(cliente.cpf, cliente.senha)}"/>
-                    </p:layoutUnit>
+                <p:layoutUnit position="north" size="200" resizable="false" closable="false" collapsible="true">
+                    <h:graphicImage url="/banner.jpg" />
+                </p:layoutUnit>
 
-                    <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
-                        <p:menu>
-                            <p:submenu label="Menu">
-                                <p:menuitem value="Inicio" outcome="index"/>
-                                <p:menuitem value="Quem Somos" outcome="quemsomos" />
-                                <p:menuitem value="Empresas Filiadas" url="http://www.primefaces.org/documentation.html" />
-                                <p:menuitem value="Cadastre-se" outcome="cadastro" />
-                                <p:menuitem value="Compra de Passagens" url="http://forum.primefaces.org/" />
-                                <p:menuitem value="Contato" url="http://www.primefaces.org/themes.html" />
-                            </p:submenu>
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
 
-                        </p:menu>
-                    </p:layoutUnit>
-                    <p:layoutUnit position="center">
+                <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Menu">
+                            <p:menuitem value="Inicio" outcome="index"/>
+                            <p:menuitem value="Quem Somos" outcome="quemsomos" />
+                            <p:menuitem value="Empresas Filiadas" url="http://www.primefaces.org/documentation.html" />
+                            <p:menuitem value="Cadastre-se" outcome="cadastro" />
+                            <p:menuitem value="Compra de Passagens" url="http://forum.primefaces.org/" />
+                            <p:menuitem value="Contato" url="http://www.primefaces.org/themes.html" />
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
 
                         <p:panel header="Cadstro de clientes">
                             <p:panelGrid columns="2">
@@ -64,10 +63,9 @@
                         <p><h:commandButton value = "Cadastrar" action = "#{managedBeanClientes.adicionarCliente()}"/></p>
                         <p:messages showDetail="true"/>
 
-                    </p:layoutUnit>
-                </p:layout>
-            </h:form>
+                </p:layoutUnit>
+            </p:layout>
+                                            </h:form>
         </h:body>
     </f:view>
 </html>
-
