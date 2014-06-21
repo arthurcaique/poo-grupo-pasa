@@ -17,12 +17,13 @@
 
             <p:layout fullPage="true">
 
-                <p:layoutUnit position="north" size="200" resizable="false" closable="false" collapsible="true">
-                    <h:graphicImage url="/banner.jpg" />
-                </p:layoutUnit>
-
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
+                <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
+                    <h:graphicImage url="/banner.jpg" width="700" height="200"/>
+                    <h:outputText value = "Login: "/> 
+                        <p:inputText value = "#{managedBeanClientes.cliente.cpf}" required="true"/>
+                        <h:outputText value = " Senha: "/> 
+                        <p:password value = "#{managedBeanClientes.cliente.senha}" required="true"/>
+                        <h:commandButton value = "Entrar" action = "#{managedBeanClientes.loginCliente(cliente.cpf, cliente.senha)}"/>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="west" size="210" header="Left" collapsible="true">

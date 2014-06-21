@@ -16,6 +16,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,6 +31,7 @@ public class ManagedBeanClientes implements Serializable {
     @EJB
     private Fachada fachada;
     private Cliente cliente;
+    private EntityManager em;
 
     public ManagedBeanClientes() {
         this.cliente = new Cliente();
@@ -96,6 +100,25 @@ public class ManagedBeanClientes implements Serializable {
         } catch (ClienteInexistenteException cie) {
             return "ClienteInexistente.xhtml";
         }
+    }
+
+    public Cliente loginCliente() {
+        try {
+           this.fachada.loginCliente(cliente.getCpf(), cliente.getSenha());
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Cliente logado com sucesso");
+            contexto.addMessage(null, msg);
+        } catch (ErroInternoException eie) {
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado! " + eie.getMessage());
+            contexto.addMessage(null, msg);
+
+        } catch (ClienteInexistenteException cee) {
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente Inexistente", "O cliente não existe");
+            contexto.addMessage(null, msg);
+        }
+        return null;
     }
 
 }

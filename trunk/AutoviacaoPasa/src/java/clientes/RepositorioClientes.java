@@ -19,4 +19,5 @@ public interface RepositorioClientes extends Serializable{
     public void remover (long id_cliente) throws ErroInternoException, ClienteInexistenteException;
     public Cliente buscarCliente (long id_cliente) throws ErroInternoException, ClienteInexistenteException;
     public void atualizar (Cliente cliente) throws ErroInternoException, ClienteInexistenteException;
+    public Cliente loginCliente(String cpf, String senha) throws ErroInternoException, ClienteInexistenteException;
 }

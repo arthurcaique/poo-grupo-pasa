@@ -74,6 +74,10 @@ public class Fachada implements Serializable{
     public void remover (long id_cliente) throws ErroInternoException, ClienteInexistenteException{
         this.cliente.remover(id_cliente);
     }   
+    
+    public Cliente loginCliente(String cpf, String senha) throws ErroInternoException, ClienteInexistenteException{
+        return this.cliente.loginCliente(cpf, senha);
+    }
      public void adicionar(Empresa ep) throws ErroInternoException, EmpresaExistenteException{
        this.empresa.adicionar(ep);
         

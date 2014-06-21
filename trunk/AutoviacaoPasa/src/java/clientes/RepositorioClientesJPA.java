@@ -7,7 +7,9 @@ package clientes;
 import index.ErroInternoException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -21,7 +23,7 @@ public class RepositorioClientesJPA implements RepositorioClientes {
     public RepositorioClientesJPA() {
         this.em = Persistence.createEntityManagerFactory("AutoviacaoPasaPU").createEntityManager();
     }
-    
+
     @Override
     public void adicionar(Cliente cliente) throws ErroInternoException, ClienteExistenteException {
         try {
@@ -43,19 +45,17 @@ public class RepositorioClientesJPA implements RepositorioClientes {
 
     @Override
     public Cliente buscarCliente(long id_cliente) throws ErroInternoException, ClienteInexistenteException {
-       try{
-        Cliente c = this.em.find(Cliente.class, id_cliente);
-        if (c == null) {
-            throw new ClienteInexistenteException();
+        try {
+            Cliente c = this.em.find(Cliente.class, id_cliente);
+            if (c == null) {
+                throw new ClienteInexistenteException();
+            }
+            return c;
+        } catch (ClienteInexistenteException ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw new ErroInternoException(e);
         }
-        return c;
-       }
-       catch(ClienteInexistenteException ex) {
-           throw ex;
-       }
-       catch(Exception e){
-           throw new ErroInternoException(e);
-       }
     }
 
     @Override
@@ -63,6 +63,20 @@ public class RepositorioClientesJPA implements RepositorioClientes {
         this.buscarCliente(cliente.getId_cliente());
         try {
             this.em.merge(cliente);
+        } catch (Exception e) {
+            throw new ErroInternoException(e);
+        }
+    }
+
+    @Override
+    public Cliente loginCliente(String cpf, String senha) throws ClienteInexistenteException, ErroInternoException {
+        try {
+            TypedQuery<Cliente> query = this.em.createQuery("SELECT c FROM Cliente c WHERE c.cpf = :cpf AND c.senha = :senha", Cliente.class);
+            query.setParameter("cpf", cpf);
+            query.setParameter("senha", senha);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new ClienteInexistenteException();
         } catch (Exception e) {
             throw new ErroInternoException(e);
         }
