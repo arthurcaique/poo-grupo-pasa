@@ -5,10 +5,12 @@
 package clientes;
 
 import index.ErroInternoException;
+import java.io.Serializable;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
@@ -16,9 +18,10 @@ import javax.persistence.TypedQuery;
  * @author Arthur
  */
 @Stateless
-public class RepositorioClientesJPA implements RepositorioClientes {
-
-    EntityManager em;
+public class RepositorioClientesJPA implements RepositorioClientes, Serializable {
+    
+    @PersistenceContext
+    private EntityManager em;
 
     public RepositorioClientesJPA() {
         this.em = Persistence.createEntityManagerFactory("AutoviacaoPasaPU").createEntityManager();

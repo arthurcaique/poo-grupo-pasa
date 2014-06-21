@@ -59,8 +59,8 @@ public class Fachada implements Serializable{
         
     }
     
-    public void adicionar(Cliente c) throws ErroInternoException, ClienteExistenteException{
-       this.cliente.adicionar(c);
+    public void adicionar(Cliente cliente) throws ErroInternoException, ClienteExistenteException, ClienteInexistenteException{
+       this.cliente.adicionar(cliente);
     }
     
     public Cliente buscarCliente(long id_cliente) throws ClienteInexistenteException, ErroInternoException{

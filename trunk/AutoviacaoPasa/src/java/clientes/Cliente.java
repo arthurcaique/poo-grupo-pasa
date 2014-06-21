@@ -13,11 +13,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Arthur
  */
+@Table(name = "cliente")
 @Entity
 public class Cliente implements Serializable {
     //Atributos
@@ -31,6 +33,7 @@ public class Cliente implements Serializable {
     
     //Construtor
     public Cliente(String nome, String cpf, String telefone, String senha){ 
+        
         this.senha = senha;
         this.nome = nome;
         this.telefone = telefone;
@@ -43,11 +46,12 @@ public class Cliente implements Serializable {
     public long getId_cliente() {
         return id_cliente;
     }
-
+    
     public void setId_cliente(long id_cliente) {
         this.id_cliente = id_cliente;
     }
     
+    @Column (nullable = false)
     public String getSenha() {
         return senha;
     }
@@ -65,7 +69,7 @@ public class Cliente implements Serializable {
         this.nome = nome;
     }
 
-    @Column (unique = true)
+    @Column (unique = true, nullable = false)
     public String getCpf() {
         return cpf;
     }
@@ -73,7 +77,7 @@ public class Cliente implements Serializable {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
+    @Column (nullable = false)
     public String getTelefone() {
         return telefone;
     }
@@ -82,27 +86,5 @@ public class Cliente implements Serializable {
         this.telefone = telefone;
     }
     
-    @Override
-    public boolean equals(Object obj){
-        if(obj == null || getClass() != obj.getClass() ){
-           return false; 
-        }
-        final Cliente cliente = (Cliente) obj;
-        if(!Objects.equal(this.id_cliente, cliente.id_cliente)){
-            return false;
-        }
-        if(!Objects.equal(this.cpf, cliente.cpf)){
-            return false;
-        }
-        if(!Objects.equal(this.nome, cliente.nome)){
-            return false;
-        }
-        if(!Objects.equal(this.senha, cliente.senha)){
-            return false;
-        }
-        if(!Objects.equal(this.telefone, cliente.telefone)){
-            return false;
-        }
-        return true;
-    }
+    
 }
