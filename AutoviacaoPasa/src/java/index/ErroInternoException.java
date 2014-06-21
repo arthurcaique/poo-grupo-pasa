@@ -15,6 +15,7 @@ public class ErroInternoException extends Exception{
     private Exception origem;
     
     public ErroInternoException(Exception origem){
+        super(origem.getMessage());
         this.origem = origem;
     }
     
