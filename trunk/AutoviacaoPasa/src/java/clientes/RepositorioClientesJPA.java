@@ -43,7 +43,19 @@ public class RepositorioClientesJPA implements RepositorioClientes {
 
     @Override
     public Cliente buscarCliente(long id_cliente) throws ErroInternoException, ClienteInexistenteException {
-        return this.em.find(Cliente.class, id_cliente);
+       try{
+        Cliente c = this.em.find(Cliente.class, id_cliente);
+        if (c == null) {
+            throw new ClienteInexistenteException();
+        }
+        return c;
+       }
+       catch(ClienteInexistenteException ex) {
+           throw ex;
+       }
+       catch(Exception e){
+           throw new ErroInternoException(e);
+       }
     }
 
     @Override

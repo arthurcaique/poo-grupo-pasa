@@ -36,7 +36,6 @@ public class ManagedBeanClientes implements Serializable {
     public ManagedBeanClientes(Cliente cliente) {
         this.cliente = cliente;
     }
-  
 
     public Cliente getCliente() {
         return cliente;
@@ -52,19 +51,18 @@ public class ManagedBeanClientes implements Serializable {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Cliente Cadastrado com sucesso");
             contexto.addMessage(null, msg);
-            return "index.xhtml";
 
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado!");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado! " + eie.getMessage());
             contexto.addMessage(null, msg);
-            return null;
+
         } catch (ClienteExistenteException cee) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente Existente", "Cliente já existe");
             contexto.addMessage(null, msg);
-            return null;
         }
+        return null;
     }
 
     public String removerCliente() {
