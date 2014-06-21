@@ -42,4 +42,8 @@ public class CadastroClientes {
     public void remover (long id_cliente) throws ErroInternoException, ClienteInexistenteException{
         this.clientes.remover(id_cliente);
     }
+    
+    public Cliente loginCliente(String cpf, String senha) throws ClienteInexistenteException, ErroInternoException{
+        return this.clientes.loginCliente(cpf, senha);
+    }
 }
