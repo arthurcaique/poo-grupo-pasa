@@ -12,18 +12,14 @@ package viagens;
  */
 public enum Cidades {
     RECIFE,
-    VITORIA_SANTO_ANTAO,
     GRAVATA,
     BEZERROS,
     CARUARU,
-    SAO_CAETANO,
-    BELO_JARDIM,
     SANHARO,
     PESQUEIRA,
     ARCOVERDE,
     AGRESTINA,
     TORITAMA, 
-    SANTA_CRUZ,
     CUPIRA, 
     PANELAS, 
     PALMARES,

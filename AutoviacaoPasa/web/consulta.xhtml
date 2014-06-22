@@ -41,7 +41,23 @@
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
-                        Welcome to PrimeFaces
+                        <p:panel id="panel" header="Passo 1: Consulta de ônibus">  
+                            <h:panelGrid columns="2">  
+
+                                <h:outputLabel for="dt_lanc" value="Data: " />  
+                                <p:calendar id="dt_lanc" value="#{livroBean.livro.ano}" pattern="dd/MM/yyyy"/>  
+
+                                <h:outputLabel value="Destino: " />  
+                                <p:selectOneMenu value="#{managedBeanVendas.destino}">
+                                    <f:selectItems value="#{managedBeanVendas.listaCidades}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel value="Origem: " />  
+                                <p:selectOneMenu value="#{managedBeanVendas.origem}">
+                                    <f:selectItems value="#{managedBeanVendas.listaCidades}" />
+                                </p:selectOneMenu>
+                            </h:panelGrid>  
+                        </p:panel>  
                     </p:layoutUnit>
                 </p:layout>
             </h:form>
