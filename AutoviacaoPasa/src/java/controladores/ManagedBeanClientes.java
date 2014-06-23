@@ -51,10 +51,11 @@ public class ManagedBeanClientes implements Serializable {
 
     public String adicionarCliente() {
         try {
-            this.fachada.adicionar(this.cliente);
+            this.fachada.adicionar(this.cliente);        
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Cliente Cadastrado com sucesso");
             contexto.addMessage(null, msg);
+            this.cliente = new Cliente();
 
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
@@ -66,9 +67,9 @@ public class ManagedBeanClientes implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente Existente", "Cliente já existe");
             contexto.addMessage(null, msg);
         }
-        catch (ClienteInexistenteException cee) {
+        catch (ClienteInexistenteException cie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente Existente", "Cliente já existe");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente Inexistente", "Cliente não existente");
             contexto.addMessage(null, msg);
         }
         return null;
