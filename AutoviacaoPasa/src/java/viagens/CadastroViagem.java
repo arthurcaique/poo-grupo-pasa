@@ -7,6 +7,8 @@
 package viagens;
 
 import index.ErroInternoException;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -46,6 +48,9 @@ public class CadastroViagem {
     } 
     public void atualizar(Viagem v) throws ViagemInexistenteException, ErroInternoException{
         this.viagem.atualizar(v);
+    }
+    public List<Viagem> consultaViagens(Cidades origem, Cidades destino, Date data) throws ViagemInexistenteException, ErroInternoException{
+        return this.viagem.consultaViagens(origem, destino, data);
     }
     
 }

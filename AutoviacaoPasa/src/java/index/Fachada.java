@@ -16,6 +16,7 @@ import empresas.EmpresaExistenteException;
 import empresas.EmpresaInexistenteException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -32,6 +33,7 @@ import vendas.CadastroVenda;
 import vendas.Venda;
 import vendas.VendaInexistenteException;
 import viagens.CadastroViagem;
+import viagens.Cidades;
 import viagens.Viagem;
 import viagens.ViagemExistenteException;
 import viagens.ViagemInexistenteException;
@@ -144,6 +146,9 @@ public class Fachada implements Serializable{
     } 
     public void atualizar(Viagem v) throws ViagemInexistenteException, ErroInternoException{
         this.viagem.atualizar(v);
+    }
+    public List<Viagem> consultaViagens(Cidades origem, Cidades destino, Date data) throws ErroInternoException, ViagemInexistenteException{
+        return this.viagem.consultaViagens(origem, destino, data);
     }
        
     

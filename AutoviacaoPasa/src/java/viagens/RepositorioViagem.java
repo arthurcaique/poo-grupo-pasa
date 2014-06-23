@@ -8,6 +8,7 @@ package viagens;
 
 import index.ErroInternoException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -25,6 +26,8 @@ public interface RepositorioViagem extends Serializable{
     public void atualizar(Viagem v) throws ErroInternoException,ViagemInexistenteException;
     
     public Viagem buscarViagem (long id_viagem) throws ErroInternoException, ViagemInexistenteException;
+    
+    public List<Viagem> consultaViagens(Cidades origem, Cidades destino, Date data) throws ErroInternoException, ViagemInexistenteException;
     
 
 }

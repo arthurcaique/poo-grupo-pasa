@@ -14,9 +14,8 @@
         </h:head>
 
         <h:body>
-            <h:form>
+            <h:form >
                 <p:layout fullPage="true">
-
                     <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
                         <h:graphicImage url="/banner.jpg" width="700" height="200"/>
                         <h:outputText value = "Login: "/> 
@@ -34,7 +33,7 @@
                                 <p:menuitem value="Quem Somos" outcome="quemsomos" />
                                 <p:menuitem value="Empresas Filiadas" url="http://www.primefaces.org/documentation.html" />
                                 <p:menuitem value="Cadastre-se" outcome="cadastro" />
-                                <p:menuitem value="Compra de Passagens" outcome="consulta" />
+                                <p:menuitem value="Compra de Passagens" outcome="consulta-onibus" />
                                 <p:menuitem value="Contato" url="http://www.primefaces.org/themes.html" />
                             </p:submenu>
 
@@ -45,17 +44,18 @@
                             <h:panelGrid columns="2">  
 
                                 <h:outputLabel for="dt_lanc" value="Data: " />  
-                                <p:calendar id="dt_lanc" value="#{livroBean.livro.ano}" pattern="dd/MM/yyyy"/>  
+                                <p:calendar id="dt_lanc" value="#{managedBeanViagem.viagem.data}" locale="en_US" pattern="dd/MM/yyyy"/>  
 
-                                <h:outputLabel value="Destino: " />  
-                                <p:selectOneMenu value="#{managedBeanVendas.destino}">
-                                    <f:selectItems value="#{managedBeanVendas.listaCidades}" />
+                                <h:outputLabel value="Origem " />  
+                                <p:selectOneMenu value="#{managedBeanViagem.viagem.origem}">
+                                    <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
                                 </p:selectOneMenu>
 
-                                <h:outputLabel value="Origem: " />  
-                                <p:selectOneMenu value="#{managedBeanVendas.origem}">
-                                    <f:selectItems value="#{managedBeanVendas.listaCidades}" />
+                                <h:outputLabel value="Destino " />  
+                                <p:selectOneMenu value="#{managedBeanViagem.viagem.destino}">
+                                    <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
                                 </p:selectOneMenu>
+                                <h:commandButton value = "Avançar" action = "#{managedBeanViagem.consultaViagens()}"/>
                             </h:panelGrid>  
                         </p:panel>  
                     </p:layoutUnit>
