@@ -28,12 +28,11 @@ public class RepositorioViagemJPA implements RepositorioViagem, Serializable {
     private EntityManager em;
 
     public RepositorioViagemJPA() {
-        EntityManagerFactory f = Persistence.createEntityManagerFactory("AutoviacaoPasaPU");
-        this.em = f.createEntityManager();
+        this.em = Persistence.createEntityManagerFactory("AutoviacaoPasaPU").createEntityManager();
     }
 
     @Override
-    public void adicionar(Viagem v) throws ErroInternoException {
+    public void adicionar(Viagem v) throws ErroInternoException, ViagemExistenteException {
         try {
             this.em.persist(v);
         } catch (Exception e) {
@@ -74,6 +73,8 @@ public class RepositorioViagemJPA implements RepositorioViagem, Serializable {
                 throw new ViagemInexistenteException();
             }
             return v;
+        } catch (ViagemInexistenteException ex) {
+            throw ex;
         } catch (Exception e) {
             throw new ErroInternoException(e);
 
