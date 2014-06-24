@@ -36,23 +36,26 @@ public class Viagem implements Serializable {
     private Cidades origem;
     private Cidades destino;
     private List<Cidades> listaCidades;
+    private List<Viagem> listaViagens;
     private Date hora;
     private Date data;
     private Onibus onibus;
     private Empresa empresa;
     private long id_viagem;
+    private double valor;
 
     public Viagem() {
 
     }
 
-    public Viagem(Cidades origem, Cidades destino, Date hora, Date data, Onibus onibus, Empresa empresa) {
+    public Viagem(Cidades origem, Cidades destino, Date hora, Date data, Onibus onibus, Empresa empresa, double valor) {
         this.origem = origem;
         this.destino = destino;
         this.hora = hora;
         this.data = data;
         this.onibus = onibus;
         this.empresa = empresa;
+        this.valor = valor;
     }
 
     /*public void set(Viagem v){
@@ -129,8 +132,16 @@ public class Viagem implements Serializable {
         this.empresa = empresa;
     }
 
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+    
     public String toString() {
-        return super.toString() + "\n" + this.data + "\n" + this.destino + "/n" + this.hora + "\n" + this.onibus + "/n" + this.id_viagem + "\n" + this.origem + "\n" + this.empresa;
+        return super.toString() + "\n" + this.data + "\n" + this.destino + "/n" + this.hora + "\n" + this.onibus + "/n" + this.id_viagem + "\n" + this.origem + "\n" + this.empresa + "\n" + this.valor;
     }
 
     public boolean equals(Object o) {
@@ -154,4 +165,12 @@ public class Viagem implements Serializable {
         this.listaCidades = listaCidades;
     }
 
+    @Transient
+    public List<Viagem> getListaViagens() {
+        return listaViagens;
+    }
+
+    public void setListaViagens(List<Viagem> listaViagens) {
+        this.listaViagens = listaViagens;
+    }
 }

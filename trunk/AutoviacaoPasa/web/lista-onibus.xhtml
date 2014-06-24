@@ -29,24 +29,26 @@
                                 <p:menuitem value="Empresas Filiadas" url="http://www.primefaces.org/documentation.html" />
                                 <p:menuitem value="Cadastre-se" outcome="cadastro" />
                                 <p:menuitem value="Compra de Passagens" outcome="consulta-onibus" />
-                                <p:menuitem value="Contato" url="http://www.primefaces.org/themes.html" />
+                                <p:menuitem value="Contato" outcome="cadastro-viagem" />
                             </p:submenu>
 
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
                         <p:panel header ="Passo 2: Selecione o onibus">
-                            <p:dataTable value = "#{managedBeanViagem.viagem}" var ="c" paginator ="true">
+                            <p:messages showDetail="true"/>
+                            <p:dataTable value = "#{managedBeanViagem.viagem.listaViagens}" var ="v">
                                 <p:column headerText ="Horário">
-                                    <h:outputText value ="Teste"/>
+                                    <h:outputText value ="#{v.hora}"/>
                                 </p:column>
                                 <p:column headerText="Valor">
+                                    <h:outputText value ="R$ #{v.valor}"/>
                                 </p:column>
                                 <p:column headerText ="Empresa">
-                                    <h:outputText value ="Teste"/>
+                                    <h:outputText value ="#{v.empresa.nome}"/>
                                 </p:column>
                             </p:dataTable>
-                            <p:messages showDetail="true"/>
+                            <h:commandButton value = "Avançar" action = "#{managedBeanViagem.consultaViagens()}"/>
                         </p:panel>
                     </p:layoutUnit>
                 </p:layout>
