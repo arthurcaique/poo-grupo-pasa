@@ -10,6 +10,7 @@ import clientes.ClienteInexistenteException;
 import index.ErroInternoException;
 import index.Fachada;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -78,7 +79,7 @@ public class ManagedBeanClientes implements Serializable {
     public String removerCliente() {
         try {
             this.fachada.remover(cliente.getId_cliente());
-            return "index.xhtml";
+            return "lista-html.xhtml";
         } catch (ErroInternoException eie) {
             return "ErroInterno.xhtml";
         } catch (ClienteInexistenteException cie) {
@@ -125,6 +126,16 @@ public class ManagedBeanClientes implements Serializable {
             contexto.addMessage(null, msg);
         }
         return null;
+    }
+    
+    public List<Cliente> listaClientes() throws ErroInternoException{
+        try{
+            List<Cliente> listaClientes = this.fachada.listaCliente(cliente);
+            return listaClientes;
+        }
+        catch(ErroInternoException e){
+            throw new ErroInternoException(e);
+        }
     }
 
 }
