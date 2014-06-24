@@ -21,6 +21,7 @@ import javax.persistence.EntityManager;
 import vendas.Venda;
 import viagens.Cidades;
 import viagens.Viagem;
+import viagens.ViagemExistenteException;
 import viagens.ViagemInexistenteException;
 
 /**
@@ -52,11 +53,32 @@ public class ManagedBeanViagem implements Serializable{
         this.viagem = viagem;
     }
     
+     public String adicionarViagem() {
+        try {
+            this.fachada.adicionar(this.viagem);
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Viagem Cadastrada com sucesso");
+            contexto.addMessage(null, msg);
+            this.viagem = new Viagem();
+
+        } catch (ErroInternoException eie) {
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado! " + eie.getMessage());
+            contexto.addMessage(null, msg);
+
+        } catch (ViagemExistenteException cee) {
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Viagem Existente", "Viagem já existe");
+            contexto.addMessage(null, msg);
+        }
+        return null;
+    }
+    
     public String consultaViagens(){
         try {
            this.fachada.consultaViagens(viagem.getOrigem(), viagem.getDestino(), viagem.getData());
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", viagem.getEmpresa() + " " + viagem.getHora());
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", viagem.getDestino()+ " " + viagem.getOrigem());
             contexto.addMessage(null, msg);
             //return "lista-onibus.xhtml";
         } catch (ErroInternoException eie) {

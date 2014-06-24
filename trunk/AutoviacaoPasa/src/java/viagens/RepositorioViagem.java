@@ -19,7 +19,7 @@ import javax.ejb.Local;
 @Local
 public interface RepositorioViagem extends Serializable{
     
-    public void adicionar(Viagem v) throws ErroInternoException;
+    public void adicionar(Viagem v) throws ErroInternoException, ViagemExistenteException;
     
     public void removerViagem(long id_viagem) throws ErroInternoException, ViagemInexistenteException;
     
