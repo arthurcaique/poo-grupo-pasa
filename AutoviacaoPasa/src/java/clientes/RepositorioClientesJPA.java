@@ -6,11 +6,13 @@ package clientes;
 
 import index.ErroInternoException;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -85,4 +87,10 @@ public class RepositorioClientesJPA implements RepositorioClientes, Serializable
         }
     }
 
+    @Override
+    public List<Cliente> listaCliente(Cliente cliente) throws ErroInternoException {
+        TypedQuery <Cliente> listaClientes = this.em.createQuery("SELECT c FROM Cliente c", Cliente.class);    
+        return listaClientes.getResultList();
+    }
+    
 }
