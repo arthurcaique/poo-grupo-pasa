@@ -7,6 +7,7 @@
 package empresas;
 
 import index.ErroInternoException;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -44,4 +45,8 @@ public class CadastroEmpresa {
     public void atualizar(Empresa ep) throws EmpresaInexistenteException, ErroInternoException{
         this.empresa.atualizar(ep);
     }
+    public List<Empresa> listaEmpresa (Empresa empresa) throws ErroInternoException{
+        return this.empresa.listaEmpresa(empresa);
+    }
+         
 }
