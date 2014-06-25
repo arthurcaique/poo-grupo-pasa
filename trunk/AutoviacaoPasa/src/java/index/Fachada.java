@@ -89,7 +89,9 @@ public class Fachada implements Serializable {
         this.empresa.adicionar(ep);
 
     }
-
+    /* public List<Empresa>listaEmpresa(Empresa empresa) throws ErroInternoException{
+        return this.empresa.listaClientes(empresa);}*/
+     
     public void remove(long Id_empresa) throws EmpresaInexistenteException, ErroInternoException {
         this.empresa.remove(Id_empresa);
     }
@@ -145,6 +147,7 @@ public class Fachada implements Serializable {
     public void adicionar(Viagem v) throws ErroInternoException, ViagemExistenteException {
         this.viagem.adicionar(v);
     }
+    
 
     public void removeViagem(long Id_viagem) throws ViagemInexistenteException, ErroInternoException {
         this.viagem.removeViagem(Id_viagem);

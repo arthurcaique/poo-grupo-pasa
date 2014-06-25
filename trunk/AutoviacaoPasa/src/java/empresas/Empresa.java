@@ -6,6 +6,7 @@
 
 package empresas;
 
+import com.sun.xml.ws.developer.StreamingAttachment;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import viagens.Viagem;
 
 /**
@@ -27,6 +29,7 @@ public class Empresa implements Serializable{
     private String cnpj, nome, telefone, senha;
     private long id_empresa;
     private List<Viagem> listaViagem;
+    private List<Empresa> listaEmpresa;
     
     public Empresa(){     
     }
@@ -36,8 +39,17 @@ public class Empresa implements Serializable{
         this.nome = nome;
         this.telefone = telefone;
         this.senha = senha;
+        
+    }
+    @Transient
+    public List<Empresa> getListaEmpresa() {
+        return listaEmpresa;
     }
 
+    public void setListaEmpresa(List<Empresa> listaEmpresa) {
+        this.listaEmpresa = listaEmpresa;
+    }
+    
     @Column (unique = true)
     public String getCnpj() {
         return cnpj;
