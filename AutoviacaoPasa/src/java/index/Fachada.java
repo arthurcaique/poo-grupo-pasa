@@ -45,7 +45,7 @@ import viagens.ViagemInexistenteException;
 public class Fachada implements Serializable {
 
     @EJB
-    private CadastroClientes cliente;
+    private CadastroClientes cadCliente;
     @EJB
     private CadastroEmpresa empresa;
     @EJB
@@ -62,23 +62,27 @@ public class Fachada implements Serializable {
     }
 
     public void adicionar(Cliente cliente) throws ErroInternoException, ClienteExistenteException, ClienteInexistenteException {
-        this.cliente.adicionar(cliente);
+        this.cadCliente.adicionar(cliente);
     }
 
     public Cliente buscarCliente(long id_cliente) throws ClienteInexistenteException, ErroInternoException {
-        return this.cliente.buscarCliente(id_cliente);
+        return this.cadCliente.buscarCliente(id_cliente);
     }
 
     public void atualizar(Cliente c) throws ClienteInexistenteException, ErroInternoException {
-        this.cliente.atualizar(c);
+        this.cadCliente.atualizar(c);
     }
 
     public void remover(long id_cliente) throws ErroInternoException, ClienteInexistenteException {
-        this.cliente.remover(id_cliente);
+        this.cadCliente.remover(id_cliente);
     }
 
     public Cliente loginCliente(String cpf, String senha) throws ErroInternoException, ClienteInexistenteException {
-        return this.cliente.loginCliente(cpf, senha);
+        return this.cadCliente.loginCliente(cpf, senha);
+    }
+    
+    public List<Cliente>listaCliente(Cliente cliente) throws ErroInternoException{
+        return this.cadCliente.listaClientes(cliente);
     }
 
     public void adicionar(Empresa ep) throws ErroInternoException, EmpresaExistenteException {
