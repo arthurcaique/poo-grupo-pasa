@@ -7,10 +7,13 @@
 package empresas;
 
 import index.ErroInternoException;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -18,6 +21,8 @@ import javax.persistence.Persistence;
  */
 @Stateless
 public class RepositorioEmpresaJPA implements RepositorioEmpresa{
+    
+    @PersistenceContext
     private EntityManager em;
     
     public RepositorioEmpresaJPA(){
@@ -73,4 +78,14 @@ public class RepositorioEmpresaJPA implements RepositorioEmpresa{
         
         }
     }
+       public List<Empresa> listaEmpresa (Empresa empresa) throws ErroInternoException{
+         
+        try{
+        TypedQuery <Empresa> listaEmpresa = this.em.createQuery("SELECT e FROM Empresa e", Empresa.class);    
+        return listaEmpresa.getResultList();
+        }
+       catch(Exception e){
+          throw new ErroInternoException(e);
+       }
+}
 }

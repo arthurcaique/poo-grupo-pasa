@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Autoviação Pasa</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <h:form>
+                <p:layout fullPage="true">
+
+                    <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
+                        <h:graphicImage url="/banner.jpg" width="700" height="200"/>
+                        <h:outputText value = "Login: "/> 
+                        <p:inputMask mask="999.999.999-99" value = "#{managedBeanClientes.cliente.cpf}" requiredMessage="O CPF é obrigatório"/>
+                        <h:outputText value = " Senha: "/> 
+                        <p:password value = "#{managedBeanClientes.cliente.senha}" required="true"/>
+                        <h:commandButton value = "Entrar" action = "#{managedBeanClientes.loginCliente()}"/>
+                        <p:messages showDetail="true"/>
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
+                        <p:menu>
+                            <p:submenu label="Menu">
+                                <p:menuitem value="Inicio" outcome="index"/>
+                                <p:menuitem value="Quem Somos" outcome="quemsomos" />
+                                <p:menuitem value="Empresas Filiadas" url="http://www.primefaces.org/documentation.html" />
+                                <p:menuitem value="Cadastre-se" outcome="cadastro" />
+                                <p:menuitem value="Compra de Passagens" outcome="consulta-onibus" />
+                                <p:menuitem value="Contato" outcome="cadastro-viagem" />
+                            </p:submenu>
+
+                        </p:menu>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center">
+                        <p:panel header="Cadastro de Empresa">
+                            <p:panelGrid columns="2">
+                                <h:outputText value = "Nome: "/> 
+                                <p:inputText value = "#{managedBeanEmpresa.empresa.nome}" required="true" requiredMessage="O nome é obrigatório"/>
+                                <h:outputText value = "CNPJ "/> 
+                                <p:inputMask mask="99.999.999/9999-99" value = "#{managedBeanEmpresa.empresa.cnpj}" requiredMessage="O CNPJ é obrigatório"/>
+                                <h:outputText value = "Telefone: "/> 
+                                <p:inputMask mask="(99) 99999999" value = "#{managedBeanEmpresa.empresa.telefone}" requiredMessage="O telefone é obrigatório"/>
+                                <h:outputText value= "Digite uma senha: "/>
+                                <p:password value= "#{managedBeanEmpresa.empresa.senha}" required="true" requiredMessage="A senha é obrigatória" validatorMessage="A senha deve ter pelo menos 4 dígitos" 
+                                            feedback="true" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte" promptLabel="Digite a senha" id="senha1" match="senha2">
+                                    <f:validateLength minimum="4"/>
+                                </p:password>
+                                <h:outputText value= "Digite novamente a senha: "/>
+                                <p:password value= "#{managedBeanEmpresa.empresa.senha}" required="true" requiredMessage="A senha é obrigatória" validatorMessage="As senhas não conferem" 
+                                            id="senha2">
+                                    <f:validateLength minimum="4"/>
+                                </p:password>
+                            </p:panelGrid>
+                        </p:panel>
+                        <p><h:commandButton value = "Cadastrar" action = "#{managedBeanEmpresa.adicionarEmpresa()}"/></p>
+                        <p:messages showDetail="true"/>
+
+
+                    </p:layoutUnit>
+                </p:layout>
+            </h:form>
+        </h:body>
+    </f:view>
+</html>
+
