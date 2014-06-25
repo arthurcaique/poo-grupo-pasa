@@ -38,6 +38,12 @@
                         <p:panel header ="Passo 2: Selecione o onibus">
                             <p:messages showDetail="true"/>
                             <p:dataTable value = "#{managedBeanViagem.viagem.listaViagens}" var ="v">
+                                <p:column headerText ="Selecione" style="max-width: 10px; min-width: 10px; overflow: hidden">
+                                    <h:selectOneRadio onclick="radioButton(this);">
+                                        <f:selectItem itemValue="null" />
+                                    </h:selectOneRadio>
+                                </p:column>
+
                                 <p:column headerText ="Horário">
                                     <h:outputText value ="#{v.hora}"/>
                                 </p:column>
