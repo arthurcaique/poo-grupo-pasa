@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:layout>
+                <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
+                        <h:graphicImage url="/banner.jpg" width="700" height="200"/>
+                        <h:outputText value = " Logado como usuário: #{managedBeanClientes.cliente.nome} " 
+                                      rendered="#{managedBeanClientes.login}"/> 
+                        <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" 
+                                         rendered="#{managedBeanClientes.login}"/>
+                    </p:layoutUnit>
+            <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
+                        <p:menu>
+                            <p:submenu label="Login" rendered="#{!managedBeanClientes.login}">
+                                <p:menuitem value="Cliente" outcome="login-cliente" />
+                                <p:menuitem value="Empresa" outcome="login-empresa"/>
+                            </p:submenu>
+                            <p:submenu label="Cadastre-se" rendered="#{!managedBeanClientes.login}">
+                                <p:menuitem value="Cliente" outcome="cadastro-cliente" />
+                                <p:menuitem value="Empresa" outcome="cadastro-empresa"/>
+                            </p:submenu>
+                            <p:submenu label="Menu">
+                                <p:menuitem value="Inicio" outcome="index"/>
+                                <p:menuitem value="Quem Somos" outcome="quemsomos" />
+                                <p:menuitem value="Empresas Filiadas" outcome="lista-empresa" />
+                                <p:menuitem value="Compra de Passagens" outcome="consulta-onibus" />
+                            </p:submenu>
+                        </p:menu>
+                </p:layoutUnit>
+            
+            <p:layoutUnit position = "center">
+            <p:panel header ="Dados pessoais">
+                <p:panelGrid columns="2">
+                    <h:outputText value = "Nome:"/>
+                    <h:outputText value = "#{managedBeanClientes.cliente.nome}"/>
+                    <h:outputText value = "ID:" />
+                    <h:outputText value = "#{managedBeanClientes.cliente.id_cliente}" />
+                    <h:outputText value = "CPF:" />
+                    <h:outputText value = "#{managedBeanClientes.cliente.cpf}" />
+                    <h:outputText value= "Telefone:" />
+                    <p:inputMask mask="(99)9999-9999" value = "#{managedBeanClientes.cliente.telefone}" />                   
+                </p:panelGrid>
+                <p><h:commandButton value="Atualizar informações" action="#{managedBeanClientes.atualizarCliente()}"/></p>
+            </p:panel>
+            </p:layoutUnit>
+                </p:layout>
+        </h:form>
+            
+    </h:body>
+</html>
+
