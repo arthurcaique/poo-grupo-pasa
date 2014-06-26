@@ -20,19 +20,28 @@
 
                     <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
                         <h:graphicImage url="/banner.jpg" width="700" height="200"/>
-
+                        <h:outputText value = " Logado como usuário: #{managedBeanClientes.cliente.nome} " 
+                                      rendered="#{managedBeanClientes.login}"/> 
+                        <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" 
+                                         rendered="#{managedBeanClientes.login}"/>
                     </p:layoutUnit>
 
                     <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
                         <p:menu>
-                            <p:submenu label="Menu">
-                                <p:menuitem value="Quem Somos" outcome="quemsomos" />
-                                <p:menuitem value="Empresas Filiadas" url="http://www.primefaces.org/documentation.html" />
-                                <p:menuitem value="Cadastre-se" outcome="cadastro" />
-                                <p:menuitem value="Compra de Passagens" outcome="consulta-onibus" />
-                                <p:menuitem value="Contato" outcome="cadastro-viagem" />
+                            <p:submenu label="Login">
+                                <p:menuitem value="Cliente" outcome="login-cliente" />
+                                <p:menuitem value="Empresa" outcome="login-empresa"/>
                             </p:submenu>
-
+                            <p:submenu label="Cadastre-se">
+                                <p:menuitem value="Cliente" outcome="cadastro-cliente" />
+                                <p:menuitem value="Empresa" outcome="cadastro-empresa"/>
+                            </p:submenu>
+                            <p:submenu label="Menu">
+                                <p:menuitem value="Inicio" outcome="index"/>
+                                <p:menuitem value="Quem Somos" outcome="quemsomos" />
+                                <p:menuitem value="Empresas Filiadas" outcome="lista-empresa" />
+                                <p:menuitem value="Compra de Passagens" outcome="consulta-onibus" />
+                            </p:submenu>
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">

@@ -14,31 +14,36 @@
         </h:head>
 
         <h:body>
-                    <h:form>
-            <p:layout fullPage="true">
+            <h:form>
+                <p:layout fullPage="true">
 
-                <p:layoutUnit position="north" size="200" resizable="false" closable="false" collapsible="true">
-                    <h:graphicImage url="/banner.jpg" />
-                </p:layoutUnit>
+                    <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
+                        <h:graphicImage url="/banner.jpg" width="700" height="200"/>
+                        <h:outputText value = " Logado como usuário: #{managedBeanClientes.cliente.nome} " 
+                                      rendered="#{managedBeanClientes.login}"/> 
+                        <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" 
+                                         rendered="#{managedBeanClientes.login}"/>
+                    </p:layoutUnit>
 
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
-
-                <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Menu">
-                            <p:menuitem value="Inicio" outcome="index"/>
+                    <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
+                        <p:menu>
+                            <p:submenu label="Login" rendered="#{!managedBeanClientes.login}">
+                                <p:menuitem value="Cliente" outcome="login-cliente" />
+                                <p:menuitem value="Empresa" outcome="login-empresa"/>
+                            </p:submenu>
+                            <p:submenu label="Cadastre-se" rendered="#{!managedBeanClientes.login}">
+                                <p:menuitem value="Cliente" outcome="cadastro-cliente" />
+                                <p:menuitem value="Empresa" outcome="cadastro-empresa"/>
+                            </p:submenu>
+                            <p:submenu label="Menu">
+                                <p:menuitem value="Inicio" outcome="index"/>
                                 <p:menuitem value="Quem Somos" outcome="quemsomos" />
-                                <p:menuitem value="Empresas Filiadas" url="http://www.primefaces.org/documentation.html" />
-                                <p:menuitem value="Cadastre-se" outcome="cadastro" />
+                                <p:menuitem value="Empresas Filiadas" outcome="lista-empresa" />
                                 <p:menuitem value="Compra de Passagens" outcome="consulta-onibus" />
-                                <p:menuitem value="Contato" url="http://www.primefaces.org/themes.html" />
-                        </p:submenu>
-
-                    </p:menu>
-                </p:layoutUnit>
-                <p:layoutUnit position="center">
+                            </p:submenu>
+                        </p:menu>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center">
 
                         <p:panel header="Cadstro de clientes">
                             <p:panelGrid columns="2">
@@ -63,9 +68,9 @@
                         <p><h:commandButton value = "Cadastrar" action = "#{managedBeanClientes.adicionarCliente()}"/></p>
                         <p:messages showDetail="true"/>
 
-                </p:layoutUnit>
-            </p:layout>
-                                            </h:form>
+                    </p:layoutUnit>
+                </p:layout>
+            </h:form>
         </h:body>
     </f:view>
 </html>

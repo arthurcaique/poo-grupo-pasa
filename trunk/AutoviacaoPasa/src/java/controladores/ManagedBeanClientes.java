@@ -33,6 +33,7 @@ public class ManagedBeanClientes implements Serializable {
     private Fachada fachada;
     private Cliente cliente;
     private EntityManager em;
+    private boolean login;
 
     public ManagedBeanClientes() {
         this.cliente = new Cliente();
@@ -50,9 +51,17 @@ public class ManagedBeanClientes implements Serializable {
         this.cliente = cliente;
     }
 
+    public boolean isLogin() {
+        return login;
+    }
+
+    public void setLogin(boolean login) {
+        this.login = login;
+    }
+    
     public String adicionarCliente() {
         try {
-            this.fachada.adicionar(this.cliente);        
+            this.fachada.adicionar(this.cliente);
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Cliente Cadastrado com sucesso");
             contexto.addMessage(null, msg);
@@ -67,8 +76,7 @@ public class ManagedBeanClientes implements Serializable {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente Existente", "Cliente já existe");
             contexto.addMessage(null, msg);
-        }
-        catch (ClienteInexistenteException cie) {
+        } catch (ClienteInexistenteException cie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente Inexistente", "Cliente não existente");
             contexto.addMessage(null, msg);
@@ -109,12 +117,14 @@ public class ManagedBeanClientes implements Serializable {
         }
     }
 
-    public Cliente loginCliente() {
+    public String loginCliente() {
         try {
-           this.fachada.loginCliente(cliente.getCpf(), cliente.getSenha());
+            this.cliente = this.fachada.loginCliente(cliente.getCpf(), cliente.getSenha());
+            this.login = true;
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Cliente logado com sucesso");
             contexto.addMessage(null, msg);
+            return "index.xhtml";
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado! " + eie.getMessage());
@@ -128,12 +138,16 @@ public class ManagedBeanClientes implements Serializable {
         return null;
     }
     
-    public List<Cliente> listaClientes() throws ErroInternoException{
-        try{
+    public void logout(){
+        login = false;
+        this.cliente = new Cliente();
+    }
+
+    public List<Cliente> listaClientes() throws ErroInternoException {
+        try {
             List<Cliente> listaClientes = this.fachada.listaCliente(cliente);
             return listaClientes;
-        }
-        catch(ErroInternoException e){
+        } catch (ErroInternoException e) {
             throw new ErroInternoException(e);
         }
     }
