@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controladores;
 
 import empresas.Empresa;
@@ -27,82 +26,57 @@ import javax.persistence.EntityManager;
 @ManagedBean
 @SessionScoped
 public class ManagedBeanEmpresa implements Serializable {
+
     @EJB
     private Fachada fachada;
     private Empresa empresa;
-   
-    
-    public ManagedBeanEmpresa(){
-        this.empresa  = new Empresa();
+
+    public Empresa getEmpresa() {
+        return empresa;
     }
-    
-    public ManagedBeanEmpresa(Empresa empresa){
-        this.empresa =  empresa;
-        
-    }
-    public void setEmpresa(Empresa empresa){
+
+    public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-    public Empresa getEmpresa(){
-        return empresa;
-}
     
-   public String adicionarEmpresa(){
-        try{
+
+
+    public String adicionarEmpresa() {
+        try {
             this.fachada.adicionar(this.empresa);
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Empresa Cadastrada com sucesso");
             contexto.addMessage(null, msg);
             this.empresa = new Empresa();
-          
-        }
-        catch(ErroInternoException eie){
-           FacesContext contexto = FacesContext.getCurrentInstance();
+
+        } catch (ErroInternoException eie) {
+            FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado! " + eie.getMessage());
             contexto.addMessage(null, msg);
             return null;
-        }
-     
-        catch(EmpresaExistenteException eee){
+        } catch (EmpresaExistenteException eee) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Empresa Existente", "Empresa já existe");
             contexto.addMessage(null, msg);
             return null;
         }
         return null;
-   }
+    }
 
-    public String listaEmpresa(){
-        try{
+    public String listaEmpresa() {
+        try {
             this.empresa.setListaEmpresa(this.fachada.listaEmpresa());
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.FACES_MESSAGES, "Essas são as empresa filiadas ao site");
             contexto.addMessage(null, msg);
             return null;
-            
-        }
-        catch(ErroInternoException eie){
+
+        } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro Interno", "Ocorreu um erro interno inesperado!" + eie.getMessage());
             contexto.addMessage(null, msg);
             return null;
         }
     }
-    
-    public String buscarEmpresa(){
-        try{
-            this.fachada.buscarEmpresa(this.empresa.getId_empresa());
-            return "Empresa.xhtml";
-        }
-        catch(ErroInternoException eie){
-            return "ErroInternoException.xhtml";
-        }
-        catch(EmpresaInexistenteException pie){
-            return "EmpresaInexistenteException.xhtml";
-        }
-    }
-    
-  
-    }
-  
 
+}

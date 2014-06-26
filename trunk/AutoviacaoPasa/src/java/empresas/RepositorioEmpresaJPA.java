@@ -78,6 +78,7 @@ public class RepositorioEmpresaJPA implements RepositorioEmpresa{
         
         }
     }
+    @Override
        public List<Empresa> listaEmpresa () throws ErroInternoException{
          
         try{
