@@ -30,7 +30,6 @@ public class Empresa implements Serializable{
     private String cnpj, nome, telefone, senha;
     private long id_empresa;
     private List<Viagem> listaViagem;
-    private List<Empresa> listaEmpresa;
     
     public Empresa(){     
     }
@@ -41,14 +40,6 @@ public class Empresa implements Serializable{
         this.telefone = telefone;
         this.senha = senha;
         
-    }
-    @Transient
-    public List<Empresa> getListaEmpresa() {
-        return listaEmpresa;
-    }
-
-    public void setListaEmpresa(List<Empresa> listaEmpresa) {
-        this.listaEmpresa = listaEmpresa;
     }
     
    // @Column (unique = true)
@@ -129,17 +120,6 @@ public class Empresa implements Serializable{
         if (!Objects.equals(this.listaViagem, other.listaViagem)) {
             return false;
         }
-        if (!Objects.equals(this.listaEmpresa, other.listaEmpresa)) {
-            return false;
-        }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Empresa{" + "cnpj=" + cnpj + ", nome=" + nome + ", telefone=" + telefone + ", senha=" + senha + ", id_empresa=" + id_empresa + ", listaViagem=" + listaViagem + ", listaEmpresa=" + listaEmpresa + '}';
-    }
-    
-    
-    
+    } 
 }

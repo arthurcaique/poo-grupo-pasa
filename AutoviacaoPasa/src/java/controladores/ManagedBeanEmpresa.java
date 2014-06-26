@@ -30,6 +30,15 @@ public class ManagedBeanEmpresa implements Serializable {
     @EJB
     private Fachada fachada;
     private Empresa empresa;
+    private List<Empresa> listaEmpresa;
+
+    public ManagedBeanEmpresa() {
+        this.empresa = new Empresa();
+    }
+
+    public ManagedBeanEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 
     public Empresa getEmpresa() {
         return empresa;
@@ -38,9 +47,15 @@ public class ManagedBeanEmpresa implements Serializable {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
+
+    public List<Empresa> getListaEmpresa() throws ErroInternoException {
+        return this.fachada.listaEmpresa();
+    }
+
+    public void setListaEmpresa(List<Empresa> listaEmpresa) {
+        this.listaEmpresa = listaEmpresa;
+    }
     
-
-
     public String adicionarEmpresa() {
         try {
             this.fachada.adicionar(this.empresa);
@@ -65,7 +80,7 @@ public class ManagedBeanEmpresa implements Serializable {
 
     public String listaEmpresa() {
         try {
-            this.empresa.setListaEmpresa(this.fachada.listaEmpresa());
+            this.listaEmpresa = (this.fachada.listaEmpresa());
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.FACES_MESSAGES, "Essas são as empresa filiadas ao site");
             contexto.addMessage(null, msg);
