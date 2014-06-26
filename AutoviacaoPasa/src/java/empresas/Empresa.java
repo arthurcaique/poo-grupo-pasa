@@ -9,6 +9,7 @@ package empresas;
 import com.sun.xml.ws.developer.StreamingAttachment;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,7 +51,7 @@ public class Empresa implements Serializable{
         this.listaEmpresa = listaEmpresa;
     }
     
-    @Column (unique = true)
+   // @Column (unique = true)
     public String getCnpj() {
         return cnpj;
     }
@@ -75,7 +76,7 @@ public class Empresa implements Serializable{
         this.telefone = telefone;
     }
 
-    @Column (unique = true)
+    //@Column (unique = true)
     public String getSenha() {
         return senha;
     }
@@ -102,5 +103,43 @@ public class Empresa implements Serializable{
     public void setListaViagem(List<Viagem> listaViagem) {
         this.listaViagem = listaViagem;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Empresa other = (Empresa) obj;
+        if (!Objects.equals(this.cnpj, other.cnpj)) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.telefone, other.telefone)) {
+            return false;
+        }
+        if (!Objects.equals(this.senha, other.senha)) {
+            return false;
+        }
+        if (!Objects.equals(this.listaViagem, other.listaViagem)) {
+            return false;
+        }
+        if (!Objects.equals(this.listaEmpresa, other.listaEmpresa)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Empresa{" + "cnpj=" + cnpj + ", nome=" + nome + ", telefone=" + telefone + ", senha=" + senha + ", id_empresa=" + id_empresa + ", listaViagem=" + listaViagem + ", listaEmpresa=" + listaEmpresa + '}';
+    }
+    
+    
     
 }
