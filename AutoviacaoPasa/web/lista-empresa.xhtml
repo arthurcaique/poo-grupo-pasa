@@ -38,18 +38,16 @@
                     <p:layoutUnit position="center">
                         <p:panel header ="Empresas Filiadas">
                             <p:messages showDetail="true"/>
-                            <p:dataTable value = "#{managedBeanEmpresa.empresa}" var ="v">
-                                <p:column headerText ="Horário">
-                                    <h:outputText value ="#{v.hora}"/>
+                            <p:dataTable value = "#{managedBeanEmpresa.empresa.listaEmpresa}" var ="e">
+                                <p:column headerText ="Nome">
+                                    <h:outputText value ="#{e.nome}"/>
                                 </p:column>
-                                <p:column headerText="Valor">
-                                    <h:outputText value ="R$ #{v.valor}"/>
+                                <p:column headerText="Telefone">
+                                    <h:outputText value =" #{e.telefone}"/>
                                 </p:column>
-                                <p:column headerText ="Empresa">
-                                    <h:outputText value ="#{v.empresa.nome}"/>
-                                </p:column>
+                               
                             </p:dataTable>
-                            <h:commandButton value = "Avançar" action = "#{managedBeanViagem.consultaViagens()}"/>
+                           
                         </p:panel>
                     </p:layoutUnit>
                 </p:layout>
