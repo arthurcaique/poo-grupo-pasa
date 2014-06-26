@@ -14,19 +14,15 @@
         </h:head>
 
         <h:body>
+            <h:form>
+                <p:layout fullPage="true">
 
-            <p:layout fullPage="true">
-
-               <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
+                    <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
                         <h:graphicImage url="/banner.jpg" width="700" height="200"/>
-                        <h:outputText value = " Logado como usuário: #{managedBeanClientes.cliente.nome} " 
-                                      rendered="#{managedBeanClientes.login}"/> 
-                        <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" 
-                                         rendered="#{managedBeanClientes.login}"/>
                     </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
-                   <p:menu>
+                    <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
+                        <p:menu>
                             <p:submenu label="Login" rendered="#{!managedBeanClientes.login}">
                                 <p:menuitem value="Cliente" outcome="login-cliente" />
                                 <p:menuitem value="Empresa" outcome="login-empresa"/>
@@ -44,12 +40,21 @@
                         </p:menu>
                 </p:layoutUnit>
                 <p:layoutUnit position="center">
-                    Autoviação Pasa é um local onde você consulta viagens de várias empresas e ainda garante a sua passagem comprando ela!
+                    <p:panel header="Login para clientes">
+                        <p:panelGrid columns="2">
+                            <h:outputText value = "CPF: "/>
+                            <p:inputMask mask="999.999.999-99" value = "#{managedBeanClientes.cliente.cpf}" requiredMessage="O CPF é obrigatório"/>
+                            <h:outputText value = "Senha: "/> 
+                            <p:password value = "#{managedBeanClientes.cliente.senha}" required="true"/>
+                            <p:messages showDetail="true"/>
+                        </p:panelGrid>
+                        <h:commandButton id="form1" value = "Entrar" action = "#{managedBeanClientes.loginCliente()}"/>
+                    </p:panel>
                 </p:layoutUnit>
             </p:layout>
+        </h:form>
+    </h:body>
 
-        </h:body>
-
-    </f:view>
+</f:view>
 </html>
 
