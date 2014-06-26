@@ -19,35 +19,44 @@
 
                     <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
                         <h:graphicImage url="/banner.jpg" width="700" height="200"/>
-                        
+                        <h:outputText value = " Logado como usuário: #{managedBeanClientes.cliente.nome} " 
+                                      rendered="#{managedBeanClientes.login}"/> 
+                        <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" 
+                                         rendered="#{managedBeanClientes.login}"/>
                     </p:layoutUnit>
 
                     <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
                         <p:menu>
+                            <p:submenu label="Login" rendered="#{!managedBeanClientes.login}">
+                                <p:menuitem value="Cliente" outcome="login-cliente" />
+                                <p:menuitem value="Empresa" outcome="login-empresa"/>
+                            </p:submenu>
+                            <p:submenu label="Cadastre-se" rendered="#{!managedBeanClientes.login}">
+                                <p:menuitem value="Cliente" outcome="cadastro-cliente" />
+                                <p:menuitem value="Empresa" outcome="cadastro-empresa"/>
+                            </p:submenu>
                             <p:submenu label="Menu">
                                 <p:menuitem value="Inicio" outcome="index"/>
                                 <p:menuitem value="Quem Somos" outcome="quemsomos" />
-                                <p:menuitem value="Empresas Filiadas" outcome= "Empresas Filiadas" />
-                                <p:menuitem value="Cadastre-se" outcome="cadastro" />
+                                <p:menuitem value="Empresas Filiadas" outcome="lista-empresa" />
                                 <p:menuitem value="Compra de Passagens" outcome="consulta-onibus" />
-                                <p:menuitem value="Contato" outcome="cadastro-viagem" />
                             </p:submenu>
-
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
                         <p:panel header ="Empresas Filiadas">
                             <p:messages showDetail="true"/>
-                            <p:dataTable value = "#{managedBeanEmpresa.empresa.listaEmpresa}" var ="e">
+                            <h:outputText value ="Essas são as empresas filiadas ao site"/>
+                            <p:dataTable value = "#{managedBeanEmpresa.listaEmpresa}" var ="e">
                                 <p:column headerText ="Nome">
                                     <h:outputText value ="#{e.nome}"/>
                                 </p:column>
                                 <p:column headerText="Telefone">
                                     <h:outputText value =" #{e.telefone}"/>
                                 </p:column>
-                               
+
                             </p:dataTable>
-                           
+                            <p:messages showDetail="true"/>
                         </p:panel>
                     </p:layoutUnit>
                 </p:layout>
