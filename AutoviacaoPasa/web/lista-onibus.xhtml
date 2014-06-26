@@ -19,6 +19,10 @@
 
                     <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
                         <h:graphicImage url="/banner.jpg" width="700" height="200"/>
+                        <h:link value = " Logado como usuário: #{managedBeanClientes.cliente.nome} " outcome="dadospessoais-cliente" 
+                                      rendered="#{managedBeanClientes.login}"/> 
+                        <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" 
+                                         rendered="#{managedBeanClientes.login}"/>
                     </p:layoutUnit>
 
                     <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
