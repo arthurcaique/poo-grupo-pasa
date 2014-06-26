@@ -109,12 +109,17 @@ public class ManagedBeanClientes implements Serializable {
     public String atualizarCliente() {
         try {
             this.fachada.atualizar(cliente);
-            return "index.xhtml";
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Dados do cliente atualizados com sucesso");
+            contexto.addMessage(null, msg);
         } catch (ErroInternoException eie) {
-            return "ErroInterno.xhtml";
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ErroInterno", "Ocorreu um erro interno");
+            contexto.addMessage(null, msg);
         } catch (ClienteInexistenteException cie) {
-            return "ClienteInexistente.xhtml";
+            
         }
+        return null;
     }
 
     public String loginCliente() {
