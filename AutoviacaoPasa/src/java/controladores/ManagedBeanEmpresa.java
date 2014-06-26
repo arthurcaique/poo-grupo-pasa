@@ -78,20 +78,7 @@ public class ManagedBeanEmpresa implements Serializable {
         return null;
     }
 
-    public String listaEmpresa() {
-        try {
-            this.listaEmpresa = (this.fachada.listaEmpresa());
-            FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.FACES_MESSAGES, "Essas são as empresa filiadas ao site");
-            contexto.addMessage(null, msg);
-            return null;
-
-        } catch (ErroInternoException eie) {
-            FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro Interno", "Ocorreu um erro interno inesperado!" + eie.getMessage());
-            contexto.addMessage(null, msg);
-            return null;
-        }
-    }
+    
+    
 
 }
