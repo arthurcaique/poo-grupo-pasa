@@ -89,8 +89,9 @@ public class Fachada implements Serializable {
         this.empresa.adicionar(ep);
 
     }
-    /* public List<Empresa>listaEmpresa(Empresa empresa) throws ErroInternoException{
-        return this.empresa.listaClientes(empresa);}*/
+     public List<Empresa>listaEmpresa() throws ErroInternoException{
+        return this.empresa.listaEmpresa();
+     }
      
     public void remove(long Id_empresa) throws EmpresaInexistenteException, ErroInternoException {
         this.empresa.remove(Id_empresa);

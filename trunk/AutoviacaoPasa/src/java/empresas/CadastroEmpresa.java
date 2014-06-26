@@ -45,8 +45,8 @@ public class CadastroEmpresa {
     public void atualizar(Empresa ep) throws EmpresaInexistenteException, ErroInternoException{
         this.empresa.atualizar(ep);
     }
-    public List<Empresa> listaEmpresa (Empresa empresa) throws ErroInternoException{
-        return this.empresa.listaEmpresa(empresa);
+    public List<Empresa> listaEmpresa () throws ErroInternoException{
+        return this.empresa.listaEmpresa();
     }
          
 }
