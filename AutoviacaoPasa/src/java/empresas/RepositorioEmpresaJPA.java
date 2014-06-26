@@ -78,7 +78,7 @@ public class RepositorioEmpresaJPA implements RepositorioEmpresa{
         
         }
     }
-       public List<Empresa> listaEmpresa (Empresa empresa) throws ErroInternoException{
+       public List<Empresa> listaEmpresa () throws ErroInternoException{
          
         try{
         TypedQuery <Empresa> listaEmpresa = this.em.createQuery("SELECT e FROM Empresa e", Empresa.class);    
