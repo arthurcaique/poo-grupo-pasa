@@ -3,8 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:pe="http://primefaces.org/ui/extensions">
+      xmlns:p="http://primefaces.org/ui">
 
     <f:view contentType="text/html">
         <h:head>
@@ -59,41 +58,25 @@
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
-                        <p:panel header="Cadstro de clientes">
-                            <p:panelGrid columns="2">
-                                <h:outputLabel for="dt_lanc" value="Data: " />  
-                                <p:calendar value="#{managedBeanViagem.viagem.data}" pattern="dd/MM/yyyy"/> 
+                        <p:panel header ="Passo 3: Selecione a poltrona do ônibus">
+                            <p:messages showDetail="true"/>
 
-                                <h:outputText value="Valor"/>  
-                                <p:inputText  value="#{managedBeanViagem.viagem.valor}"/>  
-
-                                <h:outputLabel value="Origem " />  
-                                <p:selectOneMenu value="#{managedBeanViagem.viagem.origem}">
-                                    <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
-                                </p:selectOneMenu>
-                                <h:outputText value="Hora"/>
-                                <p:inputText value="#{managedBeanViagem.viagem.hora}" converterMessage="Hora no padrão incorreto">
-                                    <f:convertDateTime type="time" pattern="HH:mm"  timeZone="GMT-03:00"/>
-                                </p:inputText>
-
-                                <h:outputLabel value="Destino " />  
-                                <p:selectOneMenu value="#{managedBeanViagem.viagem.destino}">
-                                    <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
-                                </p:selectOneMenu>
-
-                                <h:outputLabel value="Onibus " />  
-                                <p:selectOneMenu value="#{managedBeanViagem.onibusSelecionado}">
-                                    <f:selectItems value="#{managedBeanOnibus.listaOnibus}" var="o" itemLabel="#{o.placa}" itemValue="#{o.id_onibus}"/>
-                                </p:selectOneMenu>
-
-                                <h:outputText value="Empresa "/>
-                                <h:outputText value="#{managedBeanEmpresa.empresa.nome}"/>
-                                <h:outputText value="#{managedBeanViagem.setEmpresa(managedBeanEmpresa.empresa)}"/>
-                            </p:panelGrid>
+                            <p:dataTable var ="v" rows="#{managedBeanViagem.listaViagens.size}">
+                                <p:column headerText="Selecionar">
+                                    <p:commandButton action="#{managedBeanViagem.setViagemSelecionada(v.id_viagem)}" icon="ui-icon-check"/>
+                                </p:column>
+                                <p:column headerText ="Horário">
+                                    <h:outputText value =""/>
+                                </p:column>
+                                <p:column headerText="Valor">
+                                    <h:outputText value =""/>
+                                </p:column>
+                                <p:column headerText ="Empresa">
+                                    <h:outputText value =""/>
+                                </p:column>
+                            </p:dataTable>
+                            <p><h:commandButton value = "Voltar" action="consulta-onibus"/></p>
                         </p:panel>
-                        <p><h:commandButton value = "Cadastrar" action = "#{managedBeanViagem.adicionarViagem()}"/></p>
-                        <p:messages showDetail="true"/>
-
                     </p:layoutUnit>
                 </p:layout>
             </h:form>

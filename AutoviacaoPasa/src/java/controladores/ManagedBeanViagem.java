@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import empresas.Empresa;
 import index.ErroInternoException;
 import index.Fachada;
 import java.io.Serializable;
@@ -37,6 +38,7 @@ public class ManagedBeanViagem implements Serializable {
     private Viagem viagem;
     private long viagemSelecionada;
     private long onibusSelecionado;
+    private Empresa empresa;
     private List<Viagem> listaViagens;
 
     public ManagedBeanViagem() {
@@ -75,6 +77,14 @@ public class ManagedBeanViagem implements Serializable {
         this.viagem = viagem;
     }
 
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
     public String formatarData(Date data) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(data);
@@ -87,17 +97,19 @@ public class ManagedBeanViagem implements Serializable {
 
     public String viagemSelecionada(long id) throws ViagemInexistenteException, ErroInternoException {
         this.fachada.buscarViagem(id);
-        return "lista-poltrona";
+        return "lista-poltrona.xhtml";
     }
 
     public Onibus onibusSelecionado(long id) throws ErroInternoException, OnibusInexistenteException {
         return this.fachada.buscarOnibus(id);
     }
+    
 
     public String adicionarViagem() throws OnibusInexistenteException {
         try {
             Onibus o = onibusSelecionado(onibusSelecionado);
             this.viagem.setOnibus(o);
+            this.viagem.setEmpresa(this.empresa);
             this.fachada.adicionar(this.viagem);
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Viagem Cadastrada com sucesso");
