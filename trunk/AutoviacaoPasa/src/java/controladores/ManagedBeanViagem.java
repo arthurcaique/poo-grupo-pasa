@@ -18,6 +18,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.persistence.EntityManager;
+import onibus.Onibus;
+import onibus.OnibusInexistenteException;
 import viagens.Viagem;
 import viagens.ViagemExistenteException;
 import viagens.ViagemInexistenteException;
@@ -34,6 +36,7 @@ public class ManagedBeanViagem implements Serializable {
     private Fachada fachada;
     private Viagem viagem;
     private long viagemSelecionada;
+    private long onibusSelecionado;
     private List<Viagem> listaViagens;
 
     public ManagedBeanViagem() {
@@ -48,6 +51,14 @@ public class ManagedBeanViagem implements Serializable {
         this.viagemSelecionada = viagemSelecionada;
     }
 
+    public long getOnibusSelecionado() {
+        return onibusSelecionado;
+    }
+
+    public void setOnibusSelecionado(long onibusSelecionado) {
+        this.onibusSelecionado = onibusSelecionado;
+    }
+
     public List<Viagem> getListaViagens() {
         return listaViagens;
     }
@@ -55,7 +66,7 @@ public class ManagedBeanViagem implements Serializable {
     public void setListaViagens(List<Viagem> listaViagens) {
         this.listaViagens = listaViagens;
     }
-    
+
     public Viagem getViagem() {
         return viagem;
     }
@@ -79,8 +90,14 @@ public class ManagedBeanViagem implements Serializable {
         return "lista-poltrona";
     }
 
-    public String adicionarViagem() {
+    public Onibus onibusSelecionado(long id) throws ErroInternoException, OnibusInexistenteException {
+        return this.fachada.buscarOnibus(id);
+    }
+
+    public String adicionarViagem() throws OnibusInexistenteException {
         try {
+            Onibus o = onibusSelecionado(onibusSelecionado);
+            this.viagem.setOnibus(o);
             this.fachada.adicionar(this.viagem);
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Viagem Cadastrada com sucesso");
