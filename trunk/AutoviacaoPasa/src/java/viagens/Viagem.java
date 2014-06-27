@@ -36,7 +36,6 @@ public class Viagem implements Serializable {
     private Cidades origem;
     private Cidades destino;
     private List<Cidades> listaCidades;
-    private List<Viagem> listaViagens;
     private Date hora;
     private Date data;
     private Onibus onibus;
@@ -163,14 +162,5 @@ public class Viagem implements Serializable {
 
     public void setListaCidades(List<Cidades> listaCidades) {
         this.listaCidades = listaCidades;
-    }
-
-    @Transient
-    public List<Viagem> getListaViagens() {
-        return listaViagens;
-    }
-
-    public void setListaViagens(List<Viagem> listaViagens) {
-        this.listaViagens = listaViagens;
     }
 }

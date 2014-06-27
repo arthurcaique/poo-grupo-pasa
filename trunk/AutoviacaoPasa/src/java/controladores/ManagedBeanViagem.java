@@ -10,6 +10,7 @@ import index.Fachada;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -32,17 +33,29 @@ public class ManagedBeanViagem implements Serializable {
     @EJB
     private Fachada fachada;
     private Viagem viagem;
-    private EntityManager em;
-    private Viagem selectedItem;
+    private long viagemSelecionada;
+    private List<Viagem> listaViagens;
 
     public ManagedBeanViagem() {
         this.viagem = new Viagem();
     }
 
-    public ManagedBeanViagem(Viagem viagem) {
-        this.viagem = viagem;
+    public long getViagemSelecionada() {
+        return viagemSelecionada;
     }
 
+    public void setViagemSelecionada(long viagemSelecionada) {
+        this.viagemSelecionada = viagemSelecionada;
+    }
+
+    public List<Viagem> getListaViagens() {
+        return listaViagens;
+    }
+
+    public void setListaViagens(List<Viagem> listaViagens) {
+        this.listaViagens = listaViagens;
+    }
+    
     public Viagem getViagem() {
         return viagem;
     }
@@ -56,13 +69,16 @@ public class ManagedBeanViagem implements Serializable {
         return formatter.format(data);
     }
 
-    public void setSelectedItem(Viagem viagem) {
-        this.viagem = viagem;
-        System.out.println(viagem.getValor());
+    public String formatarHora(Date data) {
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        return formatter.format(data);
     }
 
-    
-    
+    public String viagemSelecionada(long id) throws ViagemInexistenteException, ErroInternoException {
+        this.fachada.buscarViagem(id);
+        return "lista-poltrona";
+    }
+
     public String adicionarViagem() {
         try {
             this.fachada.adicionar(this.viagem);
@@ -86,14 +102,14 @@ public class ManagedBeanViagem implements Serializable {
 
     public String consultaViagens() {
         try {
-            this.viagem.setListaViagens(this.fachada.consultaViagens(viagem.getOrigem(), viagem.getDestino(), viagem.getData()));
+            this.listaViagens = (this.fachada.consultaViagens(viagem.getOrigem(), viagem.getDestino(), viagem.getData()));
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Exibindo viagens de " + viagem.getOrigem()+ " para " + viagem.getDestino() + " em " + formatarData(viagem.getData()));
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Exibindo viagens de " + viagem.getOrigem() + " para " + viagem.getDestino() + " em " + formatarData(viagem.getData()));
             contexto.addMessage(null, msg);
             return "lista-onibus.xhtml";
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Não existe nenhuma viagem de " + viagem.getOrigem()+ " para " + viagem.getDestino()+ " em " + formatarData(viagem.getData()));
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Não existe nenhuma viagem de " + viagem.getOrigem() + " para " + viagem.getDestino() + " em " + formatarData(viagem.getData()));
             contexto.addMessage(null, msg);
 
         } catch (ViagemInexistenteException cee) {

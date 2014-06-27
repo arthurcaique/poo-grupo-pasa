@@ -75,5 +75,10 @@ public class Onibus implements Serializable{
     public void setListaViagem(List<Viagem> listaViagem) {
         this.listaViagem = listaViagem;
     }
+    
+    @Override
+    public String toString(){
+        return this.placa;
+    }
       
 }
