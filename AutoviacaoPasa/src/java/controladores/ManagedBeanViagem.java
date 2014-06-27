@@ -15,6 +15,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.persistence.EntityManager;
 import viagens.Viagem;
 import viagens.ViagemExistenteException;
@@ -32,6 +33,7 @@ public class ManagedBeanViagem implements Serializable {
     private Fachada fachada;
     private Viagem viagem;
     private EntityManager em;
+    private Viagem selectedItem;
 
     public ManagedBeanViagem() {
         this.viagem = new Viagem();
@@ -48,11 +50,18 @@ public class ManagedBeanViagem implements Serializable {
     public void setViagem(Viagem viagem) {
         this.viagem = viagem;
     }
-    
+
     public String formatarData(Date data) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(data);
     }
+
+    public void setSelectedItem(Viagem viagem) {
+        this.viagem = viagem;
+        System.out.println(viagem.getValor());
+    }
+
+    
     
     public String adicionarViagem() {
         try {
@@ -79,12 +88,12 @@ public class ManagedBeanViagem implements Serializable {
         try {
             this.viagem.setListaViagens(this.fachada.consultaViagens(viagem.getOrigem(), viagem.getDestino(), viagem.getData()));
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Exibindo viagens de " + viagem.getDestino() + " para " + viagem.getOrigem() + " em " + formatarData(viagem.getData()));
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Exibindo viagens de " + viagem.getOrigem()+ " para " + viagem.getDestino() + " em " + formatarData(viagem.getData()));
             contexto.addMessage(null, msg);
             return "lista-onibus.xhtml";
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado! " + eie.getMessage());
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Não existe nenhuma viagem de " + viagem.getOrigem()+ " para " + viagem.getDestino()+ " em " + formatarData(viagem.getData()));
             contexto.addMessage(null, msg);
 
         } catch (ViagemInexistenteException cee) {

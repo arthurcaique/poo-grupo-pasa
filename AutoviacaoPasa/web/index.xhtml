@@ -20,12 +20,12 @@
                     <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
                         <h:graphicImage url="/banner.jpg" width="700" height="200"/>
                         <h:link value = " Logado como usuário: #{managedBeanClientes.cliente.nome} " outcome="dadospessoais-cliente" 
-                                      rendered="#{managedBeanClientes.login}"/> 
+                                rendered="#{managedBeanClientes.login}"/> 
                         <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" 
                                          rendered="#{managedBeanClientes.login}"/>
                     </p:layoutUnit>
 
-                    <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
+                    <p:layoutUnit position="west" size="259" collapsible="true">
                         <p:menu>
                             <p:submenu label="Login" rendered="#{!managedBeanClientes.login}">
                                 <p:menuitem value="Cliente" outcome="login-cliente" />
@@ -44,7 +44,15 @@
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
-                        Welcome to PrimeFaces
+                        <p:panel header="Bem-vindo">
+                            Seja bem-vindo ao site Autoviação Pasa. Aqui encontra-se área para clientes, que podem consultar
+                            viagens e ainda realizar a compra da passagem.    
+                            <p>Também temos a área exclusiva para empresas, onde é possível cadastrar seus ônibus e suas viagens.</p>
+                            <p>Não fique de fora e junte-se agora!</p>
+                        </p:panel>
+                        <h:link outcome="consulta-onibus">
+                            <h:graphicImage url="/banner2.png" />
+                        </h:link>
                     </p:layoutUnit>
                 </p:layout>
             </h:form>
