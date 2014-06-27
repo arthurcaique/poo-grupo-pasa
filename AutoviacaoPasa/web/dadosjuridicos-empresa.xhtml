@@ -60,12 +60,9 @@
                     <h:outputText value= "Telefone:" />
                     <p:inputMask mask="(99)9999-9999" value = "#{managedBeanEmpresa.empresa.telefone}" />                   
                 </p:panelGrid>
-                <p><h:commandButton value="Atualizar informações" action="#{managedBeanClientes.atualizarCliente()}"/></p>
+                           <p><h:commandButton value="Atualizar informações" action="#{managedBeanEmpresa.atualizarEmpresa()}"/></p>
                 <p:messages showDetail ="true"/>
                         </p:panel>
-                        <h:link outcome="consulta-onibus">
-                            <h:graphicImage url="/banner2.png" />
-                        </h:link>
                     </p:layoutUnit>
                 </p:layout>
             </h:form>
