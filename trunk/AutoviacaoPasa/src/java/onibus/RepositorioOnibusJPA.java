@@ -6,6 +6,7 @@
 package onibus;
 
 import index.ErroInternoException;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,7 +19,7 @@ import javax.persistence.TypedQuery;
  * @author Arthur
  */
 @Stateless
-public class RepositorioOnibusJPA implements RepositorioOnibus {
+public class RepositorioOnibusJPA implements RepositorioOnibus, Serializable {
 
     @PersistenceContext
     private EntityManager em;
@@ -27,7 +28,8 @@ public class RepositorioOnibusJPA implements RepositorioOnibus {
         this.em = Persistence.createEntityManagerFactory("AutoviacaoPasaPU").createEntityManager();
     }
 
-    public void cadastrar(Onibus onibus) throws ErroInternoException {
+    @Override
+    public void cadastrar(Onibus onibus) throws ErroInternoException, OnibusExistenteException {
         try {
             this.em.persist(onibus);
         } catch (Exception e) {
@@ -35,6 +37,7 @@ public class RepositorioOnibusJPA implements RepositorioOnibus {
         }
     }
 
+    @Override
     public void excluir(long id_onibus) throws ErroInternoException, OnibusInexistenteException {
         Onibus onibus = buscarOnibus(id_onibus);
         try {
@@ -44,18 +47,22 @@ public class RepositorioOnibusJPA implements RepositorioOnibus {
         }
     }
 
+    @Override
     public Onibus buscarOnibus(long id_onibus) throws ErroInternoException, OnibusInexistenteException {
-        try {
+               try {
             Onibus onibus = this.em.find(Onibus.class, id_onibus);
             if (onibus == null) {
                 throw new OnibusInexistenteException();
             }
             return onibus;
+        } catch (OnibusInexistenteException ex) {
+            throw ex;
         } catch (Exception e) {
             throw new ErroInternoException(e);
         }
     }
 
+    @Override
     public void editar(Onibus onibus) throws ErroInternoException, OnibusInexistenteException {
         buscarOnibus(onibus.getId_onibus());
         try {

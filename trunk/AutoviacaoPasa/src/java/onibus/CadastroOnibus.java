@@ -19,33 +19,40 @@ import javax.ejb.Stateless;
 public class CadastroOnibus {
     
     @EJB
-    private RepositorioOnibus onibus;
+    private RepositorioOnibus repOnibus;
     
     public CadastroOnibus(){
     }
     
     public void cadastrar(Onibus onibus) throws ErroInternoException, OnibusExistenteException{
         try {
-            Onibus onibus2 = this.onibus.buscarOnibus(onibus.getId_onibus());
-            throw new OnibusExistenteException();
+            Onibus onibus2 = this.repOnibus.buscarOnibus(onibus.getId_onibus());
+            if(onibus2 != null){
+                throw new OnibusExistenteException();
+            }       
         } catch (OnibusInexistenteException e){
-            this.onibus.cadastrar(onibus);
+            this.repOnibus.cadastrar(onibus);
         }
     }
     
     public Onibus buscarOnibus(long id_onibus) throws ErroInternoException, OnibusInexistenteException{
-        return onibus.buscarOnibus(id_onibus);
+        try{
+            return this.repOnibus.buscarOnibus(id_onibus);
+        }
+        catch(ErroInternoException eie){
+            throw new ErroInternoException(eie);
+        }
     }
     
     public void editar(Onibus onibus) throws ErroInternoException, OnibusInexistenteException{
-        this.onibus.editar(onibus);
+        this.repOnibus.editar(onibus);
     }
     
     public void excluir(long id_onibus) throws ErroInternoException, OnibusInexistenteException{
-        this.onibus.excluir(id_onibus);
+        this.repOnibus.excluir(id_onibus);
     }
     
     public List<Onibus> listaOnibus() throws ErroInternoException{
-        return this.onibus.listaOnibus();
+        return this.repOnibus.listaOnibus();
     }
 }

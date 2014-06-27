@@ -23,7 +23,6 @@ import viagens.Viagem;
 
 
 @Entity
-
 public class Onibus implements Serializable{
     
     private String placa;

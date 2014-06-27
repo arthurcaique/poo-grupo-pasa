@@ -61,9 +61,9 @@
                         <p:panel header="Cadstro de onibus">
                             <p:panelGrid columns="2">
                                 <h:outputText value = "Placa: "/> 
-                                <p:inputText value = "#{managedBeanOnibus.onibus.placa}" required="true" requiredMessage="O nome é obrigatório"/>
+                                <p:inputText value = "#{managedBeanOnibus.onibus.placa}" required="true" requiredMessage="Identificação da placa obrigatória"/>
                                 <h:outputText value = "Quantidade de assentos: "/> 
-                                <p:inputMask mask="99" value = "#{managedBeanOnibus.onibus.qnt_assentos}" requiredMessage="O CPF é obrigatório"/>
+                                <p:inputMask mask="99"  value = "#{managedBeanOnibus.onibus.qnt_assentos}" requiredMessage="Número de assentos obrigatório"/>
                             </p:panelGrid>
                         </p:panel>
                         <p><h:commandButton value = "Cadastrar" action = "#{managedBeanOnibus.cadastrarOnibus()}"/></p>
