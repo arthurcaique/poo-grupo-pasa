@@ -29,15 +29,6 @@ public class ManagedBeanOnibus {
     private Fachada fachada;
     private Onibus onibus;
     private List<Onibus> listaOnibus;
-    private long onibusSelecionado;
-
-    public long getOnibusSelecionado() {
-        return onibusSelecionado;
-    }
-
-    public void setOnibusSelecionado(long onibusSelecionado) {
-        this.onibusSelecionado = onibusSelecionado;
-    }
 
     public ManagedBeanOnibus() {
         this.onibus = new Onibus();
