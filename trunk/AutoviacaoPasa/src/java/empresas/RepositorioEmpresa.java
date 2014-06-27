@@ -22,6 +22,7 @@ public interface RepositorioEmpresa extends Serializable {
     public void atualizar (Empresa ep) throws ErroInternoException, EmpresaInexistenteException;
     public void remover   (long id_empresa) throws ErroInternoException, EmpresaInexistenteException;
     public List<Empresa> listaEmpresa () throws ErroInternoException;
+    public Empresa loginEmpresa (String cnpj, String senha) throws ErroInternoException, EmpresaInexistenteException;
 
 }
     

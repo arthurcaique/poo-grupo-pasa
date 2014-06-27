@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -89,4 +90,21 @@ public class RepositorioEmpresaJPA implements RepositorioEmpresa, Serializable {
             throw new ErroInternoException(e);
         }
     }
+    public Empresa loginEmpresa (String cnpj, String senha) throws ErroInternoException, EmpresaInexistenteException{
+        try{
+            TypedQuery<Empresa> query = this.em.createQuery("SELECT emp FROM Empresa emp WHERE emp.cnpj = :cnpj AND emp.senha = :senha", Empresa.class);
+            query.setParameter("cnpj", cnpj);
+            query.setParameter("senha", senha);
+            return query.getSingleResult();
+        }
+       
+        catch(NoResultException nre){
+            throw new EmpresaInexistenteException();
+        }
+        catch(Exception e){
+            throw new ErroInternoException(e);
+       }
+    }
+    
+    
 }
