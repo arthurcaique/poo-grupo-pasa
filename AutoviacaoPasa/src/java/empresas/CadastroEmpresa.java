@@ -48,5 +48,7 @@ public class CadastroEmpresa {
     public List<Empresa> listaEmpresa () throws ErroInternoException{
         return this.empresa.listaEmpresa();
     }
-         
+    public Empresa loginEmpresa (String cnpj, String senha) throws ErroInternoException, EmpresaInexistenteException{
+     return this.empresa.loginEmpresa(cnpj, senha);
+}
 }

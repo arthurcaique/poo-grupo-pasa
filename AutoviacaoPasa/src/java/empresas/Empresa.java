@@ -42,7 +42,7 @@ public class Empresa implements Serializable{
         
     }
     
-   // @Column (unique = true)
+     @Column (unique = true, nullable = false)
     public String getCnpj() {
         return cnpj;
     }
@@ -50,7 +50,7 @@ public class Empresa implements Serializable{
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
-
+     @Column (name = "nome", nullable = false)
     public String getNome() {
         return nome;
     }
@@ -58,7 +58,7 @@ public class Empresa implements Serializable{
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+     @Column (nullable = false)
     public String getTelefone() {
         return telefone;
     }
@@ -67,7 +67,7 @@ public class Empresa implements Serializable{
         this.telefone = telefone;
     }
 
-    //@Column (unique = true)
+    @Column (unique = true)
     public String getSenha() {
         return senha;
     }
@@ -122,4 +122,7 @@ public class Empresa implements Serializable{
         }
         return true;
     } 
+    public String ToString(){
+        return(this.nome);
+    }
 }
