@@ -55,11 +55,6 @@ public class ManagedBeanOnibus {
         this.listaOnibus = listaOnibus;
     }
 
-    public String onibusSelecionado(long id) throws ErroInternoException, OnibusInexistenteException {
-        this.fachada.buscarOnibus(id);
-        return null;
-    }
-
     public String cadastrarOnibus() throws OnibusExistenteException, ErroInternoException {
         try {
             fachada.cadastrar(onibus);
