@@ -112,13 +112,33 @@ public class ManagedBeanEmpresa implements Serializable {
         public void logout(){
             login = false;
              this.empresa =  new Empresa();
+        }
             
       
-        
+        public String atualizarEmpresa() {
+        try {
+            this.fachada.atualizar(empresa);
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Dados da empresa atualizados com sucesso");
+            contexto.addMessage(null, msg);           
+        } 
+        catch (ErroInternoException eie) {
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ErroInterno", "Ocorreu um erro interno");
+            contexto.addMessage(null, msg);
+        } 
+        catch (EmpresaInexistenteException eie) {
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Empresa Inexistente", "A empresa não cadastrada no sistema!");
+            contexto.addMessage(null, msg);
+            return null;
+        }
+        return null;
+        }
         
     }
 
     
     
 
-}
+
