@@ -8,6 +8,7 @@ package onibus;
 
 import index.ErroInternoException;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -24,4 +25,6 @@ public interface RepositorioOnibus extends Serializable{
     public void editar(Onibus onibus) throws ErroInternoException, OnibusInexistenteException;
     
     public Onibus buscarOnibus(long id) throws ErroInternoException, OnibusInexistenteException;
+    
+    public List<Onibus> listaOnibus() throws ErroInternoException;
 }

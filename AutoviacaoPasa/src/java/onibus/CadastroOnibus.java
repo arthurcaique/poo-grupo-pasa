@@ -7,6 +7,7 @@
 package onibus;
 
 import index.ErroInternoException;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -42,5 +43,9 @@ public class CadastroOnibus {
     
     public void excluir(long id_onibus) throws ErroInternoException, OnibusInexistenteException{
         this.onibus.excluir(id_onibus);
+    }
+    
+    public List<Onibus> listaOnibus() throws ErroInternoException{
+        return this.onibus.listaOnibus();
     }
 }

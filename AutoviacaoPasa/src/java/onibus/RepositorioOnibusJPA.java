@@ -6,9 +6,12 @@
 package onibus;
 
 import index.ErroInternoException;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -17,6 +20,7 @@ import javax.persistence.Persistence;
 @Stateless
 public class RepositorioOnibusJPA implements RepositorioOnibus {
 
+    @PersistenceContext
     private EntityManager em;
 
     public RepositorioOnibusJPA() {
@@ -56,6 +60,20 @@ public class RepositorioOnibusJPA implements RepositorioOnibus {
         buscarOnibus(onibus.getId_onibus());
         try {
             this.em.merge(onibus);
+        } catch (Exception e) {
+            throw new ErroInternoException(e);
+        }
+    }
+    
+    @Override
+        public List<Onibus> listaOnibus() throws ErroInternoException {
+
+        try {
+            TypedQuery<Onibus> listaOnibus = this.em.createQuery("SELECT o FROM Onibus o", Onibus.class);
+            if (listaOnibus.getResultList().isEmpty()){
+                throw new OnibusInexistenteException();
+            }
+            return listaOnibus.getResultList();
         } catch (Exception e) {
             throw new ErroInternoException(e);
         }
