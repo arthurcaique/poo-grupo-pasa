@@ -25,7 +25,7 @@
                                          rendered="#{managedBeanClientes.login}"/>
                     </p:layoutUnit>
 
-                    <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
+                    <p:layoutUnit position="west" size="259" collapsible="true">
                         <p:menu>
                             <p:submenu label="Login" rendered="#{!managedBeanClientes.login}">
                                 <p:menuitem value="Cliente" outcome="login-cliente" />
@@ -48,8 +48,8 @@
                             <p:messages showDetail="true"/>
                             <p:dataTable value = "#{managedBeanViagem.viagem.listaViagens}" var ="v">
                                 <p:column headerText ="Selecione" style="max-width: 10px; min-width: 10px; overflow: hidden">
-                                    <h:selectOneRadio onclick="radioButton(this);">
-                                        <f:selectItem itemValue="null" />
+                                    <h:selectOneRadio  >
+                                        <f:selectItem itemValue="#{v}"/>
                                     </h:selectOneRadio>
                                 </p:column>
 
@@ -63,7 +63,7 @@
                                     <h:outputText value ="#{v.empresa.nome}"/>
                                 </p:column>
                             </p:dataTable>
-                            <h:commandButton value = "Avançar" action = "#{managedBeanViagem.consultaViagens()}"/>
+                            <h:commandButton value = "Avançar" action = "#{managedBeanViagem.setSelectedItem(v)}"/>
                         </p:panel>
                     </p:layoutUnit>
                 </p:layout>
