@@ -89,7 +89,7 @@ public class ManagedBeanEmpresa implements Serializable {
     }
     public String loginEmpresa(){
         try{
-            this.fachada.loginEmpresa(empresa.getCnpj(), empresa.getSenha());
+            this.empresa = this.fachada.loginEmpresa(empresa.getCnpj(), empresa.getSenha());
             this.login = true;
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"OK","Empresa logada!");
