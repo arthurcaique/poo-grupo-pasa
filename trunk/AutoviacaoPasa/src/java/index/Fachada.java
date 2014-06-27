@@ -104,7 +104,9 @@ public class Fachada implements Serializable {
     public void atualizar(Empresa ep) throws EmpresaInexistenteException, ErroInternoException {
         this.empresa.atualizar(ep);
     }
-
+     public Empresa loginEmpresa (String cnpj, String senha) throws ErroInternoException, EmpresaInexistenteException{
+         return this.empresa.loginEmpresa(cnpj, senha);
+     }
     public void cadastrar(Onibus onibus) throws ErroInternoException, OnibusExistenteException {
         this.onibus.cadastrar(onibus);
     }
