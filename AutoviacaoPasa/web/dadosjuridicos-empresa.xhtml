@@ -58,7 +58,9 @@
                     <h:outputText value = "CNPJ:" />
                     <h:outputText value = "#{managedBeanEmpresa.empresa.cnpj}" />
                     <h:outputText value= "Telefone:" />
-                    <p:inputMask mask="(99)9999-9999" value = "#{managedBeanEmpresa.empresa.telefone}" />                   
+                    <p:inputMask mask="(99)9999-9999" value = "#{managedBeanEmpresa.empresa.telefone}" />   
+                    <h:outputText value = "Senha"/>
+                    <h:outputText value = "#{managedBeanEmpresa.empresa.senha}"/>
                 </p:panelGrid>
                            <p><h:commandButton value="Atualizar informações" action="#{managedBeanEmpresa.atualizarEmpresa()}"/></p>
                 <p:messages showDetail ="true"/>
