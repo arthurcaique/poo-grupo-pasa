@@ -7,23 +7,24 @@ package controladores;
 
 import index.ErroInternoException;
 import index.Fachada;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import onibus.Onibus;
 import onibus.OnibusExistenteException;
-import onibus.OnibusInexistenteException;
 
 /**
  *
  * @author Arthur
  */
 @ManagedBean
-@RequestScoped
-public class ManagedBeanOnibus {
+@SessionScoped
+public class ManagedBeanOnibus implements Serializable {
 
     @EJB
     private Fachada fachada;
@@ -34,9 +35,6 @@ public class ManagedBeanOnibus {
         this.onibus = new Onibus();
     }
 
-    public ManagedBeanOnibus(Onibus onibus) {
-        this.onibus = onibus;
-    }
 
     public List<Onibus> getListaOnibus() throws ErroInternoException {
         return this.fachada.listaOnibus();
@@ -48,22 +46,23 @@ public class ManagedBeanOnibus {
 
     public String cadastrarOnibus() throws OnibusExistenteException, ErroInternoException {
         try {
-            fachada.cadastrar(onibus);
+            this.fachada.cadastrar(this.onibus);
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Onibus cadastrado com sucesso");
             contexto.addMessage(null, msg);
-            return "index.xhtml";
+            this.onibus = new Onibus();
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado!");
             contexto.addMessage(null, msg);
-            return null;
+            
         } catch (OnibusExistenteException cee) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Onibus Existente", "Onibus já existe");
             contexto.addMessage(null, msg);
-            return null;
+            
         }
+        return null;
     }
 
     public Fachada getFachada() {

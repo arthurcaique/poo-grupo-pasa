@@ -49,7 +49,7 @@ public class Fachada implements Serializable {
     @EJB
     private CadastroEmpresa empresa;
     @EJB
-    private CadastroOnibus onibus;
+    private CadastroOnibus cadOnibus;
     @EJB
     private CadastroPoltrona poltrona;
     @EJB
@@ -108,23 +108,23 @@ public class Fachada implements Serializable {
          return this.empresa.loginEmpresa(cnpj, senha);
      }
     public void cadastrar(Onibus onibus) throws ErroInternoException, OnibusExistenteException {
-        this.onibus.cadastrar(onibus);
+        this.cadOnibus.cadastrar(onibus);
     }
 
     public Onibus buscarOnibus(long id_onibus) throws ErroInternoException, OnibusInexistenteException {
-        return onibus.buscarOnibus(id_onibus);
+        return this.cadOnibus.buscarOnibus(id_onibus);
     }
     
     public List<Onibus> listaOnibus() throws ErroInternoException{
-        return this.onibus.listaOnibus();
+        return this.cadOnibus.listaOnibus();
     }
 
     public void editar(Onibus onibus) throws ErroInternoException, OnibusInexistenteException {
-        this.onibus.editar(onibus);
+        this.cadOnibus.editar(onibus);
     }
 
     public void excluir(long id_onibus) throws ErroInternoException, OnibusInexistenteException {
-        this.onibus.excluir(id_onibus);
+        this.cadOnibus.excluir(id_onibus);
     }
 
     public void adicionar(Poltrona p) throws ErroInternoException, PoltronaInexistenteException, PoltronaIndisponivelException {
