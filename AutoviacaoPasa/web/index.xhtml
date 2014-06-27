@@ -22,7 +22,12 @@
                         <h:link value = " Logado como usuário: #{managedBeanClientes.cliente.nome} " outcome="dadospessoais-cliente" 
                                 rendered="#{managedBeanClientes.login}"/> 
                         <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" 
-                                         rendered="#{managedBeanClientes.login}"/>
+                                         rendered="#{managedBeanClientes.login}"/>    
+                        
+                        <h:link value = " Logado como empresa: #{managedBeanEmpresa.empresa.nome} "
+                                rendered="#{managedBeanEmpresa.login}"/> 
+                        <h:commandButton value = "Sair" action="#{managedBeanEmpresa.logout()}" 
+                                         rendered="#{managedBeanEmpresa.login}"/>
                     </p:layoutUnit>
 
                     <p:layoutUnit position="west" size="259" collapsible="true">

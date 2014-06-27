@@ -21,34 +21,40 @@
                         <h:graphicImage url="/banner.jpg" width="700" height="200"/>
                     </p:layoutUnit>
 
-                    <p:layoutUnit position="west" size="210" header="Left" collapsible="true">
+                    <p:layoutUnit position="west" size="259" collapsible="true">
                         <p:menu>
-                            <p:submenu label="Menu">
-                                <p:menuitem value="Quem Somos" outcome="quemsomos" />
-                                <p:menuitem value="Empresas Filiadas" url="http://www.primefaces.org/documentation.html" />
-                                <p:menuitem value="Cadastre-se" outcome="cadastro" />
-                                <p:menuitem value="Compra de Passagens" url="http://forum.primefaces.org/" />
-                                <p:menuitem value="Contato" url="http://www.primefaces.org/themes.html" />
+                            <p:submenu label="Login" rendered="#{!managedBeanClientes.login}">
+                                <p:menuitem value="Cliente" outcome="login-cliente" />
+                                <p:menuitem value="Empresa" outcome="login-empresa"/>
                             </p:submenu>
-
+                            <p:submenu label="Cadastre-se" rendered="#{!managedBeanClientes.login}">
+                                <p:menuitem value="Cliente" outcome="cadastro-cliente" />
+                                <p:menuitem value="Empresa" outcome="cadastro-empresa"/>
+                            </p:submenu>
+                            <p:submenu label="Menu">
+                                <p:menuitem value="Inicio" outcome="index"/>
+                                <p:menuitem value="Quem Somos" outcome="quemsomos" />
+                                <p:menuitem value="Empresas Filiadas" outcome="lista-empresa" />
+                                <p:menuitem value="Compra de Passagens" outcome="consulta-onibus" />
+                            </p:submenu>
                         </p:menu>
-                    </p:layoutUnit>
-                    <p:layoutUnit position="center">
-                        <p:panel header="Login para clientes">
-                            <p:panelGrid columns="2">
-                                <h:outputText value = "CPF: "/>
-                                <p:inputMask mask="999.999.999-99" value = "#{managedBeanClientes.cliente.cpf}" requiredMessage="O CPF é obrigatório"/>
-                                <h:outputText value = "Senha: "/> 
-                                <p:password value = "#{managedBeanClientes.cliente.senha}" required="true"/>
-                                <p:messages showDetail="true"/>
-                            </p:panelGrid>
-                            <h:commandButton id="form1" value = "Entrar" action = "#{managedBeanClientes.loginCliente()}"/>
-                        </p:panel>
-                    </p:layoutUnit>
-                </p:layout>
-            </h:form>
-        </h:body>
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <p:panel header="Login para empresas">
+                        <p:panelGrid columns="2">
+                            <h:outputText value = "CNPJ: "/>
+                            <p:inputMask mask="99.999.999/9999-99" value = "#{managedBeanEmpresa.empresa.cnpj}" requiredMessage="O CNPJ é obrigatório"/>
+                            <h:outputText value = "Senha: "/> 
+                            <p:password value = "#{managedBeanEmpresa.empresa.senha}" required="true"/>
+                            <p:messages showDetail="true"/>
+                        </p:panelGrid>
+                        <h:commandButton id="form1" value = "Entrar" action = "#{managedBeanEmpresa.loginEmpresa()}"/>
+                    </p:panel>
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+    </h:body>
 
-    </f:view>
+</f:view>
 </html>
 

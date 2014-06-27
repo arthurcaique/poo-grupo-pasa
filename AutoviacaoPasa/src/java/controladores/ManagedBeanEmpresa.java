@@ -31,7 +31,8 @@ public class ManagedBeanEmpresa implements Serializable {
     private Fachada fachada;
     private Empresa empresa;
     private List<Empresa> listaEmpresa;
-
+    private boolean  login;
+    
     public ManagedBeanEmpresa() {
         this.empresa = new Empresa();
     }
@@ -55,6 +56,15 @@ public class ManagedBeanEmpresa implements Serializable {
     public void setListaEmpresa(List<Empresa> listaEmpresa) {
         this.listaEmpresa = listaEmpresa;
     }
+
+    public boolean isLogin() {
+        return login;
+    }
+
+    public void setLogin(boolean login) {
+        this.login = login;
+    }
+    
     
     public String adicionarEmpresa() {
         try {
@@ -76,6 +86,36 @@ public class ManagedBeanEmpresa implements Serializable {
             return null;
         }
         return null;
+    }
+    public String loginEmpresa(){
+        try{
+            this.fachada.loginEmpresa(empresa.getCnpj(), empresa.getSenha());
+            this.login = true;
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"OK","Empresa logada!");
+            contexto.addMessage(null, msg);
+            return "index.xhtml";
+        }
+        catch (ErroInternoException eie) {
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado! " + eie.getMessage());
+            contexto.addMessage(null, msg);
+            return null;
+        }
+        catch(EmpresaInexistenteException eie){
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Empresa Inexistente", "A empresa não cadastrada no sistema!");
+            contexto.addMessage(null, msg);
+            return null;
+        }
+    }  
+        public void logout(){
+            login = false;
+             this.empresa =  new Empresa();
+            
+      
+        
+        
     }
 
     
