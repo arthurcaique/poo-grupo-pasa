@@ -5,6 +5,7 @@
  */
 package controladores;
 
+
 import empresas.Empresa;
 import empresas.EmpresaExistenteException;
 import empresas.EmpresaInexistenteException;
@@ -17,7 +18,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
 
 /**
  *
@@ -87,6 +87,23 @@ public class ManagedBeanEmpresa implements Serializable {
         }
         return null;
     }
+    
+     public String senhaatualizadaEmpresa(){
+        try{
+        this.fachada.atualizar(this.empresa);
+        return "dadosjuridicos-empresa.xhtml";
+        }
+        catch(ErroInternoException eie){
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ErroInterno", "Ocorreu um erro interno");
+            contexto.addMessage(null, msg);
+            return null;
+        }
+        catch(EmpresaInexistenteException cie){
+            return null;
+        }
+    }
+     
     public String loginEmpresa(){
         try{
             this.empresa = this.fachada.loginEmpresa(empresa.getCnpj(), empresa.getSenha());
@@ -109,6 +126,11 @@ public class ManagedBeanEmpresa implements Serializable {
             return null;
         }
     }  
+    
+    public String atualizarsenhaEmpresa() {       
+            return "atualizarsenha-empresa.xhtml";  
+    }
+    
         public void logout(){
             login = false;
              this.empresa =  new Empresa();
