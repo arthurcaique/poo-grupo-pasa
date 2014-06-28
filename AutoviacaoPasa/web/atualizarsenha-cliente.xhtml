@@ -54,17 +54,18 @@
                 <p:layoutUnit position = "center">
                     <p:panel header ="Dados pessoais">
                         <p:panelGrid columns="2">
-                            <h:outputText value = "Nome:"/>
-                            <h:outputText value = "#{managedBeanClientes.cliente.nome}"/>
-                            <h:outputText value = "ID:" />
-                            <h:outputText value = "#{managedBeanClientes.cliente.id_cliente}" />
-                            <h:outputText value = "CPF:" />
-                            <h:outputText value = "#{managedBeanClientes.cliente.cpf}" />
-                            <h:outputText value= "Telefone:" />
-                            <p:inputMask mask="(99)9999-9999" value = "#{managedBeanClientes.cliente.telefone}" />      
+                            <h:outputText value= "Digite uma senha: "/>
+                                <p:password value= "#{managedBeanClientes.cliente.senha}" required="true" requiredMessage="A senha é obrigatória" validatorMessage="A senha deve ter pelo menos 4 dígitos" 
+                                            feedback="true" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte" promptLabel="Digite a senha" id="senha1" match="senha2">
+                                    <f:validateLength minimum="4"/>
+                                </p:password>
+                                <h:outputText value= "Digite novamente a senha: "/>
+                                <p:password value= "#{managedBeanClientes.cliente.senha}" required="true" requiredMessage="A senha é obrigatória" validatorMessage="As senhas não conferem" 
+                                            id="senha2">
+                                    <f:validateLength minimum="4"/>
+                                </p:password>    
                         </p:panelGrid>
                         <p><h:commandButton value="Atualizar informações" action="#{managedBeanClientes.atualizarCliente()}"/></p>
-                        <p><h:commandButton value="Atualizar senha" action="#{managedBeanClientes.atualizarsenhaCliente()}"/></p>
                         <p:messages showDetail ="true"/>
                     </p:panel>
                 </p:layoutUnit>
