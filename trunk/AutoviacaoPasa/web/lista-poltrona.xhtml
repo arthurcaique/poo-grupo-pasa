@@ -3,7 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <f:view contentType="text/html">
         <h:head>
@@ -60,21 +60,13 @@
                     <p:layoutUnit position="center">
                         <p:panel header ="Passo 3: Selecione a poltrona do ônibus">
                             <p:messages showDetail="true"/>
-
-                            <p:dataTable var ="v" rows="#{managedBeanViagem.listaViagens.size}">
-                                <p:column headerText="Selecionar">
-                                    <p:commandButton action="#{managedBeanViagem.setViagemSelecionada(v.id_viagem)}" icon="ui-icon-check"/>
-                                </p:column>
-                                <p:column headerText ="Horário">
-                                    <h:outputText value =""/>
-                                </p:column>
-                                <p:column headerText="Valor">
-                                    <h:outputText value =""/>
-                                </p:column>
-                                <p:column headerText ="Empresa">
-                                    <h:outputText value =""/>
-                                </p:column>
-                            </p:dataTable>
+                            <p:panel >
+                                <c:forEach begin="1" end="#{managedBeanViagem.onibus.qnt_assentos}" var="item">
+                                    <p:selectManyCheckbox value="#{managedBeanViagem.listaViagens}" columns="22" layout="grid">
+                                        <f:selectItem itemLabel="#{item}" itemValue="#{item}" />
+                                    </p:selectManyCheckbox>
+                                </c:forEach>
+                            </p:panel>
                             <p><h:commandButton value = "Voltar" action="consulta-onibus"/></p>
                         </p:panel>
                     </p:layoutUnit>
