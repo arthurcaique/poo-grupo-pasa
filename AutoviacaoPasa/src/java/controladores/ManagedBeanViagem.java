@@ -12,6 +12,8 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -39,6 +41,7 @@ public class ManagedBeanViagem implements Serializable {
     private long viagemSelecionada;
     private long onibusSelecionado;
     private Empresa empresa;
+    private Onibus onibus;
     private List<Viagem> listaViagens;
 
     public ManagedBeanViagem() {
@@ -83,6 +86,19 @@ public class ManagedBeanViagem implements Serializable {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public Onibus getOnibus() throws ErroInternoException, OnibusInexistenteException {
+        try {
+            this.viagem = fachada.buscarViagem(viagemSelecionada);
+        } catch (ViagemInexistenteException ex) {
+            Logger.getLogger(ManagedBeanViagem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return this.fachada.buscarOnibus(viagem.getOnibus().getId_onibus());
+    }
+
+    public void setOnibus(Onibus onibus) {
+        this.onibus = onibus;
     }
 
     public String formatarData(Date data) {
