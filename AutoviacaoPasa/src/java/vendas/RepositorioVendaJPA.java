@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import viagens.Viagem;
 import viagens.ViagemInexistenteException;
@@ -23,6 +24,7 @@ import viagens.ViagemInexistenteException;
 @Stateless
 public class RepositorioVendaJPA implements RepositorioVenda {
 
+    @PersistenceContext
     private EntityManager em;
 
     public RepositorioVendaJPA() {
