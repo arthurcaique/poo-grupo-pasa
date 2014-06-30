@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -18,6 +19,7 @@ import javax.persistence.Persistence;
 @Stateless
 public class RepositorioPoltronasJPA implements RepositorioPoltronas{
     
+    @PersistenceContext
     private EntityManager em;
 
     public RepositorioPoltronasJPA() {

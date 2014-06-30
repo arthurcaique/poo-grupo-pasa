@@ -58,9 +58,10 @@
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
-                        <p:panel header ="Passo 3: Selecione a poltrona do ônibus">
+                        <p:panel header ="Passo 4: Confirmação">
                             <p:messages showDetail="true"/>
                             <p:panel >
+                                <h:outputText value = "Verifique se os dados da compra estão corretos e clique para finalizar. "/>
                                 <p:panelGrid columns="2">
                                     <h:outputText value = "Origem"/>
                                     <h:outputText value = "#{managedBeanViagem.viagem.origem}"/>
@@ -71,16 +72,13 @@
                                     <h:outputText value = "Data" />
                                     <h:outputText value = "#{managedBeanViagem.formatarData(managedBeanViagem.viagem.data)}" />
                                     <h:outputText value= "Valor" />
-                                    <h:outputText value = "#{managedBeanViagem.viagem.valor}" />    
+                                    <h:outputText value = "#{managedBeanViagem.viagem.valor}" />
+                                    <h:outputText value= "Poltrona" />
+                                    <h:outputText value = "#{managedBeanPoltrona.poltrona.numero_poltrona}" />
                                 </p:panelGrid>
-                                <p><c:forEach begin="1" end="#{managedBeanViagem.onibus.qnt_assentos}" var="item">
-                                    <p:selectManyCheckbox value="#{managedBeanPoltrona.poltrona.numero_poltrona}" columns="22" layout="grid">
-                                        <f:selectItem itemLabel="#{item}" itemValue="#{item}" />
-                                    </p:selectManyCheckbox>
-                                </c:forEach></p>
                             </p:panel>
                             <p><h:commandButton value = "Voltar" action="lista-onibus"/></p>
-                            <p><h:commandButton value = "Avançar" action="venda"/></p>
+                            <p><h:commandButton value = "Finalizar" action="venda"/></p>
                         </p:panel>
                     </p:layoutUnit>
                 </p:layout>
