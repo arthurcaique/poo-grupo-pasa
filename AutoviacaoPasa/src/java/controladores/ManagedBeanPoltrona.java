@@ -1,5 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
+/*] * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package controladores;
@@ -7,6 +6,7 @@ package controladores;
 import index.ErroInternoException;
 import index.Fachada;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -28,6 +28,7 @@ public class ManagedBeanPoltrona implements Serializable {
     private Fachada fachada;
     private Poltrona poltrona;
     private Viagem viagem;
+    private List<Long> listaPoltrona;
 
     public ManagedBeanPoltrona() {
         this.poltrona = new Poltrona();
@@ -40,6 +41,15 @@ public class ManagedBeanPoltrona implements Serializable {
     public void setPoltrona(Poltrona poltrona) {
         this.poltrona = poltrona;
     }
+
+    public List<Long> getListaPoltrona() {
+        return listaPoltrona;
+    }
+
+    public void setListaPoltrona(List<Long> listaPoltrona) {
+        this.listaPoltrona = listaPoltrona;
+    }
+    
 
     public String adicionarPoltrona() {
         try {
