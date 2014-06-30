@@ -6,10 +6,13 @@ package controladores;
 import index.ErroInternoException;
 import index.Fachada;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import poltronas.Poltrona;
 import poltronas.PoltronaIndisponivelException;
@@ -22,18 +25,27 @@ import viagens.Viagem;
  * @author Arthur
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class ManagedBeanPoltrona implements Serializable {
 
+    @EJB
     private Fachada fachada;
     private Poltrona poltrona;
     private Viagem viagem;
-    private List<Long> listaPoltrona;
+    private long poltronaSelecionada;
 
     public ManagedBeanPoltrona() {
         this.poltrona = new Poltrona();
     }
 
+    public long getPoltronaSelecionada() {
+        return poltronaSelecionada;
+    }
+
+    public void setPoltronaSelecionada(long poltronaSelecionada) {
+        this.poltronaSelecionada = poltronaSelecionada;
+    }
+    
     public Poltrona getPoltrona() {
         return poltrona;
     }
@@ -41,23 +53,17 @@ public class ManagedBeanPoltrona implements Serializable {
     public void setPoltrona(Poltrona poltrona) {
         this.poltrona = poltrona;
     }
-
-    public List<Long> getListaPoltrona() {
-        return listaPoltrona;
-    }
-
-    public void setListaPoltrona(List<Long> listaPoltrona) {
-        this.listaPoltrona = listaPoltrona;
-    }
     
 
-    public String adicionarPoltrona() {
+    public Poltrona adicionarPoltrona() {
         try {
+            this.poltrona.setNumero_poltrona(poltronaSelecionada);
             this.fachada.adicionar(this.poltrona);
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Venda realizada com sucesso");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Poltrona cadastrada com sucesso");
             contexto.addMessage(null, msg);
-            this.poltrona = new Poltrona();
+            //this.poltrona = new Poltrona();
+            return this.poltrona; 
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado!");

@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package poltronas;
 
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import viagens.Viagem;
 
@@ -17,19 +18,21 @@ import viagens.Viagem;
  * @author Arthur
  */
 @Entity
-public class Poltrona implements Serializable{
+public class Poltrona implements Serializable {
+
     private long id_poltrona;
-    private int numero_poltrona;
-    private Viagem viagem;
-    public Poltrona(){
-        
+    private long numero_poltrona;
+
+    public Poltrona() {
+
     }
-    
-    public Poltrona(int numero_poltrona){
+
+    public Poltrona(long numero_poltrona) {
         this.numero_poltrona = numero_poltrona;
     }
-    
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId_poltrona() {
         return id_poltrona;
     }
@@ -37,13 +40,13 @@ public class Poltrona implements Serializable{
     public void setId_poltrona(long id_poltrona) {
         this.id_poltrona = id_poltrona;
     }
-    
+
     @Column(unique = true)
-    public int getNumero_poltrona() {
+    public long getNumero_poltrona() {
         return numero_poltrona;
     }
 
-    public void setNumero_poltrona(int numero_poltrona) {
+    public void setNumero_poltrona(long numero_poltrona) {
         this.numero_poltrona = numero_poltrona;
     }
 

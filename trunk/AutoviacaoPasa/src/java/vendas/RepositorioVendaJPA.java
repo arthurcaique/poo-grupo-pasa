@@ -28,10 +28,10 @@ public class RepositorioVendaJPA implements RepositorioVenda {
     private EntityManager em;
 
     public RepositorioVendaJPA() {
-        EntityManagerFactory f = Persistence.createEntityManagerFactory("AutoviacaoPasaPU");
-        this.em = f.createEntityManager();
+        this.em = Persistence.createEntityManagerFactory("AutoviacaoPasaPU").createEntityManager();
     }
 
+    @Override
     public void adicionar(Venda ven) throws ErroInternoException {
         try {
             this.em.persist(ven);
@@ -43,26 +43,26 @@ public class RepositorioVendaJPA implements RepositorioVenda {
 
     /*public void remover(long codigo) throws ErroInternoException, VendaInexistenteException {
 
-        Venda ven = buscar(codigo);//buscar esta fora do try  para não prender a exceçao
-        try {
+     Venda ven = buscar(codigo);//buscar esta fora do try  para não prender a exceçao
+     try {
 
-            this.em.remove(ven);
-        } catch (Exception e) {
-            throw new ErroInternoException(e);
-        }
+     this.em.remove(ven);
+     } catch (Exception e) {
+     throw new ErroInternoException(e);
+     }
 
-    }
+     }
 
-    public void atualizar(Venda ven) throws ErroInternoException, VendaInexistenteException {
+     public void atualizar(Venda ven) throws ErroInternoException, VendaInexistenteException {
 
-        buscar(ven.getCodigo());// não precisa do lançar o erro inexistente pois o buscar esta fora do try e ele ja faz isso
-        try {
-            this.em.merge(ven);
-        } catch (Exception e) {
-            throw new ErroInternoException(e);
-        }
-    }*/
-
+     buscar(ven.getCodigo());// não precisa do lançar o erro inexistente pois o buscar esta fora do try e ele ja faz isso
+     try {
+     this.em.merge(ven);
+     } catch (Exception e) {
+     throw new ErroInternoException(e);
+     }
+     }*/
+    @Override
     public Venda buscarVenda(long codigo) throws ErroInternoException, VendaInexistenteException {
         try {
             Venda v = this.em.find(Venda.class, codigo);
@@ -70,12 +70,14 @@ public class RepositorioVendaJPA implements RepositorioVenda {
                 throw new VendaInexistenteException();
             }
             return v;
+        } catch (VendaInexistenteException ex) {
+            throw ex;
         } catch (Exception e) {
             throw new ErroInternoException(e);
-
         }
     }
 
+    @Override
     public List<Venda> vendasPorViagem(long id_viagem) throws ErroInternoException {
         try {
             TypedQuery<Venda> query = this.em.createQuery("SELECT v FROM Venda v WHERE v.id_viagem = :id_viagem ", Venda.class);
