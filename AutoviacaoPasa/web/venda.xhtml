@@ -62,7 +62,7 @@
                             <p:messages showDetail="true"/>
                             <p:panel >
                                 <h:outputText value = "Verifique se os dados da compra estão corretos e clique para finalizar. "/>
-                                <p:panelGrid columns="2">
+                                <p><p:panelGrid columns="2">
                                     <h:outputText value = "Origem"/>
                                     <h:outputText value = "#{managedBeanViagem.viagem.origem}"/>
                                     <h:outputText value = "Destino" />
@@ -74,11 +74,15 @@
                                     <h:outputText value= "Valor" />
                                     <h:outputText value = "#{managedBeanViagem.viagem.valor}" />
                                     <h:outputText value= "Poltrona" />
-                                    <h:outputText value = "#{managedBeanPoltrona.listaPoltrona}" />
-                                </p:panelGrid>
+                                    <h:outputText value = "#{managedBeanPoltrona.poltronaSelecionada}" />
+                                </p:panelGrid></p>
                             </p:panel>
-                            <p><h:commandButton value = "Voltar" action="lista-onibus"/></p>
-                            <p><h:commandButton value = "Finalizar" action="venda"/></p>
+                            <h:outputText value = "#{managedBeanVenda.setViagemSelecionada(managedBeanViagem.viagemSelecionada)}" />
+                            <h:outputText value = "#{managedBeanVenda.setPoltrona(managedBeanPoltrona.adicionarPoltrona())}" />
+                            <h:outputText value = "#{managedBeanVenda.venda.setPreco(managedBeanViagem.viagem.valor)}" />
+                            <h:outputText value = "#{managedBeanVenda.setCliente(managedBeanClientes.cliente)}" />
+                            <p><h:commandButton value = "Voltar" action="lista-poltrona"/>
+                            <h:commandButton value = "Finalizar" action="#{managedBeanVenda.cadastrarVenda()}"/></p>
                         </p:panel>
                     </p:layoutUnit>
                 </p:layout>

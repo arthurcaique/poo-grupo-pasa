@@ -74,13 +74,11 @@
                                     <h:outputText value = "#{managedBeanViagem.viagem.valor}" />    
                                 </p:panelGrid>
                                 <p><c:forEach begin="1" end="#{managedBeanViagem.onibus.qnt_assentos}" var="item">
-                                    <p:selectManyCheckbox value="#{managedBeanPoltrona.listaPoltrona}" columns="22" layout="grid">
-                                        <f:selectItem itemLabel="#{item}" itemValue="#{item}" />
-                                    </p:selectManyCheckbox>
+                                    <p:commandButton value="#{item}" action="#{managedBeanPoltrona.setPoltronaSelecionada(item)}"/>
                                 </c:forEach></p>
                             </p:panel>
-                            <p><h:commandButton value = "Voltar" action="lista-onibus"/></p>
-                            <p><h:commandButton value = "Avançar" action="venda"/></p>
+                            <p><h:commandButton value = "Voltar" action="lista-onibus"/>
+                            <h:commandButton value = "Avançar" action="venda"/></p>
                         </p:panel>
                     </p:layoutUnit>
                 </p:layout>

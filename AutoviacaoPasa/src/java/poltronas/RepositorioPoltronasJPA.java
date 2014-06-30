@@ -17,44 +17,43 @@ import javax.persistence.PersistenceContext;
  * @author Arthur
  */
 @Stateless
-public class RepositorioPoltronasJPA implements RepositorioPoltronas{
-    
+public class RepositorioPoltronasJPA implements RepositorioPoltronas {
+
     @PersistenceContext
     private EntityManager em;
 
     public RepositorioPoltronasJPA() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AutoviacaoPasaPU");
-        this.em = emf.createEntityManager();
+        this.em = Persistence.createEntityManagerFactory("AutoviacaoPasaPU").createEntityManager();
     }
-    
+
     @Override
     public void adicionar(Poltrona p) throws ErroInternoException, PoltronaIndisponivelException {
-        try{
-        this.em.persist(p);
-        }
-        catch(Exception e){
+        try {
+            this.em.persist(p);
+        } catch (Exception e) {
             throw new ErroInternoException(e);
         }
     }
 
     @Override
     public Poltrona buscarPoltrona(long id_poltrona) throws ErroInternoException, PoltronaInexistenteException {
-        try{
+        try {
             Poltrona p = this.em.find(Poltrona.class, id_poltrona);
-            if(p == null){
+            if (p == null) {
                 throw new PoltronaInexistenteException();
             }
             return p;
-        }
-        catch(Exception e){
+        } catch (PoltronaInexistenteException ex){
+            throw ex;
+        } catch (Exception e) {
             throw new ErroInternoException(e);
         }
-        
+
     }
 
     @Override
     public List<Poltrona> listar(long id_viagem) throws ErroInternoException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
