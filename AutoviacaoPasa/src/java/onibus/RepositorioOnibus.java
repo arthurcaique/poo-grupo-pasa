@@ -27,5 +27,5 @@ public interface RepositorioOnibus extends Serializable{
     
     public Onibus buscarOnibus(long id) throws ErroInternoException, OnibusInexistenteException;
     
-    public List<Onibus> listaOnibus() throws ErroInternoException;
+    public List<Onibus> listaOnibus(Empresa empresa) throws ErroInternoException;
 }

@@ -115,8 +115,8 @@ public class Fachada implements Serializable {
         return this.cadOnibus.buscarOnibus(id_onibus);
     }
     
-    public List<Onibus> listaOnibus() throws ErroInternoException{
-        return this.cadOnibus.listaOnibus();
+    public List<Onibus> listaOnibus(Empresa empresa) throws ErroInternoException{
+        return this.cadOnibus.listaOnibus(empresa);
     }
 
     public void editar(Onibus onibus) throws ErroInternoException, OnibusInexistenteException {

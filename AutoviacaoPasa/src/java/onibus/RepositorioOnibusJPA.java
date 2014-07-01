@@ -74,10 +74,11 @@ public class RepositorioOnibusJPA implements RepositorioOnibus, Serializable {
     }
     
     @Override
-        public List<Onibus> listaOnibus() throws ErroInternoException {
+        public List<Onibus> listaOnibus(Empresa empresa) throws ErroInternoException {
 
         try {
-            TypedQuery<Onibus> listaOnibus = this.em.createQuery("SELECT o FROM Onibus o, Empresa e WHERE o.empresa.id_empresa = e.id_empresa AND o.empresa.cnpj = e.cnpj AND o.empresa.listaViagem = e.listaViagem AND o.empresa.nome = e.nome AND o.empresa.senha = e.senha AND o.empresa.telefone = e.telefone", Onibus.class);
+            TypedQuery<Onibus> listaOnibus = this.em.createQuery("SELECT o FROM Onibus o, Empresa e WHERE o.empresa = :empresa", Onibus.class);
+            listaOnibus.setParameter("empresa", empresa);
             if (listaOnibus.getResultList().isEmpty()){
                 throw new OnibusInexistenteException();
             }
