@@ -8,6 +8,7 @@ import index.ErroInternoException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import viagens.Viagem;
 
 /**
  *
@@ -39,6 +40,10 @@ public class CadastroPoltrona {
     
     public Poltrona buscarPoltrona (long id_poltrona) throws ErroInternoException, PoltronaInexistenteException{
         return this.poltronas.buscarPoltrona(id_poltrona);
+    }
+    
+    public List<Poltrona> poltronasCompradas(Viagem viagem) throws ErroInternoException{
+        return this.poltronas.poltronasCompradas(viagem);
     }
     
 }
