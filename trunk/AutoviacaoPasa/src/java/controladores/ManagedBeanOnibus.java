@@ -38,7 +38,7 @@ public class ManagedBeanOnibus implements Serializable {
     }
 
 
-    public List<Onibus> getListaOnibus() throws ErroInternoException {
+    public List<Onibus> getListaOnibus(Empresa empresa) throws ErroInternoException {
         return this.fachada.listaOnibus(empresa);
     }
 

@@ -83,7 +83,7 @@
 
                                 <h:outputLabel value="Onibus " />  
                                 <p:selectOneMenu value="#{managedBeanViagem.onibusSelecionado}">
-                                    <f:selectItems value="#{managedBeanOnibus.listaOnibus(managedBeanEmpresa.empresa.id_empresa)}" var="o" itemLabel="#{o.placa}" itemValue="#{o.id_onibus}"/>
+                                    <f:selectItems value="#{managedBeanOnibus.getListaOnibus(managedBeanEmpresa.empresa)}" var="o" itemLabel="#{o.placa}" itemValue="#{o.id_onibus}"/>
                                 </p:selectOneMenu>
 
                                 <h:outputText value="Empresa "/>
