@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import empresas.Empresa;
 import index.ErroInternoException;
 import index.Fachada;
 import java.io.Serializable;
@@ -30,6 +31,7 @@ public class ManagedBeanOnibus implements Serializable {
     private Fachada fachada;
     private Onibus onibus;
     private List<Onibus> listaOnibus;
+    private Empresa empresa;
 
     public ManagedBeanOnibus() {
         this.onibus = new Onibus();
@@ -44,9 +46,20 @@ public class ManagedBeanOnibus implements Serializable {
         this.listaOnibus = listaOnibus;
     }
 
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+    
+    
+
     public String cadastrarOnibus() throws OnibusExistenteException, ErroInternoException {
         try {
-            this.fachada.cadastrar(this.onibus);
+            this.onibus.setEmpresa(empresa);
+            this.fachada.cadastrar(this.onibus);          
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Onibus cadastrado com sucesso");
             contexto.addMessage(null, msg);
