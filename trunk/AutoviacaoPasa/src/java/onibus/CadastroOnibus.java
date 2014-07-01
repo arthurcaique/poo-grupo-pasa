@@ -53,7 +53,7 @@ public class CadastroOnibus {
         this.repOnibus.excluir(id_onibus);
     }
     
-    public List<Onibus> listaOnibus() throws ErroInternoException{
-        return this.repOnibus.listaOnibus();
+    public List<Onibus> listaOnibus(Empresa empresa) throws ErroInternoException{
+        return this.repOnibus.listaOnibus(empresa);
     }
 }
