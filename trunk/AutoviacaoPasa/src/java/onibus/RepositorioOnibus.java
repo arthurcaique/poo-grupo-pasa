@@ -6,6 +6,7 @@
 
 package onibus;
 
+import empresas.Empresa;
 import index.ErroInternoException;
 import java.io.Serializable;
 import java.util.List;

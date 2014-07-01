@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import empresas.Empresa;
 
 /**
  *
@@ -76,7 +77,7 @@ public class RepositorioOnibusJPA implements RepositorioOnibus, Serializable {
         public List<Onibus> listaOnibus() throws ErroInternoException {
 
         try {
-            TypedQuery<Onibus> listaOnibus = this.em.createQuery("SELECT o FROM Onibus o", Onibus.class);
+            TypedQuery<Onibus> listaOnibus = this.em.createQuery("SELECT o FROM Onibus o, Empresa e WHERE o.empresa.id_empresa = e.id_empresa AND o.empresa.cnpj = e.cnpj AND o.empresa.listaViagem = e.listaViagem AND o.empresa.nome = e.nome AND o.empresa.senha = e.senha AND o.empresa.telefone = e.telefone", Onibus.class);
             if (listaOnibus.getResultList().isEmpty()){
                 throw new OnibusInexistenteException();
             }

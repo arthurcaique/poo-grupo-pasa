@@ -6,6 +6,7 @@
 
 package onibus;
 
+import empresas.Empresa;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -29,14 +30,16 @@ public class Onibus implements Serializable{
     private long id_onibus;
     private int qnt_assentos;
     private List<Viagem> listaViagem;
+    private Empresa empresa;
   
     
     public Onibus(){
     }
     
-    public Onibus(String placa, int qnt_assentos){
+    public Onibus(String placa, int qnt_assentos, Empresa empresa){
         this.placa = placa;
         this.qnt_assentos = qnt_assentos;
+        this.empresa = empresa;
     }
 
     @Column (unique = true)
@@ -73,6 +76,14 @@ public class Onibus implements Serializable{
 
     public void setListaViagem(List<Viagem> listaViagem) {
         this.listaViagem = listaViagem;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
     
     @Override
