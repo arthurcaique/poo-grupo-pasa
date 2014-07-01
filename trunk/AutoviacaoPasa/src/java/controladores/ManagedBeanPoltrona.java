@@ -45,7 +45,7 @@ public class ManagedBeanPoltrona implements Serializable {
     public void setPoltronaSelecionada(long poltronaSelecionada) {
         this.poltronaSelecionada = poltronaSelecionada;
     }
-    
+
     public Poltrona getPoltrona() {
         return poltrona;
     }
@@ -53,7 +53,6 @@ public class ManagedBeanPoltrona implements Serializable {
     public void setPoltrona(Poltrona poltrona) {
         this.poltrona = poltrona;
     }
-    
 
     public Poltrona adicionarPoltrona() {
         try {
@@ -63,7 +62,7 @@ public class ManagedBeanPoltrona implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Poltrona cadastrada com sucesso");
             contexto.addMessage(null, msg);
             //this.poltrona = new Poltrona();
-            return this.poltrona; 
+            return this.poltrona;
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado!");
@@ -78,6 +77,10 @@ public class ManagedBeanPoltrona implements Serializable {
             contexto.addMessage(null, msg);
         }
         return null;
+    }
+
+    public List<Poltrona> poltronasCompradas(Viagem viagem) throws ErroInternoException {
+        return fachada.poltronasCompradas(viagem);
     }
 
     public String buscarPoltrona() {

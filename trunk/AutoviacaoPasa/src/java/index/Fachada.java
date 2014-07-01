@@ -171,5 +171,8 @@ public class Fachada implements Serializable {
     public List<Viagem> consultaViagens(Cidades origem, Cidades destino, Date data) throws ErroInternoException, ViagemInexistenteException {
         return this.viagem.consultaViagens(origem, destino, data);
     }
+    public List<Poltrona> poltronasCompradas(Viagem viagem) throws ErroInternoException{
+        return this.poltrona.poltronasCompradas(viagem);
+    }
 
 }
