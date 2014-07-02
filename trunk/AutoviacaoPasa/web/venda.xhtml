@@ -58,7 +58,8 @@
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
-                        <p:panel header ="Passo 4: Confirmação">
+                        <h:outputText value="É necessário estar logado como cliente para poder continuar" rendered="#{!managedBeanClientes.login}"/>
+                        <p:panel header ="Passo 4: Confirmação" rendered="#{managedBeanClientes.login}">
                             <p:messages showDetail="true"/>
                             <p:panel >
                                 <h:outputText value = "Verifique se os dados da compra estão corretos e clique para finalizar. "/>

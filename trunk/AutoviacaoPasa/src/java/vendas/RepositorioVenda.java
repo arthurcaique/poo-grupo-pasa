@@ -6,6 +6,7 @@
 
 package vendas;
 
+import clientes.Cliente;
 import index.ErroInternoException;
 import java.io.Serializable;
 import java.util.List;
@@ -24,4 +25,5 @@ public interface RepositorioVenda extends Serializable{
     
     public List<Venda> vendasPorViagem(long id_viagem) throws ErroInternoException;
     
+    public List<Venda> listarVendasCliente(Cliente cliente) throws ErroInternoException;
 }
