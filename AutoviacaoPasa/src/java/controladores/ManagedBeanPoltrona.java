@@ -61,7 +61,6 @@ public class ManagedBeanPoltrona implements Serializable {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Poltrona cadastrada com sucesso");
             contexto.addMessage(null, msg);
-            //this.poltrona = new Poltrona();
             return this.poltrona;
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
@@ -79,7 +78,10 @@ public class ManagedBeanPoltrona implements Serializable {
         return null;
     }
 
-    public List<Poltrona> poltronasCompradas(Viagem viagem) throws ErroInternoException {
+    public List<Long> poltronasCompradas(Viagem viagem) throws ErroInternoException {
+        if (fachada.poltronasCompradas(viagem).isEmpty()) {
+            return null;
+        }
         return fachada.poltronasCompradas(viagem);
     }
 
@@ -101,6 +103,19 @@ public class ManagedBeanPoltrona implements Serializable {
         } catch (ErroInternoException eie) {
             return "ErroInterno.xhtml";
         }
+    }
 
+    public boolean poltronaIndisponivel(Viagem viagem, long id) throws ErroInternoException {
+        try {
+            for (Long poltronasComprada : poltronasCompradas(viagem)) {
+                if(poltronasComprada.equals(id)){
+                    return true;
+                }
+            }
+
+            return false;
+        } catch (ErroInternoException e) {
+            throw e;
+        }
     }
 }

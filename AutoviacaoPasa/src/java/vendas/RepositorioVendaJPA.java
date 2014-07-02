@@ -5,6 +5,7 @@
  */
 package vendas;
 
+import clientes.Cliente;
 import index.ErroInternoException;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -41,27 +42,16 @@ public class RepositorioVendaJPA implements RepositorioVenda {
 
     }
 
-    /*public void remover(long codigo) throws ErroInternoException, VendaInexistenteException {
+    public List<Venda> listarVendasCliente(Cliente cliente) throws ErroInternoException {
+        try {
+            TypedQuery<Venda> query = this.em.createQuery("SELECT v FROM Venda v, Cliente c WHERE v.id_cliente = :cliente", Venda.class);
+            query.setParameter("cliente", cliente);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new ErroInternoException(e);
+        }
+    }
 
-     Venda ven = buscar(codigo);//buscar esta fora do try  para não prender a exceçao
-     try {
-
-     this.em.remove(ven);
-     } catch (Exception e) {
-     throw new ErroInternoException(e);
-     }
-
-     }
-
-     public void atualizar(Venda ven) throws ErroInternoException, VendaInexistenteException {
-
-     buscar(ven.getCodigo());// não precisa do lançar o erro inexistente pois o buscar esta fora do try e ele ja faz isso
-     try {
-     this.em.merge(ven);
-     } catch (Exception e) {
-     throw new ErroInternoException(e);
-     }
-     }*/
     @Override
     public Venda buscarVenda(long codigo) throws ErroInternoException, VendaInexistenteException {
         try {

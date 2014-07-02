@@ -42,7 +42,7 @@ public class CadastroPoltrona {
         return this.poltronas.buscarPoltrona(id_poltrona);
     }
     
-    public List<Poltrona> poltronasCompradas(Viagem viagem) throws ErroInternoException{
+    public List<Long> poltronasCompradas(Viagem viagem) throws ErroInternoException{
         return this.poltronas.poltronasCompradas(viagem);
     }
     

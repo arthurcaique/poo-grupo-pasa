@@ -6,6 +6,7 @@
 
 package vendas;
 
+import clientes.Cliente;
 import index.ErroInternoException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,5 +44,9 @@ public class CadastroVenda {
                 }
             }
             return venda;
+    }
+    
+    public List<Venda> listarVendasCliente(Cliente cliente) throws ErroInternoException{
+        return this.venda.listarVendasCliente(cliente);
     }
 }

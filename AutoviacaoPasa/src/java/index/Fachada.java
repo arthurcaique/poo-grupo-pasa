@@ -80,8 +80,8 @@ public class Fachada implements Serializable {
     public Cliente loginCliente(String cpf, String senha) throws ErroInternoException, ClienteInexistenteException {
         return this.cadCliente.loginCliente(cpf, senha);
     }
-    
-    public List<Cliente>listaCliente(Cliente cliente) throws ErroInternoException{
+
+    public List<Cliente> listaCliente(Cliente cliente) throws ErroInternoException {
         return this.cadCliente.listaClientes(cliente);
     }
 
@@ -89,10 +89,11 @@ public class Fachada implements Serializable {
         this.empresa.adicionar(ep);
 
     }
-     public List<Empresa>listaEmpresa() throws ErroInternoException{
+
+    public List<Empresa> listaEmpresa() throws ErroInternoException {
         return this.empresa.listaEmpresa();
-     }
-     
+    }
+
     public void remove(long Id_empresa) throws EmpresaInexistenteException, ErroInternoException {
         this.empresa.remove(Id_empresa);
     }
@@ -104,9 +105,11 @@ public class Fachada implements Serializable {
     public void atualizar(Empresa ep) throws EmpresaInexistenteException, ErroInternoException {
         this.empresa.atualizar(ep);
     }
-     public Empresa loginEmpresa (String cnpj, String senha) throws ErroInternoException, EmpresaInexistenteException{
-         return this.empresa.loginEmpresa(cnpj, senha);
-     }
+
+    public Empresa loginEmpresa(String cnpj, String senha) throws ErroInternoException, EmpresaInexistenteException {
+        return this.empresa.loginEmpresa(cnpj, senha);
+    }
+
     public void cadastrar(Onibus onibus) throws ErroInternoException, OnibusExistenteException {
         this.cadOnibus.cadastrar(onibus);
     }
@@ -114,8 +117,8 @@ public class Fachada implements Serializable {
     public Onibus buscarOnibus(long id_onibus) throws ErroInternoException, OnibusInexistenteException {
         return this.cadOnibus.buscarOnibus(id_onibus);
     }
-    
-    public List<Onibus> listaOnibus(Empresa empresa) throws ErroInternoException{
+
+    public List<Onibus> listaOnibus(Empresa empresa) throws ErroInternoException {
         return this.cadOnibus.listaOnibus(empresa);
     }
 
@@ -154,7 +157,6 @@ public class Fachada implements Serializable {
     public void adicionar(Viagem v) throws ErroInternoException, ViagemExistenteException {
         this.viagem.adicionar(v);
     }
-    
 
     public void removeViagem(long Id_viagem) throws ViagemInexistenteException, ErroInternoException {
         this.viagem.removeViagem(Id_viagem);
@@ -171,8 +173,12 @@ public class Fachada implements Serializable {
     public List<Viagem> consultaViagens(Cidades origem, Cidades destino, Date data) throws ErroInternoException, ViagemInexistenteException {
         return this.viagem.consultaViagens(origem, destino, data);
     }
-    public List<Poltrona> poltronasCompradas(Viagem viagem) throws ErroInternoException{
+
+    public List<Long> poltronasCompradas(Viagem viagem) throws ErroInternoException {
         return this.poltrona.poltronasCompradas(viagem);
     }
 
+    public List<Venda> listarVendasCliente(Cliente cliente) throws ErroInternoException {
+        return this.venda.listarVendasCliente(cliente);
+    }
 }

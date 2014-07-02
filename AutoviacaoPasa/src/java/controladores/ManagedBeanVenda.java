@@ -72,7 +72,13 @@ public class ManagedBeanVenda implements Serializable {
         this.poltrona = poltrona;
     }
 
-    
+    public List<Venda> listarVendasCliente(Cliente cliente) throws ErroInternoException{
+        try{
+            return this.fachada.listarVendasCliente(cliente);
+        } catch (ErroInternoException e){
+            throw e;
+        }
+    }
     public String cadastrarVenda() throws OnibusExistenteException, ErroInternoException {
         try {
             this.venda.setId_cliente(cliente);
@@ -84,6 +90,7 @@ public class ManagedBeanVenda implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Venda realizada com sucesso");
             contexto.addMessage(null, msg);
             this.venda = new Venda();
+            this.poltrona = new Poltrona();
             return "voucher.xhtml";
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();

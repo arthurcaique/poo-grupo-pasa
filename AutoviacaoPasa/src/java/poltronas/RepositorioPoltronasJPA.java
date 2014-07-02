@@ -54,10 +54,10 @@ public class RepositorioPoltronasJPA implements RepositorioPoltronas {
     }
     
     @Override
-    public List<Poltrona> poltronasCompradas(Viagem viagem) throws ErroInternoException{
+    public List<Long> poltronasCompradas(Viagem viagem) throws ErroInternoException{
         try {
-            TypedQuery<Poltrona> listaPoltronas = this.em.createQuery("SELECT p FROM Venda v, Poltrona p, Viagem vi WHERE v.id_poltrona.id_poltrona = p.id_poltrona "
-                    + "AND v.id_viagem = :viagem", Poltrona.class);
+            TypedQuery<Long> listaPoltronas = this.em.createQuery("SELECT p.numero_poltrona FROM Venda v, Poltrona p, Viagem vi WHERE v.id_poltrona.id_poltrona = p.id_poltrona "
+                    + "AND v.id_viagem = :viagem", Long.class);
             listaPoltronas.setParameter("viagem", viagem);
             return listaPoltronas.getResultList();
         } catch (Exception e) {
