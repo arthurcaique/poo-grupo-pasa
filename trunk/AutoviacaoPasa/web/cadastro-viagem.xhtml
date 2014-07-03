@@ -93,15 +93,16 @@
                                     <p:selectOneMenu value="#{managedBeanViagem.viagem.origem}">
                                         <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
                                     </p:selectOneMenu>
-                                    <h:outputText value="Hora"/>
-                                    <p:inputText value="#{managedBeanViagem.viagem.hora}" converterMessage="Hora no padrão incorreto">
-                                        <f:convertDateTime type="time" pattern="HH:mm"  timeZone="GMT-03:00"/>
-                                    </p:inputText>
-
+                                    
                                     <h:outputLabel value="Destino " />  
                                     <p:selectOneMenu value="#{managedBeanViagem.viagem.destino}">
                                         <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
                                     </p:selectOneMenu>
+                                    
+                                    <h:outputText value="Hora"/>
+                                    <p:inputText value="#{managedBeanViagem.viagem.hora}" converterMessage="Hora no padrão incorreto">
+                                        <f:convertDateTime type="time" pattern="HH:mm"  timeZone="GMT-03:00"/>
+                                    </p:inputText>
 
                                     <h:outputLabel value="Onibus " />  
                                     <p:selectOneMenu value="#{managedBeanViagem.onibusSelecionado}">

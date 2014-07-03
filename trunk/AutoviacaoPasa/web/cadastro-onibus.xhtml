@@ -66,7 +66,7 @@
                         <div style="float: right"><p:panel header="Cadastrar novo" style="max-width: 600px">
                                 <p:panelGrid columns="2">
                                     <h:outputText value = "Placa: "/> 
-                                    <p:inputText value = "#{managedBeanOnibus.onibus.placa}" required="true" requiredMessage="Identificação da placa obrigatória"/>
+                                    <p:inputText value = "#{managedBeanOnibus.onibus.placa}" requiredMessage="Identificação da placa obrigatória"/>
                                     <h:outputText value = "Quantidade de assentos: "/> 
                                     <p:inputMask mask="99"  value = "#{managedBeanOnibus.onibus.qnt_assentos}" requiredMessage="Número de assentos obrigatório"/>
                                     <h:outputText value="Empresa "/>

@@ -58,7 +58,7 @@ public class ManagedBeanClientes implements Serializable {
     public void setLogin(boolean login) {
         this.login = login;
     }
-    
+
     public String adicionarCliente() {
         try {
             this.fachada.adicionar(this.cliente);
@@ -105,27 +105,25 @@ public class ManagedBeanClientes implements Serializable {
             return "ClienteInexistente.xhtml";
         }
     }
-        
-    public String atualizarsenhaCliente() {       
-            return "atualizarsenha-cliente.xhtml";  
+
+    public String atualizarsenhaCliente() {
+        return "atualizarsenha-cliente.xhtml";
     }
-    
-    public String senhaatualizadaCliente(){
-        try{
-        this.fachada.atualizar(this.cliente);
-        return "dadospessoais-cliente.xhtml";
-        }
-        catch(ErroInternoException eie){
+
+    public String senhaatualizadaCliente() {
+        try {
+            this.fachada.atualizar(this.cliente);
+            return "dadospessoais-cliente.xhtml";
+        } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ErroInterno", "Ocorreu um erro interno");
             contexto.addMessage(null, msg);
             return null;
-        }
-        catch(ClienteInexistenteException cie){
+        } catch (ClienteInexistenteException cie) {
             return null;
         }
     }
-    
+
     public String atualizarCliente() {
         try {
             this.fachada.atualizar(cliente);
@@ -137,7 +135,7 @@ public class ManagedBeanClientes implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ErroInterno", "Ocorreu um erro interno");
             contexto.addMessage(null, msg);
         } catch (ClienteInexistenteException cie) {
-            
+
         }
         return null;
     }
@@ -162,10 +160,11 @@ public class ManagedBeanClientes implements Serializable {
         }
         return null;
     }
-    
-    public void logout(){
+
+    public String logout() {
         login = false;
-        this.cliente = new Cliente();
+        this.cliente = new Cliente();          
+        return "index.xhtml";
     }
 
     public List<Cliente> listaClientes() throws ErroInternoException {
