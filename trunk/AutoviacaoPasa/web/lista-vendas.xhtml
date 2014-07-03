@@ -65,7 +65,7 @@
                                         <h:outputText value ="#{v.id_viagem.origem}"/>
                                     </p:column>
                                     <p:column headerText="Destino">
-                                        <h:outputText value ="R$ #{v.id_viagem.destino}"/>
+                                        <h:outputText value ="#{v.id_viagem.destino}"/>
                                     </p:column>
                                     <p:column headerText ="Empresa">
                                         <h:outputText value ="#{v.id_viagem.empresa.nome}"/>
@@ -74,12 +74,14 @@
                                         <h:outputText value ="#{managedBeanViagem.formatarData(v.data)}"/>
                                     </p:column>
                                     <p:column headerText ="Valor">
-                                        <h:outputText value ="#{v.preco}"/>
+                                        <h:outputText value ="R$ #{v.preco}"/>
+                                    </p:column>
+                                    <p:column headerText ="Poltrona">
+                                        <h:outputText value ="#{v.id_poltrona.numero_poltrona}"/>
                                     </p:column>
                                 </p:dataTable>
                             </p:panelGrid>
                         </p:panel>
-                        <p><h:commandButton value = "Cadastrar" action = "#{managedBeanEmpresa.adicionarEmpresa()}"/></p>
                         <p:messages showDetail="true"/>
                     </p:layoutUnit>
                 </p:layout>

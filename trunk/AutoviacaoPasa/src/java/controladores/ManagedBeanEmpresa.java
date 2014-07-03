@@ -70,7 +70,7 @@ public class ManagedBeanEmpresa implements Serializable {
         try {
             this.fachada.adicionar(this.empresa);
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Empresa Cadastrada com sucesso");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Cadastro realizado com sucesso");
             contexto.addMessage(null, msg);
             this.empresa = new Empresa();
 
@@ -81,7 +81,7 @@ public class ManagedBeanEmpresa implements Serializable {
             return null;
         } catch (EmpresaExistenteException eee) {
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Empresa Existente", "Empresa já existe");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", "Essa empresa já está cadastrada no sistema");
             contexto.addMessage(null, msg);
             return null;
         }
@@ -95,7 +95,7 @@ public class ManagedBeanEmpresa implements Serializable {
         }
         catch(ErroInternoException eie){
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ErroInterno", "Ocorreu um erro interno");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", " Ocorreu um erro interno");
             contexto.addMessage(null, msg);
             return null;
         }
@@ -109,7 +109,7 @@ public class ManagedBeanEmpresa implements Serializable {
             this.empresa = this.fachada.loginEmpresa(empresa.getCnpj(), empresa.getSenha());
             this.login = true;
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"OK","Empresa logada!");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null,"Empresa logada");
             contexto.addMessage(null, msg);
             return "index.xhtml";
         }
@@ -121,7 +121,7 @@ public class ManagedBeanEmpresa implements Serializable {
         }
         catch(EmpresaInexistenteException eie){
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Empresa Inexistente", "A empresa não cadastrada no sistema!");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Erro: ", " A empresa não está cadastrada no sistema. Verifique o CNPJ e senha e tente novamente");
             contexto.addMessage(null, msg);
             return null;
         }
@@ -141,7 +141,7 @@ public class ManagedBeanEmpresa implements Serializable {
         try {
             this.fachada.atualizar(empresa);
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Dados da empresa atualizados com sucesso");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Os dados foram atualizados com sucesso");
             contexto.addMessage(null, msg);           
         } 
         catch (ErroInternoException eie) {
