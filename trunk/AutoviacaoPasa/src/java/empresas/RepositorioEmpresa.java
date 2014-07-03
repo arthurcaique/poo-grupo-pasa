@@ -10,6 +10,7 @@ import index.ErroInternoException;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Local;
+import viagens.Viagem;
 
 /**
  *
@@ -23,6 +24,7 @@ public interface RepositorioEmpresa extends Serializable {
     public void remover   (long id_empresa) throws ErroInternoException, EmpresaInexistenteException;
     public List<Empresa> listaEmpresa () throws ErroInternoException;
     public Empresa loginEmpresa (String cnpj, String senha) throws ErroInternoException, EmpresaInexistenteException;
+    public List<Viagem> listarViagens (Empresa empresa) throws ErroInternoException;
 
 }
     
