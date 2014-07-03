@@ -63,18 +63,18 @@ public class ManagedBeanClientes implements Serializable {
         try {
             this.fachada.adicionar(this.cliente);
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Cliente Cadastrado com sucesso");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Cadastro realizado com sucesso.");
             contexto.addMessage(null, msg);
             this.cliente = new Cliente();
 
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado! " + eie.getMessage());
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", " Ocorreu um erro interno inesperado " + eie.getMessage());
             contexto.addMessage(null, msg);
 
         } catch (ClienteExistenteException cee) {
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente Existente", "Cliente já existe");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", " Esse cliente já está cadastrado");
             contexto.addMessage(null, msg);
         } catch (ClienteInexistenteException cie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
@@ -130,7 +130,7 @@ public class ManagedBeanClientes implements Serializable {
         try {
             this.fachada.atualizar(cliente);
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Dados do cliente atualizados com sucesso");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Dados atualizados com sucesso");
             contexto.addMessage(null, msg);
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
@@ -147,7 +147,7 @@ public class ManagedBeanClientes implements Serializable {
             this.cliente = this.fachada.loginCliente(cliente.getCpf(), cliente.getSenha());
             this.login = true;
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Cliente logado com sucesso");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Cliente logado com sucesso");
             contexto.addMessage(null, msg);
             return "index.xhtml";
         } catch (ErroInternoException eie) {
@@ -157,7 +157,7 @@ public class ManagedBeanClientes implements Serializable {
 
         } catch (ClienteInexistenteException cee) {
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente Inexistente", "O cliente não existe");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", "O cliente não está cadastrado no sistema. Verifique o CPF e senha e tente novamente.");
             contexto.addMessage(null, msg);
         }
         return null;

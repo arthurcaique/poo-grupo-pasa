@@ -42,8 +42,8 @@ public class ManagedBeanPoltrona implements Serializable {
         return poltronaSelecionada;
     }
 
-    public void setPoltronaSelecionada(long poltronaSelecionada) {
-        this.poltronaSelecionada = poltronaSelecionada;
+    public void setPoltronaSelecionada(long poltronaSelecionada) throws PoltronaIndisponivelException {
+            this.poltronaSelecionada = poltronaSelecionada;
     }
 
     public Poltrona getPoltrona() {
@@ -59,7 +59,7 @@ public class ManagedBeanPoltrona implements Serializable {
             this.poltrona.setNumero_poltrona(poltronaSelecionada);
             this.fachada.adicionar(this.poltrona);
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Poltrona cadastrada com sucesso");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Poltrona cadastrada com sucesso");
             contexto.addMessage(null, msg);
             return this.poltrona;
         } catch (ErroInternoException eie) {
@@ -108,7 +108,7 @@ public class ManagedBeanPoltrona implements Serializable {
     public boolean poltronaIndisponivel(Viagem viagem, long id) throws ErroInternoException {
         try {
             for (Long poltronasComprada : poltronasCompradas(viagem)) {
-                if(poltronasComprada.equals(id)){
+                if (poltronasComprada.equals(id)) {
                     return true;
                 }
             }

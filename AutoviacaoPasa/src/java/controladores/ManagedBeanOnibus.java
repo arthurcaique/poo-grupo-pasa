@@ -61,7 +61,7 @@ public class ManagedBeanOnibus implements Serializable {
             this.onibus.setEmpresa(empresa);
             this.fachada.cadastrar(this.onibus);          
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Onibus cadastrado com sucesso");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Onibus cadastrado com sucesso");
             contexto.addMessage(null, msg);
             this.onibus = new Onibus();
         } catch (ErroInternoException eie) {
@@ -71,7 +71,7 @@ public class ManagedBeanOnibus implements Serializable {
             
         } catch (OnibusExistenteException cee) {
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Onibus Existente", "Onibus já existe");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Esse ônibus já está cadastrado");
             contexto.addMessage(null, msg);
             
         }

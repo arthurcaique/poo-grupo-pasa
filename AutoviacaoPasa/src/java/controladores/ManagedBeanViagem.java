@@ -128,7 +128,7 @@ public class ManagedBeanViagem implements Serializable {
             this.viagem.setEmpresa(this.empresa);
             this.fachada.adicionar(this.viagem);
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Viagem Cadastrada com sucesso");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Viagem cadastrada com sucesso");
             contexto.addMessage(null, msg);
             this.viagem = new Viagem();
 
