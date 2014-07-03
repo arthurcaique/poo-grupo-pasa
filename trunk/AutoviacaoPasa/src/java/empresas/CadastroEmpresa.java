@@ -53,6 +53,6 @@ public class CadastroEmpresa {
      return this.empresa.loginEmpresa(cnpj, senha);
 }
     public List<Viagem> listarViagens (Empresa empresa) throws ErroInternoException{
-        return this.listarViagens(empresa);
+        return this.empresa.listarViagens(empresa);
     }
 }

@@ -59,41 +59,63 @@
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
-                        <p:panel header="Cadstro de viagem">
-                            <p:panelGrid columns="2">
-                                <h:outputLabel for="dt_lanc" value="Data: " />  
-                                <p:calendar value="#{managedBeanViagem.viagem.data}" pattern="dd/MM/yyyy"/> 
+                        <div style="float: left"><p:panel header ="Viagens cadastradas" style="max-width: 2000px">
+                                <p:dataTable value = "#{managedBeanEmpresa.getListaViagem(managedBeanEmpresa.empresa)}" var ="o" paginator ="true">
+                                    <p:column headerText ="Origem" style="max-width: 400px">
+                                        <h:outputText value ="#{o.origem}"/>
+                                    </p:column>
+                                    <p:column headerText ="Destino" style="max-width:200px">
+                                        <h:outputText value ="#{o.destino}"/>
+                                    </p:column>
+                                    <p:column headerText ="Data" style="max-width:200px">
+                                        <h:outputText value ="#{managedBeanViagem.formatarData(o.data)}"/>
+                                    </p:column> 
+                                    <p:column headerText ="Hora" style="max-width:200px">
+                                        <h:outputText value ="#{managedBeanViagem.formatarHora(o.hora)}"/>
+                                    </p:column> 
+                                    <p:column headerText ="Onibus" style="max-width:200px">
+                                        <h:outputText value ="#{o.onibus.placa}"/>
+                                    </p:column> 
+                                    <p:column headerText ="Quantidade de assentos" style="max-width:120px">
+                                        <h:outputText value ="#{o.onibus.qnt_assentos}"/>
+                                    </p:column> 
+                                </p:dataTable>
+                            </p:panel></div>
+                        <div style="float: right"><p:panel header="Nova viagem">
+                                <p:panelGrid columns="2">
+                                    <h:outputLabel for="dt_lanc" value="Data: " />  
+                                    <p:calendar value="#{managedBeanViagem.viagem.data}" pattern="dd/MM/yyyy"/> 
 
-                                <h:outputText value="Valor"/>  
-                                <p:inputText  value="#{managedBeanViagem.viagem.valor}"/>  
+                                    <h:outputText value="Valor"/>  
+                                    <p:inputText  value="#{managedBeanViagem.viagem.valor}"/>  
 
-                                <h:outputLabel value="Origem " />  
-                                <p:selectOneMenu value="#{managedBeanViagem.viagem.origem}">
-                                    <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
-                                </p:selectOneMenu>
-                                <h:outputText value="Hora"/>
-                                <p:inputText value="#{managedBeanViagem.viagem.hora}" converterMessage="Hora no padrão incorreto">
-                                    <f:convertDateTime type="time" pattern="HH:mm"  timeZone="GMT-03:00"/>
-                                </p:inputText>
+                                    <h:outputLabel value="Origem " />  
+                                    <p:selectOneMenu value="#{managedBeanViagem.viagem.origem}">
+                                        <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
+                                    </p:selectOneMenu>
+                                    <h:outputText value="Hora"/>
+                                    <p:inputText value="#{managedBeanViagem.viagem.hora}" converterMessage="Hora no padrão incorreto">
+                                        <f:convertDateTime type="time" pattern="HH:mm"  timeZone="GMT-03:00"/>
+                                    </p:inputText>
 
-                                <h:outputLabel value="Destino " />  
-                                <p:selectOneMenu value="#{managedBeanViagem.viagem.destino}">
-                                    <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
-                                </p:selectOneMenu>
+                                    <h:outputLabel value="Destino " />  
+                                    <p:selectOneMenu value="#{managedBeanViagem.viagem.destino}">
+                                        <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
+                                    </p:selectOneMenu>
 
-                                <h:outputLabel value="Onibus " />  
-                                <p:selectOneMenu value="#{managedBeanViagem.onibusSelecionado}">
-                                    <f:selectItems value="#{managedBeanOnibus.getListaOnibus(managedBeanEmpresa.empresa)}" var="o" itemLabel="#{o.placa}" itemValue="#{o.id_onibus}"/>
-                                </p:selectOneMenu>
+                                    <h:outputLabel value="Onibus " />  
+                                    <p:selectOneMenu value="#{managedBeanViagem.onibusSelecionado}">
+                                        <f:selectItems value="#{managedBeanOnibus.getListaOnibus(managedBeanEmpresa.empresa)}" var="o" itemLabel="#{o.placa}" itemValue="#{o.id_onibus}"/>
+                                    </p:selectOneMenu>
 
-                                <h:outputText value="Empresa "/>
-                                <h:outputText value="#{managedBeanEmpresa.empresa.nome}"/>
-                                <h:outputText value="#{managedBeanViagem.setEmpresa(managedBeanEmpresa.empresa)}"/>
-                            </p:panelGrid>
-                        </p:panel>
-                        <p><h:commandButton value = "Cadastrar" action = "#{managedBeanViagem.adicionarViagem()}"/></p>
+                                    <h:outputText value="Empresa "/>
+                                    <h:outputText value="#{managedBeanEmpresa.empresa.nome}"/>
+                                    <h:outputText value="#{managedBeanViagem.setEmpresa(managedBeanEmpresa.empresa)}"/>
+                                </p:panelGrid>
+                            </p:panel>
+                            <p><h:commandButton value = "Cadastrar" action = "#{managedBeanViagem.adicionarViagem()}"/></p>
+                        </div>
                         <p:messages showDetail="true"/>
-
                     </p:layoutUnit>
                 </p:layout>
             </h:form>

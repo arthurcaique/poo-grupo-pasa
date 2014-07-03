@@ -4,6 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
+    <link rel="stylesheet" type="text/css" href="cssLayout.css" />
 
     <f:view contentType="text/html">
         <h:head>
@@ -19,9 +20,9 @@
 
                     <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
                         <h:graphicImage url="/banner.jpg" width="700" height="200"/>  
-                        
+
                         <h:outputText value = " Logado como empresa: #{managedBeanEmpresa.empresa.nome} "
-                                rendered="#{managedBeanEmpresa.login}"/> 
+                                      rendered="#{managedBeanEmpresa.login}"/> 
                         <h:commandButton value = "Minha conta" action="dadosjuridicos-empresa" 
                                          rendered="#{managedBeanEmpresa.login}"/>
                         <h:commandButton value = "Sair" action="#{managedBeanEmpresa.logout()}" 
@@ -52,18 +53,29 @@
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
-                        <p:panel header="Cadstro de onibus">
-                            <p:panelGrid columns="2">
-                                <h:outputText value = "Placa: "/> 
-                                <p:inputText value = "#{managedBeanOnibus.onibus.placa}" required="true" requiredMessage="Identificação da placa obrigatória"/>
-                                <h:outputText value = "Quantidade de assentos: "/> 
-                                <p:inputMask mask="99"  value = "#{managedBeanOnibus.onibus.qnt_assentos}" requiredMessage="Número de assentos obrigatório"/>
-                                <h:outputText value="Empresa "/>
-                                <h:outputText value="#{managedBeanEmpresa.empresa.nome}"/>
-                                <h:outputText value="#{managedBeanOnibus.setEmpresa(managedBeanEmpresa.empresa)}"/>
-                            </p:panelGrid>
-                        </p:panel>
-                        <p><h:commandButton value = "Cadastrar" action = "#{managedBeanOnibus.cadastrarOnibus()}"/></p>
+                        <div style="float: left"><p:panel header ="Ônibus cadastrados" style="max-width: 2000px">
+                                <p:dataTable value = "#{managedBeanOnibus.getListaOnibus(managedBeanEmpresa.empresa)}" var ="o" paginator ="true">
+                                    <p:column headerText ="Placa" style="max-width: 400px">
+                                        <h:outputText value ="#{o.placa}"/>
+                                    </p:column>
+                                    <p:column headerText ="Quantidade de assentos" style="max-width:200px">
+                                        <h:outputText value ="#{o.qnt_assentos}"/>
+                                    </p:column>               
+                                </p:dataTable>
+                            </p:panel></div>
+                        <div style="float: right"><p:panel header="Cadastrar novo" style="max-width: 600px">
+                                <p:panelGrid columns="2">
+                                    <h:outputText value = "Placa: "/> 
+                                    <p:inputText value = "#{managedBeanOnibus.onibus.placa}" required="true" requiredMessage="Identificação da placa obrigatória"/>
+                                    <h:outputText value = "Quantidade de assentos: "/> 
+                                    <p:inputMask mask="99"  value = "#{managedBeanOnibus.onibus.qnt_assentos}" requiredMessage="Número de assentos obrigatório"/>
+                                    <h:outputText value="Empresa "/>
+                                    <h:outputText value="#{managedBeanEmpresa.empresa.nome}"/>
+                                    <h:outputText value="#{managedBeanOnibus.setEmpresa(managedBeanEmpresa.empresa)}"/>
+                                </p:panelGrid>
+                            </p:panel>
+                            <p><h:commandButton value = "Cadastrar" action = "#{managedBeanOnibus.cadastrarOnibus()}"/></p>
+                        </div>
                         <p:messages showDetail="true"/>
                     </p:layoutUnit>
                 </p:layout>

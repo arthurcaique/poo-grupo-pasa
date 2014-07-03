@@ -64,8 +64,8 @@ public class ManagedBeanViagem implements Serializable {
         this.onibusSelecionado = onibusSelecionado;
     }
 
-    public List<Viagem> getListaViagens() {
-        return listaViagens;
+    public List<Viagem> getListaViagens(Empresa empresa) throws ErroInternoException {
+        return fachada.listarViagens(empresa);
     }
 
     public void setListaViagens(List<Viagem> listaViagens) {

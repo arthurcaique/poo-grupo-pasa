@@ -110,7 +110,8 @@ public class RepositorioEmpresaJPA implements RepositorioEmpresa, Serializable {
 
     @Override
     public List<Viagem> listarViagens(Empresa empresa) throws ErroInternoException {
-        TypedQuery<Viagem> listarViagens = this.em.createQuery("SELECT FROM Viagem v, Empresa e WHERE v.empresa = :empresa", Viagem.class);
+        TypedQuery<Viagem> listarViagens = this.em.createQuery("SELECT v FROM Viagem v, Empresa e WHERE v.empresa = :empresa", Viagem.class);
+        listarViagens.setParameter("empresa", empresa);
         return listarViagens.getResultList();
     }
     
