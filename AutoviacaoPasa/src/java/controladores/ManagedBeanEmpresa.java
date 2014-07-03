@@ -146,9 +146,10 @@ public class ManagedBeanEmpresa implements Serializable {
         return "atualizarsenha-empresa.xhtml";
     }
 
-    public void logout() {
+    public String logout() {
         login = false;
         this.empresa = new Empresa();
+        return "index.xhtml";
     }
 
     public String atualizarEmpresa() {
