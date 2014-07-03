@@ -111,7 +111,7 @@ public class Fachada implements Serializable {
     }
     
     public List<Viagem> listarViagens (Empresa empresa) throws ErroInternoException{
-        return this.listarViagens(empresa);
+        return this.empresa.listarViagens(empresa);
     }
 
     public void cadastrar(Onibus onibus) throws ErroInternoException, OnibusExistenteException {

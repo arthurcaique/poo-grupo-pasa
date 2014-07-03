@@ -52,7 +52,7 @@ public class ManagedBeanEmpresa implements Serializable {
         this.empresa = empresa;
     }
 
-    public List<Viagem> getListaViagem() throws ErroInternoException{
+    public List<Viagem> getListaViagem(Empresa empresa) throws ErroInternoException{
         try{
             return this.fachada.listarViagens(empresa);
         }
