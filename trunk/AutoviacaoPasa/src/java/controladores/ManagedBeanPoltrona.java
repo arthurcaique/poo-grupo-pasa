@@ -43,7 +43,7 @@ public class ManagedBeanPoltrona implements Serializable {
     }
 
     public void setPoltronaSelecionada(long poltronaSelecionada) throws PoltronaIndisponivelException {
-            this.poltronaSelecionada = poltronaSelecionada;
+        this.poltronaSelecionada = poltronaSelecionada;
     }
 
     public Poltrona getPoltrona() {
@@ -79,9 +79,6 @@ public class ManagedBeanPoltrona implements Serializable {
     }
 
     public List<Long> poltronasCompradas(Viagem viagem) throws ErroInternoException {
-        if (fachada.poltronasCompradas(viagem).isEmpty()) {
-            return null;
-        }
         return fachada.poltronasCompradas(viagem);
     }
 
@@ -112,7 +109,6 @@ public class ManagedBeanPoltrona implements Serializable {
                     return true;
                 }
             }
-
             return false;
         } catch (ErroInternoException e) {
             throw e;

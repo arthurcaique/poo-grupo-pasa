@@ -75,9 +75,6 @@
                                     <h:outputText value = "#{managedBeanViagem.viagem.valor}" />    
                                 </p:panelGrid>
                                 <p><c:forEach begin="1" end="#{managedBeanViagem.onibus.qnt_assentos}" var="item">
-                                    <c:if test="#{managedBeanPoltrona.poltronasCompradas(managedBeanViagem.viagem) == null}">
-                                        <p:commandButton value="#{item}" action="#{managedBeanPoltrona.setPoltronaSelecionada(item)}"/>
-                                    </c:if>
                                     <p:commandButton value="#{item}" action="#{managedBeanPoltrona.setPoltronaSelecionada(item)}" disabled="#{managedBeanPoltrona.poltronaIndisponivel(managedBeanViagem.viagem, item)}"/>
                                 </c:forEach></p>
                             </p:panel>

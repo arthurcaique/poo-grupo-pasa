@@ -5,7 +5,6 @@
  */
 package controladores;
 
-
 import empresas.Empresa;
 import empresas.EmpresaExistenteException;
 import empresas.EmpresaInexistenteException;
@@ -13,6 +12,8 @@ import index.ErroInternoException;
 import index.Fachada;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -31,8 +32,8 @@ public class ManagedBeanEmpresa implements Serializable {
     private Fachada fachada;
     private Empresa empresa;
     private List<Empresa> listaEmpresa;
-    private boolean  login;
-    
+    private boolean login;
+
     public ManagedBeanEmpresa() {
         this.empresa = new Empresa();
     }
@@ -50,7 +51,11 @@ public class ManagedBeanEmpresa implements Serializable {
     }
 
     public List<Empresa> getListaEmpresa() throws ErroInternoException {
-        return this.fachada.listaEmpresa();
+        try {
+            return this.fachada.listaEmpresa();
+        } catch (ErroInternoException ex) {
+            throw ex;
+        }
     }
 
     public void setListaEmpresa(List<Empresa> listaEmpresa) {
@@ -64,8 +69,7 @@ public class ManagedBeanEmpresa implements Serializable {
     public void setLogin(boolean login) {
         this.login = login;
     }
-    
-    
+
     public String adicionarEmpresa() {
         try {
             this.fachada.adicionar(this.empresa);
@@ -87,80 +91,68 @@ public class ManagedBeanEmpresa implements Serializable {
         }
         return null;
     }
-    
-     public String senhaatualizadaEmpresa(){
-        try{
-        this.fachada.atualizar(this.empresa);
-        return "dadosjuridicos-empresa.xhtml";
-        }
-        catch(ErroInternoException eie){
+
+    public String senhaatualizadaEmpresa() {
+        try {
+            this.fachada.atualizar(this.empresa);
+            return "dadosjuridicos-empresa.xhtml";
+        } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", " Ocorreu um erro interno");
             contexto.addMessage(null, msg);
             return null;
-        }
-        catch(EmpresaInexistenteException cie){
+        } catch (EmpresaInexistenteException cie) {
             return null;
         }
     }
-     
-    public String loginEmpresa(){
-        try{
+
+    public String loginEmpresa() {
+        try {
             this.empresa = this.fachada.loginEmpresa(empresa.getCnpj(), empresa.getSenha());
             this.login = true;
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null,"Empresa logada");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Empresa logada");
             contexto.addMessage(null, msg);
             return "index.xhtml";
-        }
-        catch (ErroInternoException eie) {
+        } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado! " + eie.getMessage());
             contexto.addMessage(null, msg);
             return null;
-        }
-        catch(EmpresaInexistenteException eie){
+        } catch (EmpresaInexistenteException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Erro: ", " A empresa não está cadastrada no sistema. Verifique o CNPJ e senha e tente novamente");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", " A empresa não está cadastrada no sistema. Verifique o CNPJ e senha e tente novamente");
             contexto.addMessage(null, msg);
             return null;
         }
-    }  
-    
-    public String atualizarsenhaEmpresa() {       
-            return "atualizarsenha-empresa.xhtml";  
     }
-    
-        public void logout(){
-            login = false;
-             this.empresa =  new Empresa();
-        }
-            
-      
-        public String atualizarEmpresa() {
+
+    public String atualizarsenhaEmpresa() {
+        return "atualizarsenha-empresa.xhtml";
+    }
+
+    public void logout() {
+        login = false;
+        this.empresa = new Empresa();
+    }
+
+    public String atualizarEmpresa() {
         try {
             this.fachada.atualizar(empresa);
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Os dados foram atualizados com sucesso");
-            contexto.addMessage(null, msg);           
-        } 
-        catch (ErroInternoException eie) {
+            contexto.addMessage(null, msg);
+        } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ErroInterno", "Ocorreu um erro interno");
             contexto.addMessage(null, msg);
-        } 
-        catch (EmpresaInexistenteException eie) {
+        } catch (EmpresaInexistenteException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Empresa Inexistente", "A empresa não cadastrada no sistema!");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Empresa Inexistente", "A empresa não cadastrada no sistema!");
             contexto.addMessage(null, msg);
             return null;
         }
         return null;
-        }
-        
     }
 
-    
-    
-
-
+}
