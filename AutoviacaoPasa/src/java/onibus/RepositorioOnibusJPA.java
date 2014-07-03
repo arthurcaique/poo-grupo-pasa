@@ -77,7 +77,7 @@ public class RepositorioOnibusJPA implements RepositorioOnibus, Serializable {
         public List<Onibus> listaOnibus(Empresa empresa) throws ErroInternoException {
 
         try {
-            TypedQuery<Onibus> listaOnibus = this.em.createQuery("SELECT o FROM Onibus o, Empresa e WHERE o.empresa = :empresa", Onibus.class);
+            TypedQuery<Onibus> listaOnibus = this.em.createQuery("SELECT o FROM Onibus o WHERE o.empresa = :empresa", Onibus.class);
             listaOnibus.setParameter("empresa", empresa);
             if (listaOnibus.getResultList().isEmpty()){
                 throw new OnibusInexistenteException();
