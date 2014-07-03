@@ -44,7 +44,7 @@ public class RepositorioVendaJPA implements RepositorioVenda {
 
     public List<Venda> listarVendasCliente(Cliente cliente) throws ErroInternoException {
         try {
-            TypedQuery<Venda> query = this.em.createQuery("SELECT v FROM Venda v, Cliente c WHERE v.id_cliente = :cliente", Venda.class);
+            TypedQuery<Venda> query = this.em.createQuery("SELECT v FROM Venda v WHERE v.id_cliente = :cliente", Venda.class);
             query.setParameter("cliente", cliente);
             return query.getResultList();
         } catch (Exception e) {
