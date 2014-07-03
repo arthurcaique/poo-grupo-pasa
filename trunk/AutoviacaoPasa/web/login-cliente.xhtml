@@ -64,10 +64,10 @@
                                 <p:inputMask mask="999.999.999-99" value = "#{managedBeanClientes.cliente.cpf}" requiredMessage="O CPF é obrigatório"/>
                                 <h:outputText value = "Senha: "/> 
                                 <p:password value = "#{managedBeanClientes.cliente.senha}" required="true"/>
-                                <p:messages showDetail="true"/>
                             </p:panelGrid>
                             <h:commandButton id="form1" value = "Entrar" action = "#{managedBeanClientes.loginCliente()}"/>
                         </p:panel>
+                        <p:messages showDetail="true"/>
                     </p:layoutUnit>
                 </p:layout>
             </h:form>

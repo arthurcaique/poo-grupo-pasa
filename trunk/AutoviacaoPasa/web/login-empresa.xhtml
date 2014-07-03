@@ -64,10 +64,10 @@
                                 <p:inputMask mask="99.999.999/9999-99" value = "#{managedBeanEmpresa.empresa.cnpj}" requiredMessage="O CNPJ é obrigatório"/>
                                 <h:outputText value = "Senha: "/> 
                                 <p:password value = "#{managedBeanEmpresa.empresa.senha}" required="true"/>
-                                <p:messages showDetail="true"/>
                             </p:panelGrid>
                             <h:commandButton id="form1" value = "Entrar" action = "#{managedBeanEmpresa.loginEmpresa()}"/>
                         </p:panel>
+                        <p:messages showDetail="true"/>
                     </p:layoutUnit>
                 </p:layout>
             </h:form>
