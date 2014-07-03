@@ -10,6 +10,7 @@ import index.ErroInternoException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import viagens.Viagem;
 
 /**
  *
@@ -51,4 +52,7 @@ public class CadastroEmpresa {
     public Empresa loginEmpresa (String cnpj, String senha) throws ErroInternoException, EmpresaInexistenteException{
      return this.empresa.loginEmpresa(cnpj, senha);
 }
+    public List<Viagem> listarViagens (Empresa empresa) throws ErroInternoException{
+        return this.listarViagens(empresa);
+    }
 }

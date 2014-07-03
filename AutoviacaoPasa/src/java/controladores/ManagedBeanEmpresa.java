@@ -19,6 +19,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import viagens.Viagem;
 
 /**
  *
@@ -33,6 +34,7 @@ public class ManagedBeanEmpresa implements Serializable {
     private Empresa empresa;
     private List<Empresa> listaEmpresa;
     private boolean login;
+    private List<Viagem> listaViagem;
 
     public ManagedBeanEmpresa() {
         this.empresa = new Empresa();
@@ -50,6 +52,19 @@ public class ManagedBeanEmpresa implements Serializable {
         this.empresa = empresa;
     }
 
+    public List<Viagem> getListaViagem() throws ErroInternoException{
+        try{
+            return this.fachada.listarViagens(empresa);
+        }
+        catch(ErroInternoException eie){
+            throw eie;
+        }
+    }
+
+    public void setListaViagem(List<Viagem> listaViagem) {
+        this.listaViagem = listaViagem;
+    }
+       
     public List<Empresa> getListaEmpresa() throws ErroInternoException {
         try {
             return this.fachada.listaEmpresa();

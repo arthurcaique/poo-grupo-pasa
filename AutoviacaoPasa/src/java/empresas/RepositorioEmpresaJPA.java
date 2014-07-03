@@ -14,7 +14,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import viagens.Viagem;
 
 /**
  *
@@ -104,6 +106,12 @@ public class RepositorioEmpresaJPA implements RepositorioEmpresa, Serializable {
         catch(Exception e){
             throw new ErroInternoException(e);
        }
+    }
+
+    @Override
+    public List<Viagem> listarViagens(Empresa empresa) throws ErroInternoException {
+        TypedQuery<Viagem> listarViagens = this.em.createQuery("SELECT FROM Viagem v, Empresa e WHERE v.empresa = :empresa", Viagem.class);
+        return listarViagens.getResultList();
     }
     
     
