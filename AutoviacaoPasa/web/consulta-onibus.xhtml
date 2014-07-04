@@ -57,7 +57,7 @@
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
-                        <c:if test="#{managedBeanClientes.login}">
+                        <c:if test="#{!managedBeanEmpresa.login}">
                         <p:panel id="panel" header="Passo 1: Consulta de ônibus">  
                             <h:panelGrid columns="2">  
 
