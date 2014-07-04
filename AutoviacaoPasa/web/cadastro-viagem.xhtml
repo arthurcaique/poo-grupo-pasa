@@ -60,7 +60,7 @@
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
                         <c:if test="#{managedBeanEmpresa.login}">
-                        <div style="float: left"><p:panel header ="Viagens cadastradas" style="max-width: 2000px">
+                            <p:panel header ="Viagens cadastradas" style="max-width: 2000px">
                                 <p:dataTable value = "#{managedBeanEmpresa.getListaViagem(managedBeanEmpresa.empresa)}" var ="o" paginator ="true">
                                     <p:column headerText ="Origem" style="max-width: 400px">
                                         <h:outputText value ="#{o.origem}"/>
@@ -77,12 +77,15 @@
                                     <p:column headerText ="Onibus" style="max-width:200px">
                                         <h:outputText value ="#{o.onibus.placa}"/>
                                     </p:column> 
-                                    <p:column headerText ="Quantidade de assentos" style="max-width:120px">
+                                    <p:column headerText ="Quantidade de assentos" style="max-width:90px">
                                         <h:outputText value ="#{o.onibus.qnt_assentos}"/>
-                                    </p:column> 
+                                    </p:column>
+                                    <p:column headerText ="Valor" style="max-width:90px">
+                                        <h:outputText value ="R$ #{o.valor}"/>
+                                    </p:column>
                                 </p:dataTable>
-                            </p:panel></div>
-                        <div style="float: right"><p:panel header="Nova viagem">
+                            </p:panel>
+                            <p:panel header="Nova viagem">
                                 <p:panelGrid columns="2">
                                     <h:outputLabel for="dt_lanc" value="Data: " />  
                                     <p:calendar value="#{managedBeanViagem.viagem.data}" pattern="dd/MM/yyyy"/> 
@@ -94,12 +97,12 @@
                                     <p:selectOneMenu value="#{managedBeanViagem.viagem.origem}">
                                         <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
                                     </p:selectOneMenu>
-                                    
+
                                     <h:outputLabel value="Destino " />  
                                     <p:selectOneMenu value="#{managedBeanViagem.viagem.destino}">
                                         <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
                                     </p:selectOneMenu>
-                                    
+
                                     <h:outputText value="Hora"/>
                                     <p:inputText value="#{managedBeanViagem.viagem.hora}" converterMessage="Hora no padrão incorreto">
                                         <f:convertDateTime type="time" pattern="HH:mm"  timeZone="GMT-03:00"/>
@@ -116,8 +119,7 @@
                                 </p:panelGrid>
                             </p:panel>
                             <p><h:commandButton value = "Cadastrar" action = "#{managedBeanViagem.adicionarViagem()}"/></p>
-                        </div>
-                        <p:messages showDetail="true"/>
+                            <p:messages showDetail="true"/>
                         </c:if>
                     </p:layoutUnit>
                 </p:layout>
