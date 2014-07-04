@@ -8,6 +8,7 @@ package controladores;
 import empresas.Empresa;
 import index.ErroInternoException;
 import index.Fachada;
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -101,7 +102,7 @@ public class ManagedBeanViagem implements Serializable {
 
     public String formatarData(Date data) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        return formatter.format(data);
+        return formatter.format(data);    
     }
 
     public String formatarHora(Date data) {
@@ -109,13 +110,37 @@ public class ManagedBeanViagem implements Serializable {
         return formatter.format(data);
     }
 
-    public String viagemSelecionada(long id) throws ViagemInexistenteException, ErroInternoException {
+    public String viagemSelecionada(long id) throws ViagemInexistenteException, ErroInternoException, IOException {
+        try{
         this.fachada.buscarViagem(id);
-        return "lista-poltrona.xhtml";
+        FacesContext.getCurrentInstance().getExternalContext().redirect("lista-poltrona.xhtml");
+        }
+        catch(IOException ioe){
+            throw ioe;
+        }
+        catch (ErroInternoException eie) {
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado! " + eie.getMessage());
+            contexto.addMessage(null, msg);     
+        }
+        catch (ViagemInexistenteException cee) {
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Viagem Inexistente", "A viagem não existe");
+            contexto.addMessage(null, msg);
+        }
+        return null;
     }
 
     public Onibus onibusSelecionado(long id) throws ErroInternoException, OnibusInexistenteException {
+        try{
         return this.fachada.buscarOnibus(id);
+        }
+        catch(OnibusInexistenteException oie){
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Ônibus inexistente! ");
+            contexto.addMessage(null, msg);   
+        }
+        return null;
     }
     
 

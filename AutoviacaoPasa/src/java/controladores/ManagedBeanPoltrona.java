@@ -6,18 +6,15 @@ package controladores;
 import index.ErroInternoException;
 import index.Fachada;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import poltronas.Poltrona;
 import poltronas.PoltronaIndisponivelException;
 import poltronas.PoltronaInexistenteException;
-import vendas.Venda;
 import viagens.Viagem;
 
 /**
@@ -54,7 +51,7 @@ public class ManagedBeanPoltrona implements Serializable {
         this.poltrona = poltrona;
     }
 
-    public Poltrona adicionarPoltrona() {
+    public Poltrona adicionarPoltrona() throws ErroInternoException, PoltronaIndisponivelException, PoltronaInexistenteException {
         try {
             this.poltrona.setNumero_poltrona(poltronaSelecionada);
             this.fachada.adicionar(this.poltrona);
@@ -79,27 +76,38 @@ public class ManagedBeanPoltrona implements Serializable {
     }
 
     public List<Long> poltronasCompradas(Viagem viagem) throws ErroInternoException {
+        try{
         return fachada.poltronasCompradas(viagem);
+        }
+        catch(ErroInternoException eie){
+            throw eie;
+        }
     }
 
-    public String buscarPoltrona() {
+    public String buscarPoltrona() throws ErroInternoException, PoltronaInexistenteException {
         try {
             this.fachada.buscarPoltrona(this.poltrona.getId_poltrona());
-            return "Poltrona.xhtml";
         } catch (ErroInternoException eie) {
-            return "ErroInternoException.xhtml";
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado!");
+            contexto.addMessage(null, msg);
         } catch (PoltronaInexistenteException pie) {
-            return "PoltronaInexistenteException.xhtml";
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Essa poltrona não existe!");
+            contexto.addMessage(null, msg);
         }
+        return null;
     }
 
     public String listarPoltrona() {
         try {
             this.fachada.listar(this.viagem.getId_viagem());
-            return "ListaPoltronas.xhtml";
         } catch (ErroInternoException eie) {
-            return "ErroInterno.xhtml";
+            FacesContext contexto = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro Interno", "Ocorreu um errointerno inesperado!");
+            contexto.addMessage(null, msg);
         }
+        return null;
     }
 
     public boolean poltronaIndisponivel(Viagem viagem, long id) throws ErroInternoException {

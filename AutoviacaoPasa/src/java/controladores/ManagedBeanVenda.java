@@ -11,15 +11,11 @@ import index.Fachada;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import onibus.Onibus;
 import onibus.OnibusExistenteException;
 import poltronas.Poltrona;
 import vendas.Venda;
@@ -63,6 +59,18 @@ public class ManagedBeanVenda implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+    
+    public Fachada getFachada() {
+        return fachada;
+    }
+
+    public void setFachada(Fachada fachada) {
+        this.fachada = fachada;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
+    }
 
     public Poltrona getPoltrona() {
         return poltrona;
@@ -104,15 +112,4 @@ public class ManagedBeanVenda implements Serializable {
         return null;
     }
 
-    public Fachada getFachada() {
-        return fachada;
-    }
-
-    public void setFachada(Fachada fachada) {
-        this.fachada = fachada;
-    }
-
-    public void setVenda(Venda venda) {
-        this.venda = venda;
-    }
 }
