@@ -62,7 +62,7 @@
                         <p:panel header ="Passo 2: Selecione o onibus">
                             <p:messages showDetail="true"/>
 
-                            <p:dataTable  value = "#{managedBeanViagem.listaViagens}" var ="v">
+                            <p:dataTable  value = "#{managedBeanViagem.getListaViagens(managedBeanEmpresa.empresa)}" var ="v">
                                 <p:column headerText="Selecionar">
                                     <p:commandButton action="#{managedBeanViagem.setViagemSelecionada(v.id_viagem)}" icon="ui-icon-check"/>
                                 </p:column>
