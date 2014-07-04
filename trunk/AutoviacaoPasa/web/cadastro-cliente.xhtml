@@ -3,7 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <f:view contentType="text/html">
         <h:head>
@@ -58,6 +58,7 @@
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
+                        <c:if test="#{!managedBeanClientes.login and !managedBeanEmpresa.login}">
                         <p:panel header="Cadastro de clientes">
                             <p:panelGrid columns="2">
                                 <h:outputText value = "Nome: "/> 
@@ -80,6 +81,7 @@
                         </p:panel>
                         <p><h:commandButton value = "Cadastrar" action = "#{managedBeanClientes.adicionarCliente()}"/></p>
                         <p:messages showDetail="true"/>
+                        </c:if>
                     </p:layoutUnit>
                 </p:layout>
             </h:form>

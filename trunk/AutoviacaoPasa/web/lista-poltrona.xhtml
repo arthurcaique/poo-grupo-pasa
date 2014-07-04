@@ -59,6 +59,7 @@
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
+                        <c:if test="#{managedBeanClientes.login}">
                         <p:panel header ="Passo 3: Selecione a poltrona do ônibus">
                             <p:messages showDetail="true"/>
                             <p:panel >
@@ -82,6 +83,7 @@
                             <h:commandButton value = "Avançar" action="venda"/></p>
                         </p:panel>
                         <p:messages showDetail="true"/>
+                        </c:if>
                     </p:layoutUnit>
                 </p:layout>
             </h:form>

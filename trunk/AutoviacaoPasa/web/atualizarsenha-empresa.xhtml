@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -22,6 +23,7 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="west" size="259" collapsible="true">
+                   
                     <p:menu>
                         <p:submenu label="Login" rendered="#{!managedBeanClientes.login and !managedBeanEmpresa.login}">
                             <p:menuitem value="Cliente" outcome="login-cliente" />
@@ -43,9 +45,11 @@
                             <p:menuitem value="Minhas Compras" outcome="index" rendered="#{managedBeanClientes.login}"/>
                         </p:submenu>
                     </p:menu>
+                       
                 </p:layoutUnit>
 
                 <p:layoutUnit position = "center">
+                    <c:if test="#{managedBeanEmpresa.login}">
                     <p:panel header ="Atualizar senha">
                         <p:panelGrid columns="2">
                             <h:outputText value= "Digite uma senha: "/>
@@ -62,6 +66,7 @@
                         <p><h:commandButton value="Atualizar senha" action="#{managedBeanEmpresa.senhaatualizadaEmpresa()}"/></p>
                         <p:messages showDetail ="true"/>
                     </p:panel>
+                </c:if>
                 </p:layoutUnit>
             </p:layout>
         </h:form>
