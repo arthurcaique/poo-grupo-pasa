@@ -58,7 +58,7 @@
                         </p:menu>
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
-                        <c:if test="#{managedBeanClientes.login}">
+                        <c:if test="#{!managedBeanEmpresa.login}">
                         <p:panel header ="Passo 2: Selecione o onibus">
                             <p:messages showDetail="true"/>
 
