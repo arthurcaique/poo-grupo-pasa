@@ -24,7 +24,7 @@ public class RepositorioOnibusJPA implements RepositorioOnibus, Serializable {
 
     @PersistenceContext
     private EntityManager em;
-
+    
     public RepositorioOnibusJPA() {
         this.em = Persistence.createEntityManagerFactory("AutoviacaoPasaPU").createEntityManager();
     }
@@ -75,17 +75,9 @@ public class RepositorioOnibusJPA implements RepositorioOnibus, Serializable {
     
     @Override
         public List<Onibus> listaOnibus(Empresa empresa) throws ErroInternoException {
-
-        try {
-            TypedQuery<Onibus> listaOnibus = this.em.createQuery("SELECT o FROM Onibus o WHERE o.empresa = :empresa", Onibus.class);
-            listaOnibus.setParameter("empresa", empresa);
-            if (listaOnibus.getResultList().isEmpty()){
-                throw new OnibusInexistenteException();
-            }
-            return listaOnibus.getResultList();
-        } catch (Exception e) {
-            throw new ErroInternoException(e);
+            TypedQuery<Onibus> listarOnibus = this.em.createQuery("SELECT o FROM Onibus o WHERE o.empresa = :empresa ", Onibus.class);
+            listarOnibus.setParameter("empresa", empresa);
+            return listarOnibus.getResultList();
         }
-    }
 
 }
