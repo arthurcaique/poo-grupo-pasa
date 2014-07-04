@@ -13,7 +13,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import onibus.Onibus;
@@ -60,6 +59,21 @@ public class ManagedBeanOnibus implements Serializable {
         this.empresa = empresa;
     }
     
+        public Fachada getFachada() {
+        return fachada;
+    }
+
+    public void setFachada(Fachada fachada) {
+        this.fachada = fachada;
+    }
+
+    public Onibus getOnibus() {
+        return onibus;
+    }
+
+    public void setOnibus(Onibus onibus) {
+        this.onibus = onibus;
+    }
     
 
     public String cadastrarOnibus() throws OnibusExistenteException, ErroInternoException {
@@ -82,22 +96,6 @@ public class ManagedBeanOnibus implements Serializable {
             
         }
         return null;
-    }
-
-    public Fachada getFachada() {
-        return fachada;
-    }
-
-    public void setFachada(Fachada fachada) {
-        this.fachada = fachada;
-    }
-
-    public Onibus getOnibus() {
-        return onibus;
-    }
-
-    public void setOnibus(Onibus onibus) {
-        this.onibus = onibus;
     }
 
 }
