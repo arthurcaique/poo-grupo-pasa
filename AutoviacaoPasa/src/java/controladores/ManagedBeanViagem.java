@@ -19,8 +19,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
-import javax.persistence.EntityManager;
 import onibus.Onibus;
 import onibus.OnibusInexistenteException;
 import viagens.Viagem;
@@ -64,8 +62,8 @@ public class ManagedBeanViagem implements Serializable {
         this.onibusSelecionado = onibusSelecionado;
     }
 
-    public List<Viagem> getListaViagens(Empresa empresa) throws ErroInternoException {
-        return fachada.listarViagens(empresa);
+    public List<Viagem> getListaViagens() {
+        return listaViagens;
     }
 
     public void setListaViagens(List<Viagem> listaViagens) {
