@@ -18,6 +18,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import onibus.Onibus;
 import onibus.OnibusExistenteException;
+import onibus.OnibusInexistenteException;
 
 /**
  *
@@ -38,8 +39,13 @@ public class ManagedBeanOnibus implements Serializable {
     }
 
 
-    public List<Onibus> getListaOnibus(Empresa empresa) throws ErroInternoException {
+    public List<Onibus> getListaOnibus(Empresa empresa) throws ErroInternoException, OnibusInexistenteException {
+        try{
         return this.fachada.listaOnibus(empresa);
+        }
+        catch(ErroInternoException eie){
+            throw eie;
+        }
     }
 
     public void setListaOnibus(List<Onibus> listaOnibus) {
