@@ -34,7 +34,14 @@ public class ManagedBeanClientes implements Serializable {
     public ManagedBeanClientes() {
         this.cliente = new Cliente();
     }
+    
+    public Cliente getCliente() {
+        return cliente;
+    }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
     public boolean isLogin() {
         return login;
     }
@@ -190,12 +197,6 @@ public class ManagedBeanClientes implements Serializable {
         }
     }
     
-    public Cliente getCliente() {
-        return cliente;
-    }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
 
 }
