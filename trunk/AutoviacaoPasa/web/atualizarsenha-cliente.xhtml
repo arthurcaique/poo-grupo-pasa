@@ -15,6 +15,8 @@
                     <h:graphicImage url="/banner.jpg" width="700" height="200"/>
                     <h:outputText value = " Logado como cliente: #{managedBeanClientes.cliente.nome} " 
                                   rendered="#{managedBeanClientes.login}"/> 
+                    <h:commandButton value = "Carrinho: #{managedBeanVenda.listaCarrinho.size()} " action="venda" 
+                                     rendered="#{managedBeanClientes.login}"/>
                     <h:commandButton value = "Minha conta" action="dadospessoais-cliente" 
                                      rendered="#{managedBeanClientes.login}"/>
                     <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" 
@@ -48,9 +50,9 @@
 
                 <p:layoutUnit position = "center">
                     <c:if  test="#{managedBeanClientes.login}">
-                    <p:panel header ="Atualizar senha">
-                        <p:panelGrid columns="2">
-                            <h:outputText value= "Digite uma senha: "/>
+                        <p:panel header ="Atualizar senha">
+                            <p:panelGrid columns="2">
+                                <h:outputText value= "Digite uma senha: "/>
                                 <p:password value= "#{managedBeanClientes.cliente.senha}" required="true" requiredMessage="A senha é obrigatória" validatorMessage="A senha deve ter pelo menos 4 dígitos" 
                                             feedback="true" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte" promptLabel="Digite a senha" id="senha1" match="senha2">
                                     <f:validateLength minimum="4"/>
@@ -60,10 +62,10 @@
                                             id="senha2">
                                     <f:validateLength minimum="4"/>
                                 </p:password>    
-                        </p:panelGrid>
-                        <p><h:commandButton value="Atualizar senha" action="#{managedBeanClientes.senhaatualizadaCliente()}"/></p>
-                        <p:messages showDetail ="true"/>
-                    </p:panel>
+                            </p:panelGrid>
+                            <p><h:commandButton value="Atualizar senha" action="#{managedBeanClientes.senhaatualizadaCliente()}"/></p>
+                            <p:messages showDetail ="true"/>
+                        </p:panel>
                     </c:if>
                 </p:layoutUnit>
             </p:layout>

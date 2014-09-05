@@ -30,7 +30,7 @@ import viagens.Viagem;
 @Entity
 public class Venda implements Serializable{
     private Cliente id_cliente;
-    private Poltrona id_poltrona;
+    private long id_poltrona;
     private Viagem id_viagem;
     private double preco;
     private long codigo;
@@ -40,7 +40,7 @@ public class Venda implements Serializable{
     public Venda(){
         
     }
-    public Venda(Cliente id_cliente, Poltrona id_poltrona, Viagem id_viagem, double preco, Date data){
+    public Venda(Cliente id_cliente, int id_poltrona, Viagem id_viagem, double preco, Date data){
         this.id_cliente = id_cliente;
         this.id_poltrona = id_poltrona;
         this.id_viagem = id_viagem;
@@ -66,11 +66,11 @@ public class Venda implements Serializable{
         this.id_cliente = id_cliente;
     }
 
-    public Poltrona getId_poltrona() {
+    public long getId_poltrona() {
         return id_poltrona;
     }
 
-    public void setId_poltrona(Poltrona id_poltrona) {
+    public void setId_poltrona(long id_poltrona) {
         this.id_poltrona = id_poltrona;
     }
 

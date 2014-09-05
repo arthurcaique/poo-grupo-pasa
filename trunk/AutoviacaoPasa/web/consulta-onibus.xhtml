@@ -18,15 +18,17 @@
                 <p:layout fullPage="true">
                     <p:layoutUnit position="north" size="230" resizable="false" closable="false" collapsible="true">
                         <h:graphicImage url="/banner.jpg" width="700" height="200"/>
-                                                <h:outputText value = " Logado como cliente: #{managedBeanClientes.cliente.nome} " 
-                                rendered="#{managedBeanClientes.login}"/> 
+                        <h:outputText value = " Logado como cliente: #{managedBeanClientes.cliente.nome} " 
+                                      rendered="#{managedBeanClientes.login}"/> 
+                        <h:commandButton value = "Carrinho: #{managedBeanVenda.listaCarrinho.size()} " action="venda" 
+                                         rendered="#{managedBeanClientes.login}"/>
                         <h:commandButton value = "Minha conta" action="dadospessoais-cliente" 
                                          rendered="#{managedBeanClientes.login}"/>
-                        <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" 
+                        <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" actionListener="#{managedBeanVenda.listaCarrinho.clear()}"
                                          rendered="#{managedBeanClientes.login}"/>    
-                        
+
                         <h:outputText value = " Logado como empresa: #{managedBeanEmpresa.empresa.nome} "
-                                rendered="#{managedBeanEmpresa.login}"/> 
+                                      rendered="#{managedBeanEmpresa.login}"/> 
                         <h:commandButton value = "Minha conta" action="dadosjuridicos-empresa" 
                                          rendered="#{managedBeanEmpresa.login}"/>
                         <h:commandButton value = "Sair" action="#{managedBeanEmpresa.logout()}" 
@@ -58,25 +60,25 @@
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
                         <c:if test="#{!managedBeanEmpresa.login}">
-                        <p:panel id="panel" header="Passo 1: Consulta de ônibus">  
-                            <h:panelGrid columns="2">  
+                            <p:panel id="panel" header="Passo 1: Consulta de ônibus">  
+                                <h:panelGrid columns="2">  
 
-                                <h:outputLabel for="dt_lanc" value="Data: " />  
-                                <p:calendar id="dt_lanc" value="#{managedBeanViagem.viagem.data}" pattern="dd/MM/yyyy"/>  
+                                    <h:outputLabel for="dt_lanc" value="Data: " />  
+                                    <p:calendar id="dt_lanc" value="#{managedBeanViagem.viagem.data}" pattern="dd/MM/yyyy"/>  
 
-                                <h:outputLabel value="Origem " />  
-                                <p:selectOneMenu value="#{managedBeanViagem.viagem.origem}">
-                                    <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
-                                </p:selectOneMenu>
+                                    <h:outputLabel value="Origem " />  
+                                    <p:selectOneMenu value="#{managedBeanViagem.viagem.origem}">
+                                        <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
+                                    </p:selectOneMenu>
 
-                                <h:outputLabel value="Destino " />  
-                                <p:selectOneMenu value="#{managedBeanViagem.viagem.destino}">
-                                    <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
-                                </p:selectOneMenu>
-                                <h:commandButton value = "Avançar" action = "#{managedBeanViagem.consultaViagens()}"/>
-                            </h:panelGrid> 
-                            <p:messages showDetail="true"/>
-                        </p:panel>  
+                                    <h:outputLabel value="Destino " />  
+                                    <p:selectOneMenu value="#{managedBeanViagem.viagem.destino}">
+                                        <f:selectItems value="#{managedBeanViagem.viagem.listaCidades}" />
+                                    </p:selectOneMenu>
+                                    <h:commandButton value = "Avançar" action = "#{managedBeanViagem.consultaViagens()}"/>
+                                </h:panelGrid> 
+                                <p:messages showDetail="true"/>
+                            </p:panel>  
                         </c:if>
                     </p:layoutUnit>
                 </p:layout>

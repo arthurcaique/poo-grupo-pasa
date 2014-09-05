@@ -9,6 +9,7 @@ import clientes.Cliente;
 import index.ErroInternoException;
 import index.Fachada;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -33,8 +34,9 @@ public class ManagedBeanVenda implements Serializable {
     private Fachada fachada;
     private Venda venda;
     private long viagemSelecionada;
+    private long poltrona;
     private Cliente cliente;
-    private Poltrona poltrona;
+    private ArrayList<Venda> listaCarrinho = new ArrayList<Venda>();
 
     public ManagedBeanVenda() {
         this.venda = new Venda();
@@ -59,7 +61,7 @@ public class ManagedBeanVenda implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
+
     public Fachada getFachada() {
         return fachada;
     }
@@ -72,25 +74,39 @@ public class ManagedBeanVenda implements Serializable {
         this.venda = venda;
     }
 
-    public Poltrona getPoltrona() {
+    public ArrayList<Venda> getListaCarrinho() {
+        return listaCarrinho;
+    }
+
+    public long getPoltrona() {
         return poltrona;
     }
 
-    public void setPoltrona(Poltrona poltrona) {
+    public void setPoltrona(long poltrona) {
         this.poltrona = poltrona;
     }
 
-    public List<Venda> listarVendasCliente(Cliente cliente) throws ErroInternoException{
-        try{
+    public String adicionarAoCarrinho() throws ViagemInexistenteException, ErroInternoException {
+        this.venda.setId_cliente(cliente);
+        this.venda.setId_poltrona(poltrona);
+        this.venda.setId_viagem(this.fachada.buscarViagem(viagemSelecionada));
+        this.venda.setData(new Date());
+        this.listaCarrinho.add(venda);
+        this.venda = new Venda();
+        return "venda";
+    }
+
+    public List<Venda> listarVendasCliente(Cliente cliente) throws ErroInternoException {
+        try {
             return this.fachada.listarVendasCliente(cliente);
-        } catch (ErroInternoException e){
+        } catch (ErroInternoException e) {
             throw e;
         }
     }
+
     public String cadastrarVenda() throws OnibusExistenteException, ErroInternoException {
         try {
             this.venda.setId_cliente(cliente);
-            this.venda.setId_poltrona(poltrona);
             this.venda.setId_viagem(this.fachada.buscarViagem(viagemSelecionada));
             this.venda.setData(new Date());
             this.fachada.adicionar(this.venda);
@@ -98,7 +114,6 @@ public class ManagedBeanVenda implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Venda realizada com sucesso");
             contexto.addMessage(null, msg);
             this.venda = new Venda();
-            this.poltrona = new Poltrona();
             return "voucher.xhtml";
         } catch (ErroInternoException eie) {
             FacesContext contexto = FacesContext.getCurrentInstance();

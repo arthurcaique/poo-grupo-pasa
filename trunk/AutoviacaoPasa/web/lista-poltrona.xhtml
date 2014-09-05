@@ -22,6 +22,8 @@
                         <h:graphicImage url="/banner.jpg" width="700" height="200"/>
                         <h:outputText value = " Logado como cliente: #{managedBeanClientes.cliente.nome} " 
                                       rendered="#{managedBeanClientes.login}"/> 
+                        <h:commandButton value = "Carrinho: #{managedBeanVenda.listaCarrinho.size()} " action="venda" 
+                                         rendered="#{managedBeanClientes.login}"/>
                         <h:commandButton value = "Minha conta" action="dadospessoais-cliente" 
                                          rendered="#{managedBeanClientes.login}"/>
                         <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" 
@@ -60,29 +62,33 @@
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
                         <c:if test="#{!managedBeanEmpresa.login}">
-                        <p:panel header ="Passo 3: Selecione a poltrona do ônibus">
-                            <p:messages showDetail="true"/>
-                            <p:panel >
-                                <p:panelGrid columns="2">
-                                    <h:outputText value = "Origem"/>
-                                    <h:outputText value = "#{managedBeanViagem.viagem.origem}"/>
-                                    <h:outputText value = "Destino" />
-                                    <h:outputText value = "#{managedBeanViagem.viagem.destino}" />
-                                    <h:outputText value = "Hora" />
-                                    <h:outputText value = "#{managedBeanViagem.formatarHora(managedBeanViagem.viagem.hora)}" />
-                                    <h:outputText value = "Data" />
-                                    <h:outputText value = "#{managedBeanViagem.formatarData(managedBeanViagem.viagem.data)}" />
-                                    <h:outputText value= "Valor" />
-                                    <h:outputText value = "#{managedBeanViagem.viagem.valor}" />    
-                                </p:panelGrid>
-                                <p><c:forEach begin="1" end="#{managedBeanViagem.onibus.qnt_assentos}" var="item">
-                                    <p:commandButton value="#{item}" action="#{managedBeanPoltrona.setPoltronaSelecionada(item)}" disabled="#{managedBeanPoltrona.poltronaIndisponivel(managedBeanViagem.viagem, item)}"/>
-                                </c:forEach></p>
+                            <p:panel header ="Passo 3: Selecione a poltrona do ônibus">
+                                <p:messages showDetail="true"/>
+                                <p:panel >
+                                    <p:panelGrid columns="2">
+                                        <h:outputText value = "Origem"/>
+                                        <h:outputText value = "#{managedBeanViagem.viagem.origem}"/>
+                                        <h:outputText value = "Destino" />
+                                        <h:outputText value = "#{managedBeanViagem.viagem.destino}" />
+                                        <h:outputText value = "Hora" />
+                                        <h:outputText value = "#{managedBeanViagem.formatarHora(managedBeanViagem.viagem.hora)}" />
+                                        <h:outputText value = "Data" />
+                                        <h:outputText value = "#{managedBeanViagem.formatarData(managedBeanViagem.viagem.data)}" />
+                                        <h:outputText value= "Valor" />
+                                        <h:outputText value = "#{managedBeanViagem.viagem.valor}" />    
+                                    </p:panelGrid>
+                                    <p><c:forEach begin="1" end="#{managedBeanViagem.onibus.qnt_assentos}" var="item">
+                                        <p:commandButton value="#{item}" action="#{managedBeanVenda.setPoltrona(item)}" />
+                                    </c:forEach></p>
+                                </p:panel>
+                                <h:outputText value = "#{managedBeanVenda.setViagemSelecionada(managedBeanViagem.viagemSelecionada)}" />
+
+                                <h:outputText value = "#{managedBeanVenda.venda.setPreco(managedBeanViagem.viagem.valor)}" />
+                                <h:outputText value = "#{managedBeanVenda.setCliente(managedBeanClientes.cliente)}" />
+                                <p><h:commandButton value = "Voltar" action="lista-onibus"/>
+                                <h:commandButton value = "Avançar" action="#{managedBeanVenda.adicionarAoCarrinho()}"/></p>
                             </p:panel>
-                            <p><h:commandButton value = "Voltar" action="lista-onibus"/>
-                            <h:commandButton value = "Avançar" action="venda"/></p>
-                        </p:panel>
-                        <p:messages showDetail="true"/>
+                            <p:messages showDetail="true"/>
                         </c:if>
                     </p:layoutUnit>
                 </p:layout>
