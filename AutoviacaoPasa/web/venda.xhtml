@@ -59,31 +59,38 @@
                     </p:layoutUnit>
                     <p:layoutUnit position="center">
                         <h:outputText value="É necessário estar logado como cliente para poder continuar" rendered="#{!managedBeanClientes.login}"/>
-                        <p:panel header ="Passo 4: Confirmação" rendered="#{managedBeanClientes.login}">
+                        <p:panel header ="Passo 4: Carrinho" rendered="#{managedBeanClientes.login}">
                             <p:messages showDetail="true"/>
                             <p:panel >
-                                <h:outputText value = "Verifique se os dados da compra estão corretos e clique para finalizar. "/>
-                                <p><p:panelGrid columns="2">
-                                    <h:outputText value = "Origem"/>
-                                    <h:outputText value = "#{managedBeanViagem.viagem.origem}"/>
-                                    <h:outputText value = "Destino" />
-                                    <h:outputText value = "#{managedBeanViagem.viagem.destino}" />
-                                    <h:outputText value = "Hora" />
-                                    <h:outputText value = "#{managedBeanViagem.formatarHora(managedBeanViagem.viagem.hora)}" />
-                                    <h:outputText value = "Data" />
-                                    <h:outputText value = "#{managedBeanViagem.formatarData(managedBeanViagem.viagem.data)}" />
-                                    <h:outputText value= "Valor" />
-                                    <h:outputText value = "#{managedBeanViagem.viagem.valor}" />
-                                    <h:outputText value= "Poltrona" />
-                                    <h:outputText value = "#{managedBeanPoltrona.poltronaSelecionada}" />
-                                </p:panelGrid></p>
+                                <p:dataTable  value = "#{managedBeanVenda.listaCarrinho}" var ="v">
+                                    <p:column headerText ="Origem">
+                                        <h:outputText value ="#{v.id_viagem.origem}"/>
+                                    </p:column>
+                                    <p:column headerText="Destino">
+                                        <h:outputText value ="#{v.id_viagem.destino}"/>
+                                    </p:column>
+                                    <p:column headerText ="Empresa">
+                                        <h:outputText value ="#{v.id_viagem.empresa.nome}"/>
+                                    </p:column>
+                                    <p:column headerText ="Hora">
+                                        <h:outputText value ="#{managedBeanViagem.formatarHora(v.id_viagem.hora)}"/>
+                                    </p:column>
+                                    <p:column headerText ="Data">
+                                        <h:outputText value ="#{managedBeanViagem.formatarData(v.id_viagem.data)}"/>
+                                    </p:column>
+                                    <p:column headerText ="Valor">
+                                        <h:outputText value ="R$ #{v.preco}"/>
+                                    </p:column>
+                                    <p:column headerText ="Poltrona">
+                                        <h:outputText value ="#{v.id_poltrona}"/>
+                                    </p:column>
+                                </p:dataTable>
+                                <h:outputText value="Total: "/>
                             </p:panel>
-                            <h:outputText value = "#{managedBeanVenda.setViagemSelecionada(managedBeanViagem.viagemSelecionada)}" />
-                            <h:outputText value = "#{managedBeanVenda.setPoltrona(managedBeanPoltrona.adicionarPoltrona())}" />
-                            <h:outputText value = "#{managedBeanVenda.venda.setPreco(managedBeanViagem.viagem.valor)}" />
-                            <h:outputText value = "#{managedBeanVenda.setCliente(managedBeanClientes.cliente)}" />
+                            
                             <p><h:commandButton value = "Voltar" action="lista-poltrona"/>
-                            <h:commandButton value = "Finalizar" action="#{managedBeanVenda.cadastrarVenda()}"/></p>
+                            <h:commandButton value = "Finalizar" action="#{managedBeanVenda.cadastrarVenda()}"/>
+                            <h:commandButton value = "Adicionar nova passagem" action="consulta-onibus"/></p>
                         </p:panel>
                     </p:layoutUnit>
                 </p:layout>

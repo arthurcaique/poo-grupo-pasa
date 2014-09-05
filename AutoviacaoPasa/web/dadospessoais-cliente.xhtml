@@ -15,6 +15,8 @@
                     <h:graphicImage url="/banner.jpg" width="700" height="200"/>
                     <h:outputText value = " Logado como cliente: #{managedBeanClientes.cliente.nome} " 
                                   rendered="#{managedBeanClientes.login}"/> 
+                    <h:commandButton value = "Carrinho: #{managedBeanVenda.listaCarrinho.size()} " action="venda" 
+                                     rendered="#{managedBeanClientes.login}"/>
                     <h:commandButton value = "Minha conta" action="dadospessoais-cliente" 
                                      rendered="#{managedBeanClientes.login}"/>
                     <h:commandButton value = "Sair" action="#{managedBeanClientes.logout()}" 
@@ -54,21 +56,21 @@
 
                 <p:layoutUnit position = "center">
                     <c:if test="#{managedBeanClientes.login}">
-                    <p:panel header ="Dados pessoais">
-                        <p:panelGrid columns="2">
-                            <h:outputText value = "Nome:"/>
-                            <h:outputText value = "#{managedBeanClientes.cliente.nome}"/>
-                            <h:outputText value = "ID:" />
-                            <h:outputText value = "#{managedBeanClientes.cliente.id_cliente}" />
-                            <h:outputText value = "CPF:" />
-                            <h:outputText value = "#{managedBeanClientes.cliente.cpf}" />
-                            <h:outputText value= "Telefone:" />
-                            <p:inputMask mask="(99)9999-9999" value = "#{managedBeanClientes.cliente.telefone}" />      
-                        </p:panelGrid>
-                        <p><h:commandButton value="Atualizar informações" action="#{managedBeanClientes.atualizarCliente()}"/></p>
-                        <p><h:commandButton value="Atualizar senha" action="#{managedBeanClientes.atualizarsenhaCliente()}"/></p>
-                        <p:messages showDetail ="true"/>
-                    </p:panel>
+                        <p:panel header ="Dados pessoais">
+                            <p:panelGrid columns="2">
+                                <h:outputText value = "Nome:"/>
+                                <h:outputText value = "#{managedBeanClientes.cliente.nome}"/>
+                                <h:outputText value = "ID:" />
+                                <h:outputText value = "#{managedBeanClientes.cliente.id_cliente}" />
+                                <h:outputText value = "CPF:" />
+                                <h:outputText value = "#{managedBeanClientes.cliente.cpf}" />
+                                <h:outputText value= "Telefone:" />
+                                <p:inputMask mask="(99)9999-9999" value = "#{managedBeanClientes.cliente.telefone}" />      
+                            </p:panelGrid>
+                            <p><h:commandButton value="Atualizar informações" action="#{managedBeanClientes.atualizarCliente()}"/></p>
+                            <p><h:commandButton value="Atualizar senha" action="#{managedBeanClientes.atualizarsenhaCliente()}"/></p>
+                            <p:messages showDetail ="true"/>
+                        </p:panel>
                     </c:if>
                 </p:layoutUnit>
             </p:layout>
